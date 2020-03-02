@@ -29,10 +29,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center_vertical"
-                android:text=" Espace Client"
+                android:text=" Espace Fonctionnaire"
                 android:textAllCaps="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="#FFFFFF"
+                android:textColor="#A3F7F2F2"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
