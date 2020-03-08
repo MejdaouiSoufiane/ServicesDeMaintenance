@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         circle = (LinearLayout)findViewById(R.id.circle);
-        sinClient = (TextView)findViewById(R.id.sin2);
-        sinWorker = (TextView)findViewById(R.id.sin3);
+        sinClient = (TextView)findViewById(R.id.signupClient);
+        sinWorker = (TextView)findViewById(R.id.signupWorker);
         circle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(
-                        MainActivity.this,LoginClient.class);
+                        MainActivity.this,RegisterClient.class);
                 startActivity(it);
             }
         });
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(
-                        MainActivity.this,LoginWorker.class);
+                        MainActivity.this,RegisterFonctionnaire.class);
                 startActivity(it);
             }
         });

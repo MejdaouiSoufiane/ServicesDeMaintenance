@@ -11,13 +11,13 @@
         android:background="@drawable/background">
 
         <TextView
-            android:id="@+id/sin"
+            android:id="@+id/creer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="107dp"
             android:gravity="center"
-            android:text="Se connecter"
+            android:text="Créer Un Compte"
             android:textColor="#54abee"
             android:textSize="25dp" />
 
@@ -36,7 +36,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/sin2"
+            android:id="@+id/signupClient"
             android:layout_width="182dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -56,7 +56,7 @@
             android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/sin3"
+            android:id="@+id/signupWorker"
             android:layout_width="182dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -79,7 +79,7 @@
             android:id="@+id/account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/sin"
+            android:layout_above="@id/creer"
             android:layout_marginBottom="4dp"
             android:gravity="center"
             android:paddingBottom="16dp"
@@ -116,12 +116,12 @@
             </FrameLayout>
 
             <TextView
-                android:id="@+id/signupforfree"
+                android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:text="Créer Un Compte"
+                android:text="Se connecter"
                 android:textColor="#fff"
                 android:textSize="22dp" />
         </LinearLayout>

@@ -8,12 +8,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class RegisterClient extends AppCompatActivity {
+public class RegisterFonctionnaire extends AppCompatActivity {
 
     private Button creer;
     private EditText nom;
@@ -23,15 +24,16 @@ public class RegisterClient extends AppCompatActivity {
     private EditText email;
     private EditText pswd;
     private EditText confirm;
+    private Spinner secteur;
 
     DatabaseReference database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_client);
+        setContentView(R.layout.activity_register_fonctionnaire);
 
-        database = FirebaseDatabase.getInstance().getReference("clients");
+        database = FirebaseDatabase.getInstance().getReference("fonctionnaires");
 
         creer = (Button) this.findViewById(R.id.creer);
         nom = (EditText) this.findViewById(R.id.nom);
@@ -41,6 +43,7 @@ public class RegisterClient extends AppCompatActivity {
         email = (EditText) this.findViewById(R.id.email);
         pswd = (EditText) this.findViewById(R.id.pswd);
         confirm = (EditText) this.findViewById(R.id.confirm);
+        secteur = (Spinner) this.findViewById(R.id.secteur);
 
         creer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +51,7 @@ public class RegisterClient extends AppCompatActivity {
 
                 addClient();
 
-               Intent main = new Intent(RegisterClient.this, MainActivity.class);
+                Intent main = new Intent(RegisterFonctionnaire.this, MainActivity.class);
                 startActivity(main);
             }
         });
@@ -62,25 +65,23 @@ public class RegisterClient extends AppCompatActivity {
         String tadresse = adresse.getText().toString();
         String ttel = tel.getText().toString();
         String tconfirm = confirm.getText().toString();
+        String tsecteur = secteur.getSelectedItem().toString();
 
         if (!TextUtils.isEmpty(tnom)) {
 
             if (!tconfirm.equals(tpswd)) {
-
-                //  confirm.setError("Mot de passe incorrect");
+               // confirm.setError("Mot de passe incorrect");
             }
                 String id = database.push().getKey();
 
-                Client client = new Client(id, tnom, tprenom, temail, tpswd, tadresse, ttel);
+                Fonctionnaire fonctionnaire = new Fonctionnaire(id, tnom, tprenom, temail, tpswd, tadresse, ttel, tsecteur);
 
-                database.child(id).setValue(client);
+                database.child(id).setValue(fonctionnaire);
 
                 Toast.makeText(this, "Votre compte est créé", Toast.LENGTH_LONG).show();
-
-        } else {
-            Toast.makeText(this, "Entrez votre nom", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Entrez votre nom", Toast.LENGTH_LONG).show();
+            }
         }
+
     }
-
-}
-

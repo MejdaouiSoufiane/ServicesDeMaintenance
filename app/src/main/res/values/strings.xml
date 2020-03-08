@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ServicesDeMaintenance</string>
+
+    <array name="secteur" >
+        <item>Secteur</item>
+        <item>Peinture</item>
+        <item>Eléctricité</item>
+        <item>Maçonnerie</item>
+        <item>Tapisserie </item>
+        <item>Plâterie</item>
+        <item>Plomberie</item>
+    </array>
 </resources>

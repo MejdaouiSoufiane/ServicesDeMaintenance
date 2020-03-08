@@ -12,12 +12,11 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_height="wrap_content">
 
             <ScrollView
-                android:layout_width="395dp"
-                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:id="@+id/form"
@@ -123,6 +122,22 @@
                             android:textSize="16sp"
                             tools:text="Téléphone" />
                     </com.google.android.material.textfield.TextInputLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:background="#ADCCE2" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/secteur"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="22dp"
+                        android:layout_marginRight="35dp"
+                        android:entries="@array/secteur"
+                        android:padding="16dp"/>
 
                     <View
                         android:layout_width="match_parent"

@@ -52,7 +52,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/usrusr"
+                android:id="@+id/pswd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
@@ -75,7 +75,7 @@
                 android:background="#ADCCE2" />
 
             <EditText
-                android:id="@+id/pswrd"
+                android:id="@+id/confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
@@ -99,7 +99,7 @@
                 android:background="#ADCCE2" />
 
             <TextView
-                android:id="@+id/sin"
+                android:id="@+id/creer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
