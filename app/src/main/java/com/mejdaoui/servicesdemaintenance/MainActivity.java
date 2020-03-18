@@ -2,52 +2,56 @@ package com.mejdaoui.servicesdemaintenance;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Pair;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
-    TextView sinClient;
-    TextView sinWorker;
-    LinearLayout circle;
+    private  static  int SPLASH_SCREEN = 5000;
+    //var animation
+    Animation topAnim, buttomAnim;
+    ImageView imageLogo;
+    TextView textLogo,stextLogo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        circle = (LinearLayout)findViewById(R.id.circle);
-        sinClient = (TextView)findViewById(R.id.sin2);
-        sinWorker = (TextView)findViewById(R.id.sin3);
-        circle.setOnClickListener(new View.OnClickListener() {
+        //Animations
+        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
+        buttomAnim =  AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
+        imageLogo = findViewById(R.id.imageView);
+        textLogo = findViewById(R.id.title);
+        stextLogo = findViewById(R.id.textView2);
+
+        imageLogo.setAnimation(topAnim);
+        textLogo.setAnimation(buttomAnim);
+        stextLogo.setAnimation(buttomAnim);
+
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-
-                Intent it = new Intent(MainActivity.this,LoginClient.class);
-                startActivity(it);
-
+            public void run() {
+                Intent intent = new Intent(MainActivity.this,Login.class);
+                Pair[] pairs = new Pair[2];
+                pairs[0] = new Pair<View,String>(imageLogo,"logo_image");
+                pairs[1] = new Pair<View,String>(textLogo,"logo_text");
+                if(android.os.Build.VERSION.SDK_INT>=android.os.Build.VERSION_CODES.LOLLIPOP)
+                {
+                    ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
+                    startActivity(intent,options.toBundle());
+                }
             }
-        });
-        sinClient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(
-                        MainActivity.this,LoginClient.class);
-                startActivity(it);
-            }
-        });
-
-        sinWorker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(
-                        MainActivity.this,LoginWorker.class);
-                startActivity(it);
-            }
-        });
-
+        },SPLASH_SCREEN);
     }
+
 }

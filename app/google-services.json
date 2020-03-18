@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "874529843458-jpvlooh5pmim86kh5gc55bp40paod906.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mejdaoui.servicesdemaintenance",
+            "certificate_hash": "eefc304ab7760d01c129d0c35a645a9932b1baa2"
+          }
+        },
+        {
           "client_id": "874529843458-8bqie9u3m4f99esiqqqf492dcn3eld3q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
