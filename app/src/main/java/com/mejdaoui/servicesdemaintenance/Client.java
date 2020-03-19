@@ -14,12 +14,11 @@ public class Client {
 
     }
 
-    public Client(String idClient, String nom, String prenom, String email, String pswd, String adresse, String tel) {
+    public Client(String idClient, String nom, String prenom, String email, String adresse, String tel) {
         this.idClient = idClient;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.pswd = pswd;
         this.adresse = adresse;
         this.tel = tel;
     }
