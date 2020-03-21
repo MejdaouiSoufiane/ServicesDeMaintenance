@@ -11,13 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".RegisterFonctionnaire"></activity>
         <activity android:name=".RegisterClient" />
-        <activity android:name=".Login" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".Login" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
