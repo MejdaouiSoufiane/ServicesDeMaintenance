@@ -1,5 +1,8 @@
 package com.mejdaoui.servicesdemaintenance;
 
+import java.util.List;
+import java.util.Set;
+
 public class Fonctionnaire {
 
     private String idFonct ;
@@ -9,17 +12,16 @@ public class Fonctionnaire {
     private String pswd ;
     private String adresse ;
     private String tel ;
-    private String secteur ;
+    private List<String> secteur ;
 
     public Fonctionnaire() {
     }
 
-    public Fonctionnaire(String idFonct, String nom, String prenom, String email, String pswd, String adresse, String tel, String secteur) {
+    public Fonctionnaire(String idFonct, String nom, String prenom, String email, String adresse, String tel, List<String> secteur) {
         this.idFonct = idFonct;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.pswd = pswd;
         this.adresse = adresse;
         this.tel = tel;
         this.secteur = secteur;
@@ -81,11 +83,11 @@ public class Fonctionnaire {
         this.tel = tel;
     }
 
-    public String getSecteur() {
+    public List<String> getSecteur() {
         return secteur;
     }
 
-    public void setSecteur(String secteur) {
+    public void setSecteur(List<String> secteur) {
         this.secteur = secteur;
     }
 }
