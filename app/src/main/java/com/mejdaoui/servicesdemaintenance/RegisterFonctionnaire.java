@@ -30,18 +30,12 @@ import java.util.Set;
 
 public class RegisterFonctionnaire extends AppCompatActivity {
 
-    private Button creer;
-    private EditText nom, prenom, ville, tel, email, password, confirm, otherSecteur;
+    static private List<String> secteur = new ArrayList<>();
 
-    private CheckBox tapisserie, plomberie, platerie, maçonnerie, peinture, electricité ;
-
-    private List<String> secteur = new ArrayList<>();
-
-    private String tnom, tprenom, tville, ttel, temail, tpassword, fnom, fprenom, fville, ftel, fsecteur ;
+   static private String tnom, tprenom, tville, ttel, temail, tpassword, type ;
 
     DatabaseReference database;
     private FirebaseAuth mAuth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,20 +51,24 @@ public class RegisterFonctionnaire extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment,fragment, fragment.getTag()).commit();
 
-
     }
 
 
     public void addUser() {
 
-        //receiveLoginData();
-
-
         String id = database.push().getKey();
 
-        Fonctionnaire fonctionnaire = new Fonctionnaire(id, tnom, tprenom, temail, tville, ttel, secteur);
+        if(type.equals("fonctionnaire")){
 
-        database.child(id).setValue(fonctionnaire);
+        Fonctionnaire fonctionnaire = new Fonctionnaire(id, tnom, tprenom, temail, tville, ttel, secteur);
+        database.child(id).setValue(fonctionnaire);}
+
+        else if (type.equals("client")){
+            Client client = new Client(id, tnom, tprenom, temail, tville, ttel);
+            database.child(id).setValue(client);
+        }
+
+
 
         mAuth.createUserWithEmailAndPassword(temail, tpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -103,18 +101,17 @@ public class RegisterFonctionnaire extends AppCompatActivity {
 
     public void receiveUserData(){
         Intent intent = getIntent();
-        tnom = intent.getStringExtra("nom");
+        tnom =intent.getStringExtra("nom");
         tprenom = intent.getStringExtra("prenom");
         tville = intent.getStringExtra("ville");
         ttel = intent.getStringExtra("tel");
-
+        type = intent.getStringExtra("type");
     }
 
     private void receiveSecteurData() {
         Intent intent = getIntent();
-        secteur = intent.getStringArrayListExtra("secteur");
+        secteur = this.getIntent().getStringArrayListExtra("secteur");
     }
-
 
     @Override
     protected void onResume() {
@@ -124,25 +121,24 @@ public class RegisterFonctionnaire extends AppCompatActivity {
 
         if(sender != null && sender.equals("UserInfo")){
             receiveUserData();
-            Toast.makeText(getApplicationContext(), fnom, Toast.LENGTH_SHORT).show();
 
             if(type.equals("fonctionnaire")){
                 secteurFragment fragment = new secteurFragment();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment,fragment, fragment.getTag()).commit();
-
             }
            else{
                 loginInfoFragment fragment = new loginInfoFragment();
+
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment,fragment, fragment.getTag()).commit();
-
-            }
+           }
         }
 
         else if(sender != null && sender.equals("secteurFragment")){
+
             receiveSecteurData();
             loginInfoFragment fragment = new loginInfoFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -151,8 +147,12 @@ public class RegisterFonctionnaire extends AppCompatActivity {
         }
 
         else if(sender != null && sender.equals("loginFragment")){
+
+
+            Toast.makeText(getApplicationContext(), tnom, Toast.LENGTH_SHORT).show();
             receiveLoginData();
             addUser();
+            //Toast.makeText(getApplicationContext(), temail, Toast.LENGTH_SHORT).show();
         }
     }
 }

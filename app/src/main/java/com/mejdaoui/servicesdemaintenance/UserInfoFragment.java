@@ -21,8 +21,8 @@ import android.widget.TextView;
 
 public class UserInfoFragment extends Fragment {
 
-    protected Button next;
-    protected EditText nom, prenom, ville, tel;
+    private Button next;
+    private EditText nom, prenom, ville, tel;
 
     protected String tnom, tprenom, tville, ttel;
 
@@ -50,11 +50,9 @@ public class UserInfoFragment extends Fragment {
         client = (CheckBox) view.findViewById(R.id.client);
         fonctionnaire = (CheckBox) view.findViewById(R.id.fonctionnaire);
 
-        client.setOnClickListener(
-                new View.OnClickListener() {
+        client.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 userType(v);
             }
         });
@@ -94,7 +92,6 @@ public class UserInfoFragment extends Fragment {
         getActivity().startActivity(intent);
     }
 
-
     private void userType(View v) {
         switch (v.getId()){
             case R.id.client:
@@ -108,6 +105,4 @@ public class UserInfoFragment extends Fragment {
                 break;
         }
     }
-
-
 }

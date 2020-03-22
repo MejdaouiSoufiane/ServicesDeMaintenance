@@ -29,12 +29,7 @@ public class loginInfoFragment extends Fragment {
     private EditText email, password, confirm;
 
     protected String temail, tpassword, tconfirm;
-
-    private CheckBox tapisserie, plomberie, platerie, maçonnerie, peinture, electricite;
-
-    private EditText otherSecteur;
-
-    private List<String> secteur = new ArrayList<>();
+    private String tnom, tprenom, tville, ttel;
 
     public loginInfoFragment() {
         // Required empty public constructor
@@ -43,6 +38,11 @@ public class loginInfoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_login_info, container, false);
+
+        /*tnom =getArguments().getString("nom");
+        tprenom =getArguments().getString("prenom");
+        tville = getArguments().getString("ville");
+        ttel = getArguments().getString("tel");*/
 
         creer = (Button) view.findViewById(R.id.creer);
         email = (EditText) view.findViewById(R.id.email);

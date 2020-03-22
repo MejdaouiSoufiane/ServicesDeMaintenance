@@ -28,6 +28,8 @@ public class secteurFragment extends Fragment  implements View.OnClickListener {
 
     private EditText otherSecteur;
 
+    private String tnom, tprenom, tville, ttel;
+
     private String tsecteur;
     private List<String> secteur = new ArrayList<>();
 
@@ -38,6 +40,12 @@ public class secteurFragment extends Fragment  implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_secteur, container, false);
+/*
+        tnom =getArguments().getString("nom");
+        tprenom =getArguments().getString("prenom");
+        tville = getArguments().getString("ville");
+        ttel = getArguments().getString("tel");*/
+
 
         next = (Button) view.findViewById(R.id.next);
 
