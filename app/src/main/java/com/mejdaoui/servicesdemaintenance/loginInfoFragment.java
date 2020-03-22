@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class loginInfo extends Fragment {
+public class loginInfoFragment extends Fragment {
 
     private Button creer;
     private EditText email, password, confirm;
@@ -36,7 +36,7 @@ public class loginInfo extends Fragment {
 
     private List<String> secteur = new ArrayList<>();
 
-    public loginInfo() {
+    public loginInfoFragment() {
         // Required empty public constructor
     }
 
@@ -49,35 +49,25 @@ public class loginInfo extends Fragment {
         password = (EditText) view.findViewById(R.id.password);
         confirm = (EditText) view.findViewById(R.id.confirm);
 
-        temail = email.getText().toString();
-        tpassword = password.getText().toString();
-        tconfirm = confirm.getText().toString();
-
-        verifyData();
-
-        otherSecteur = (EditText) view.findViewById(R.id.otherSecteur);
-
-        platerie = (CheckBox) view.findViewById(R.id.platerie);
-        plomberie = (CheckBox) view.findViewById(R.id.plomberie);
-        peinture = (CheckBox) view.findViewById(R.id.peinture);
-        maçonnerie = (CheckBox) view.findViewById(R.id.maçonnerie);
-        electricite = (CheckBox) view.findViewById(R.id.electricite);
-        tapisserie = (CheckBox) view.findViewById(R.id.tapisserie);
-
-
         final RegisterFonctionnaire activity = (RegisterFonctionnaire) getActivity();
 
-        creer.setOnClickListener(new View.OnClickListener() {
+        creer.setOnClickListener(
+                new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.addUser();
+                verifyData(v);
             }
         });
 
         return view;
     }
 
-    private void verifyData() {
+    private void verifyData(View v) {
+
+        temail = email.getText().toString();
+        tpassword = password.getText().toString();
+        tconfirm = confirm.getText().toString();
+
         if (temail.isEmpty()) {
             email.setError("Email obligatoire");
             email.requestFocus();
@@ -103,9 +93,12 @@ public class loginInfo extends Fragment {
             return;
         }
 
+
         Intent intent = new Intent(getActivity().getBaseContext(), RegisterFonctionnaire.class);
         intent.putExtra("email", temail);
         intent.putExtra("password", tpassword);
+        intent.putExtra("fragment","loginFragment");
+        getActivity().startActivity(intent);
     }
 
 }

@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-public class UserInfo extends Fragment {
+public class UserInfoFragment extends Fragment {
 
     protected Button next;
     protected EditText nom, prenom, ville, tel;
@@ -32,7 +32,7 @@ public class UserInfo extends Fragment {
     protected String ttype ;
 
 
-    public UserInfo() {
+    public UserInfoFragment() {
         // Required empty public constructor
     }
 
@@ -68,7 +68,7 @@ public class UserInfo extends Fragment {
         tville = ville.getText().toString();
         ttel = tel.getText().toString();
 
-        Intent intent = new Intent(getActivity().getBaseContext(), RegisterFonctionnaire.class);
+        final Intent intent = new Intent(getActivity().getBaseContext(), RegisterFonctionnaire.class);
         intent.putExtra("nom",tnom);
         intent.putExtra("prenom",tprenom);
         intent.putExtra("ville",tville);
@@ -82,7 +82,8 @@ public class UserInfo extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.nextBtn(v);
+
+                getActivity().startActivity(intent);
             }
         });
 

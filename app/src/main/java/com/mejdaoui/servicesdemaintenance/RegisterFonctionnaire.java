@@ -2,6 +2,7 @@ package com.mejdaoui.servicesdemaintenance;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,25 +28,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class RegisterFonctionnaire extends AppCompatActivity implements View.OnClickListener {
+public class RegisterFonctionnaire extends AppCompatActivity {
 
     private Button creer;
-    private EditText nom;
-    private EditText prenom;
-    private EditText ville;
-    private EditText tel;
-    private EditText email;
-    private EditText password;
-    private EditText confirm;
-    private CheckBox tapisserie;
-    private CheckBox plomberie;
-    private CheckBox platerie;
-    private CheckBox maçonnerie;
-    private CheckBox peinture;
-    private CheckBox electricite;
-    private EditText otherSecteur;
+    private EditText nom, prenom, ville, tel, email, password, confirm, otherSecteur;
+
+    private CheckBox tapisserie, plomberie, platerie, maçonnerie, peinture, electricité ;
+
     private List<String> secteur = new ArrayList<>();
 
+    private String tnom, tprenom, tville, ttel, temail, tpassword, tconfirm, type;
 
     DatabaseReference database;
     private FirebaseAuth mAuth;
@@ -54,79 +46,24 @@ public class RegisterFonctionnaire extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_fonctionnaire);
+        setContentView(R.layout.activity_register_fonctionnaire_2);
 
         database = FirebaseDatabase.getInstance().getReference("fonctionnaires");
 
         mAuth = FirebaseAuth.getInstance();
 
-        creer = (Button) this.findViewById(R.id.creer);
-        nom = (EditText) this.findViewById(R.id.nom);
-        prenom = (EditText) this.findViewById(R.id.prenom);
-        ville = (EditText) this.findViewById(R.id.ville);
-        tel = (EditText) this.findViewById(R.id.tel);
-        email = (EditText) this.findViewById(R.id.email);
-        password = (EditText) this.findViewById(R.id.pswd);
-        confirm = (EditText) this.findViewById(R.id.confirm);
-        platerie = (CheckBox) this.findViewById(R.id.platerie);
-        plomberie = (CheckBox) this.findViewById(R.id.plomberie);
-        peinture = (CheckBox) this.findViewById(R.id.peinture);
-        maçonnerie = (CheckBox) this.findViewById(R.id.maçonnerie);
-        electricite = (CheckBox) this.findViewById(R.id.electricite);
-        tapisserie = (CheckBox) this.findViewById(R.id.tapisserie);
-        otherSecteur = (EditText) this.findViewById(R.id.otherSecteur);
+        UserInfoFragment fragment = new UserInfoFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment,fragment, fragment.getTag()).commit();
 
-
-        creer.setOnClickListener(this);
-
-        platerie.setOnClickListener(this);
-        plomberie.setOnClickListener(this);
-        peinture.setOnClickListener(this);
-        tapisserie.setOnClickListener(this);
-        maçonnerie.setOnClickListener(this);
-        electricite.setOnClickListener(this);
 
     }
 
 
-    private void addUser() {
-        String tnom = nom.getText().toString();
-        String tprenom = prenom.getText().toString();
-        String temail = email.getText().toString().trim();
-        String tpassword = password.getText().toString().trim();
-        String tville = ville.getText().toString();
-        String ttel = tel.getText().toString();
-        String tconfirm = confirm.getText().toString().trim();
-        String tsecteur = otherSecteur.getText().toString();
+    public void addUser() {
 
-        if (temail.isEmpty()) {
-            email.setError("Email obligatoire");
-            email.requestFocus();
-            return;
-        }
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(temail).matches()) {
-            email.setError("Entrez un email valide");
-           email.requestFocus();
-            return;
-        }
-
-        if (tpassword.isEmpty()) {
-            password.setError("Mot de passe obligatoire");
-            password.requestFocus();
-            return;
-        }
-
-        if (!tconfirm.equals(tpassword)) {
-
-             confirm.setError("Mot de passe incorrect");
-             confirm.requestFocus();
-             return;
-        }
-
-        if (!tsecteur.isEmpty()) {
-            secteur.add(tsecteur);
-        }
+        //receiveLoginData();
 
         String id = database.push().getKey();
 
@@ -157,45 +94,100 @@ public class RegisterFonctionnaire extends AppCompatActivity implements View.OnC
 
     }
 
+    private void receiveLoginData() {
+        Intent intent = getIntent();
+        temail = intent.getStringExtra("email");
+        tpassword = intent.getStringExtra("password");
+
+    }
+
+    public void receiveUserData(){
+        Intent intent = this.getIntent();
+        tnom = intent.getStringExtra("nom");
+        tprenom = intent.getStringExtra("prenom");
+        tville = intent.getStringExtra("ville");
+        ttel = intent.getStringExtra("tel");
+        type = intent.getStringExtra("type");
+
+    }
+
+    private void receiveSecteurData() {
+        Intent intent = getIntent();
+        secteur = intent.getStringArrayListExtra("secteur");
+    }
+
 
     @Override
-    public void onClick(View v) {
+    protected void onResume() {
+        super.onResume();
+        final String sender=this.getIntent().getStringExtra("fragment");
 
-        switch (v.getId()){
-            case R.id.creer:
-                addUser();
-                break;
+        if(sender != null && sender.equals("UserInfo")){
+            receiveUserData();
+           // if(type.equals("fonctionnaire")){
+                secteurFragment fragment = new secteurFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment,fragment, fragment.getTag()).commit();
 
-            case R.id.platerie:
-                if (((CheckBox)v).isChecked())
-                    secteur.add("platerie");
-                break;
+            }
+           /* else{
+                loginInfoFragment fragment = new loginInfoFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment,fragment, fragment.getTag()).commit();
 
-            case R.id.plomberie:
-                if (((CheckBox)v).isChecked())
-                 secteur.add("plomberie");
-                break;
+            }*/
 
-            case R.id.peinture:
-                if (((CheckBox)v).isChecked())
-                secteur.add("peinture");
-                break;
+        //}
 
-            case R.id.tapisserie:
-                if (((CheckBox)v).isChecked())
-                secteur.add("tapisserie");
-                break;
+        else if(sender != null && sender.equals("secteurFragment")){
+            receiveSecteurData();
+            loginInfoFragment fragment = new loginInfoFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment,fragment, fragment.getTag()).commit();
+        }
+        else if(sender != null && sender.equals("loginFragment")){
+            receiveLoginData();
+            addUser();
 
-            case R.id.maçonnerie:
-                if (((CheckBox)v).isChecked())
-                secteur.add("maçonnerie");
-                break;
-
-            case R.id.electricite:
-                if (((CheckBox)v).isChecked())
-                secteur.add("éléctricité");
-                break;
         }
 
     }
+/*
+    public void nextBtnUser(View v) {
+        String sender=this.getIntent().getExtras().getString("fragment");
+
+         if(sender != null && sender.equals("UserInfo")){
+             receiveUserData();
+             if(type.equals("fonctionnaire")){
+                 secteurFragment fragment = new secteurFragment();
+                 FragmentManager fragmentManager = getSupportFragmentManager();
+                 fragmentManager.beginTransaction()
+                         .replace(R.id.fragment,fragment, fragment.getTag()).commit();
+
+             }
+             else{
+                 loginInfoFragment fragment = new loginInfoFragment();
+                 FragmentManager fragmentManager = getSupportFragmentManager();
+                 fragmentManager.beginTransaction()
+                         .replace(R.id.fragment,fragment, fragment.getTag()).commit();
+
+             }
+
+         }
+
+         else if(sender != null && sender.equals("secteurFragment")){
+             receiveSecteurData();
+             loginInfoFragment fragment = new loginInfoFragment();
+             FragmentManager fragmentManager = getSupportFragmentManager();
+             fragmentManager.beginTransaction()
+                     .replace(R.id.fragment,fragment, fragment.getTag()).commit();
+         }
+
+
+    }*/
+
+
 }
