@@ -63,12 +63,11 @@ public class secteurFragment extends Fragment  implements View.OnClickListener {
             secteur.add(tsecteur);
         }
 
-        final RegisterFonctionnaire activity = (RegisterFonctionnaire) getActivity();
 
-        next.setOnClickListener(
-                new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         Intent intent = new Intent(getActivity().getBaseContext(), RegisterFonctionnaire.class);
                         intent.putExtra("fragment","secteurFragment");
                         intent.putStringArrayListExtra("secteur", (ArrayList<String>) secteur);

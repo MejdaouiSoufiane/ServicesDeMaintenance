@@ -49,10 +49,7 @@ public class loginInfoFragment extends Fragment {
         password = (EditText) view.findViewById(R.id.password);
         confirm = (EditText) view.findViewById(R.id.confirm);
 
-        final RegisterFonctionnaire activity = (RegisterFonctionnaire) getActivity();
-
-        creer.setOnClickListener(
-                new View.OnClickListener() {
+        creer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 verifyData(v);
@@ -92,7 +89,6 @@ public class loginInfoFragment extends Fragment {
             confirm.requestFocus();
             return;
         }
-
 
         Intent intent = new Intent(getActivity().getBaseContext(), RegisterFonctionnaire.class);
         intent.putExtra("email", temail);

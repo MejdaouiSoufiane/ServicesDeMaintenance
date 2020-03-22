@@ -50,9 +50,11 @@ public class UserInfoFragment extends Fragment {
         client = (CheckBox) view.findViewById(R.id.client);
         fonctionnaire = (CheckBox) view.findViewById(R.id.fonctionnaire);
 
-        client.setOnClickListener(new View.OnClickListener() {
+        client.setOnClickListener(
+                new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 userType(v);
             }
         });
@@ -63,12 +65,24 @@ public class UserInfoFragment extends Fragment {
             }
         });
 
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendData(v);
+            }
+        });
+
+        return view;
+    }
+
+    private void sendData(View v) {
+
         tnom = nom.getText().toString();
         tprenom = prenom.getText().toString();
         tville = ville.getText().toString();
         ttel = tel.getText().toString();
 
-        final Intent intent = new Intent(getActivity().getBaseContext(), RegisterFonctionnaire.class);
+        Intent intent = new Intent(getActivity().getBaseContext(), RegisterFonctionnaire.class);
         intent.putExtra("nom",tnom);
         intent.putExtra("prenom",tprenom);
         intent.putExtra("ville",tville);
@@ -77,18 +91,9 @@ public class UserInfoFragment extends Fragment {
 
         intent.putExtra("fragment", "UserInfo");
 
-        final RegisterFonctionnaire activity = (RegisterFonctionnaire) getActivity();
-
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                getActivity().startActivity(intent);
-            }
-        });
-
-        return view;
+        getActivity().startActivity(intent);
     }
+
 
     private void userType(View v) {
         switch (v.getId()){

@@ -37,7 +37,7 @@ public class RegisterFonctionnaire extends AppCompatActivity {
 
     private List<String> secteur = new ArrayList<>();
 
-    private String tnom, tprenom, tville, ttel, temail, tpassword, tconfirm, type;
+    private String tnom, tprenom, tville, ttel, temail, tpassword, fnom, fprenom, fville, ftel, fsecteur ;
 
     DatabaseReference database;
     private FirebaseAuth mAuth;
@@ -65,6 +65,7 @@ public class RegisterFonctionnaire extends AppCompatActivity {
 
         //receiveLoginData();
 
+
         String id = database.push().getKey();
 
         Fonctionnaire fonctionnaire = new Fonctionnaire(id, tnom, tprenom, temail, tville, ttel, secteur);
@@ -87,7 +88,6 @@ public class RegisterFonctionnaire extends AppCompatActivity {
                     } else {
                         Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-
                 }
             }
         });
@@ -102,12 +102,11 @@ public class RegisterFonctionnaire extends AppCompatActivity {
     }
 
     public void receiveUserData(){
-        Intent intent = this.getIntent();
+        Intent intent = getIntent();
         tnom = intent.getStringExtra("nom");
         tprenom = intent.getStringExtra("prenom");
         tville = intent.getStringExtra("ville");
         ttel = intent.getStringExtra("tel");
-        type = intent.getStringExtra("type");
 
     }
 
@@ -121,25 +120,27 @@ public class RegisterFonctionnaire extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         final String sender=this.getIntent().getStringExtra("fragment");
+        final String type=this.getIntent().getStringExtra("type");
 
         if(sender != null && sender.equals("UserInfo")){
             receiveUserData();
-           // if(type.equals("fonctionnaire")){
+            Toast.makeText(getApplicationContext(), fnom, Toast.LENGTH_SHORT).show();
+
+            if(type.equals("fonctionnaire")){
                 secteurFragment fragment = new secteurFragment();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment,fragment, fragment.getTag()).commit();
 
             }
-           /* else{
+           else{
                 loginInfoFragment fragment = new loginInfoFragment();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment,fragment, fragment.getTag()).commit();
 
-            }*/
-
-        //}
+            }
+        }
 
         else if(sender != null && sender.equals("secteurFragment")){
             receiveSecteurData();
@@ -148,46 +149,10 @@ public class RegisterFonctionnaire extends AppCompatActivity {
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment,fragment, fragment.getTag()).commit();
         }
+
         else if(sender != null && sender.equals("loginFragment")){
             receiveLoginData();
             addUser();
-
         }
-
     }
-/*
-    public void nextBtnUser(View v) {
-        String sender=this.getIntent().getExtras().getString("fragment");
-
-         if(sender != null && sender.equals("UserInfo")){
-             receiveUserData();
-             if(type.equals("fonctionnaire")){
-                 secteurFragment fragment = new secteurFragment();
-                 FragmentManager fragmentManager = getSupportFragmentManager();
-                 fragmentManager.beginTransaction()
-                         .replace(R.id.fragment,fragment, fragment.getTag()).commit();
-
-             }
-             else{
-                 loginInfoFragment fragment = new loginInfoFragment();
-                 FragmentManager fragmentManager = getSupportFragmentManager();
-                 fragmentManager.beginTransaction()
-                         .replace(R.id.fragment,fragment, fragment.getTag()).commit();
-
-             }
-
-         }
-
-         else if(sender != null && sender.equals("secteurFragment")){
-             receiveSecteurData();
-             loginInfoFragment fragment = new loginInfoFragment();
-             FragmentManager fragmentManager = getSupportFragmentManager();
-             fragmentManager.beginTransaction()
-                     .replace(R.id.fragment,fragment, fragment.getTag()).commit();
-         }
-
-
-    }*/
-
-
 }
