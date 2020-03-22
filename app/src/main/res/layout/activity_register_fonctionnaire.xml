@@ -44,7 +44,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/name"
-                    style="@style/AppTextField"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="22dp"
@@ -73,7 +73,7 @@
                     android:background="#AA150A" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/AppTextField"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="22dp"
@@ -98,7 +98,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/AppTextField"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="22dp"
@@ -126,7 +126,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/AppTextField"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="22dp"
@@ -230,7 +230,7 @@
                     android:background="#AA150A" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/AppTextField"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="22dp"
@@ -257,7 +257,7 @@
                     android:background="#AA150A" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/AppTextField"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="22dp"
@@ -285,7 +285,7 @@
                     android:background="#AA150A" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/AppTextField"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="22dp"
@@ -312,7 +312,7 @@
                     android:background="#AA150A" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/AppTextField"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="22dp"
@@ -334,7 +334,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-                <com.google.android.material.button.MaterialButton
+                <Button
                     android:id="@+id/creer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

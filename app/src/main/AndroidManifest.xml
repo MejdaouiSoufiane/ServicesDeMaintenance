@@ -12,6 +12,7 @@
         <activity android:name=".RegisterFonctionnaire"></activity>
         <activity android:name=".RegisterClient" />
         <activity android:name=".Login" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
