@@ -17,6 +17,13 @@ public class Fonctionnaire {
     public Fonctionnaire() {
     }
 
+    public Fonctionnaire(String nom, String prenom, String adresse, String tel) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.tel = tel;
+    }
+
     public Fonctionnaire(String idFonct, String nom, String prenom, String email, String adresse, String tel, List<String> secteur) {
         this.idFonct = idFonct;
         this.nom = nom;
