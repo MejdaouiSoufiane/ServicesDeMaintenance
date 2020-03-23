@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="3dp"
+    app:cardCornerRadius="3dp">
+    <RelativeLayout
+        android:padding="10dp"
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sans_titre"/>
+
+        <TextView
+                android:id="@+id/item_titre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/item_image"
+                android:layout_toEndOf="@+id/item_image"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="Commande"/>
+        <TextView
+                android:id="@+id/item_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@+id/item_image"
+                android:layout_toEndOf="@+id/item_image"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/item_titre"
+                android:text="Description comamnde "/>
+
+
+
+        <TextView
+            android:id="@+id/item_etat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/capsule"
+            android:gravity="center"
+            android:text="Etat"
+            android:textSize="16sp"
+            android:layout_toRightOf="@+id/item_image"
+            android:layout_toEndOf="@+id/item_image"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/item_description"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
