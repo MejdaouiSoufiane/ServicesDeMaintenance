@@ -1,8 +1,6 @@
 package com.mejdaoui.servicesdemaintenance;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,13 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class loginInfoFragment extends Fragment {
@@ -90,7 +82,7 @@ public class loginInfoFragment extends Fragment {
             return;
         }
 
-        Intent intent = new Intent(getActivity().getBaseContext(), RegisterFonctionnaire.class);
+        Intent intent = new Intent(getActivity().getBaseContext(), Register.class);
         intent.putExtra("email", temail);
         intent.putExtra("password", tpassword);
         intent.putExtra("fragment","loginFragment");

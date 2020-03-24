@@ -1,9 +1,6 @@
 package com.mejdaoui.servicesdemaintenance;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
 
 public class UserInfoFragment extends Fragment {
@@ -80,7 +76,7 @@ public class UserInfoFragment extends Fragment {
         tville = ville.getText().toString();
         ttel = tel.getText().toString();
 
-        Intent intent = new Intent(getActivity().getBaseContext(), RegisterFonctionnaire.class);
+        Intent intent = new Intent(getActivity().getBaseContext(), Register.class);
         intent.putExtra("nom",tnom);
         intent.putExtra("prenom",tprenom);
         intent.putExtra("ville",tville);

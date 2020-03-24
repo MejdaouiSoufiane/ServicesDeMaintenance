@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.firebase.auth.FirebaseAuthException;
-
 public class Login extends AppCompatActivity {
 
 
@@ -25,7 +23,7 @@ public class Login extends AppCompatActivity {
         newaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent create = new Intent(Login.this, RegisterFonctionnaire.class);
+                Intent create = new Intent(Login.this, Register.class);
                 startActivity(create);
             }
         });
