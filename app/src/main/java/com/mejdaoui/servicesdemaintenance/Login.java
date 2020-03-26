@@ -59,7 +59,7 @@ public class Login extends AppCompatActivity {
         newaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent create = new Intent(Login.this, RegisterFonctionnaire.class);
+                Intent create = new Intent(Login.this, Register.class);
                 startActivity(create);
             }
         });

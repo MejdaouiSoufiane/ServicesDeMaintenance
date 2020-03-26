@@ -6,13 +6,6 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Patterns;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,11 +17,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public class RegisterFonctionnaire extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
     static private List<String> secteur = new ArrayList<>();
 
@@ -77,7 +68,7 @@ public class RegisterFonctionnaire extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     finish();
                     Toast.makeText(getApplicationContext(), "Compte bien créé", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterFonctionnaire.this, Login.class));
+                    startActivity(new Intent(Register.this, Login.class));
                 } else {
 
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {

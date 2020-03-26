@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClientProfile"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:padding="20dp">
+ <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:padding="20dp"
+    android:background="#fece2f">
+
+    <ImageView
+        android:id="@+id/profileImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/sans_titre"
+        android:layout_centerVertical ="true" />
+
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/profileImg"
+         android:layout_centerVertical="true"
+         android:layout_marginLeft="21dp"
+         android:layout_marginTop="-71dp"
+         android:layout_toRightOf="@+id/profileImg"
+         android:fontFamily="@font/banger"
+         android:includeFontPadding="false"
+         android:text="Name"
+         android:textColor="#000"
+         android:textSize="20sp" />
+
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/profileImg"
+         android:layout_marginLeft="27dp"
+         android:layout_marginTop="-47dp"
+         android:layout_toRightOf="@+id/profileImg"
+         android:includeFontPadding="false"
+         android:text="Name"
+         android:textSize="14sp" />
+
+  </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="125dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="#fece2f"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/sans_titre"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:fontFamily="@font/banger"
+                    android:id="@+id/payment_label"
+                    android:includeFontPadding="false"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="$123"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/payment_desc"
+                    android:includeFontPadding="false"
+                    android:layout_below="@id/payment_label"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Balance"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:hint="Full Name"
+                android:id="@+id/full_name_profile"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:drawablePadding="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:background="#fece2f"
+                android:fontFamily="@font/banger"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:text="UPDATE" />
+    </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
