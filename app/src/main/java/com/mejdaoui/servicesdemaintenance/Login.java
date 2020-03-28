@@ -6,11 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,13 +17,25 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
-
 
     private Button newaccount;
     private Button login;
@@ -34,9 +44,7 @@ public class Login extends AppCompatActivity {
     TextInputEditText password;
 
     private FirebaseAuth mAuth;
-
     ProgressDialog pd;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,7 @@ public class Login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         login = findViewById(R.id.connect);
+        newaccount = findViewById(R.id.newaccount);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
 
@@ -67,13 +76,10 @@ public class Login extends AppCompatActivity {
         pd = new ProgressDialog(this);
         pd.setMessage("Logging In...");
 
-
-        newaccount = (Button) this.findViewById(R.id.newaccount);
-
         newaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent create = new Intent(Login.this, RegisterFonctionnaire.class);
+                Intent create = new Intent(Login.this, Register.class);
                 startActivity(create);
             }
         });
@@ -90,7 +96,7 @@ public class Login extends AppCompatActivity {
                             pd.dismiss();
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(new Intent(Login.this, Profile_fnct.class));
+                            startActivity(new Intent(Login.this, ListeCommande.class));
                             finish();
                         } else {
                             pd.dismiss();

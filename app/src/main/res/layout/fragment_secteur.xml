@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".secteurFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:id="@+id/sector"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true">
+
+           <CheckBox
+               android:id="@+id/peinture"
+               android:layout_width="101dp"
+               android:layout_height="40dp"
+               android:text="Peinture"
+               android:textColor="#050505"
+               app:layout_constraintTop_toTopOf="parent"
+               tools:ignore="MissingConstraints" />
+
+           <CheckBox
+               android:id="@+id/tapisserie"
+               android:layout_width="125dp"
+               android:layout_height="45dp"
+               android:text="Tapisserie"
+               android:textColor="#050505"
+               app:layout_constraintStart_toEndOf="@+id/peinture"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <CheckBox
+               android:id="@+id/plomberie"
+               android:layout_width="125dp"
+               android:layout_height="45dp"
+               android:text="Plomberie"
+               android:textColor="#050505"
+               app:layout_constraintStart_toEndOf="@+id/tapisserie"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <CheckBox
+               android:id="@+id/electricite"
+               android:layout_width="105dp"
+               android:layout_height="34dp"
+               android:text="Eléctricité"
+               android:textColor="#050505"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/peinture"
+               app:layout_constraintVertical_bias="0.0"
+               tools:ignore="MissingConstraints"
+               tools:layout_editor_absoluteX="0dp" />
+
+
+           <CheckBox
+               android:id="@+id/maçonnerie"
+               android:layout_width="122dp"
+               android:layout_height="26dp"
+               android:text="Maçonnerie"
+               android:textColor="#050505"
+               app:layout_constraintStart_toEndOf="@+id/electricite"
+               app:layout_constraintTop_toBottomOf="@+id/tapisserie" />
+           <CheckBox
+               android:id="@+id/platerie"
+               android:layout_width="122dp"
+               android:layout_height="26dp"
+               android:text="Plâterie"
+               android:textColor="#050505"
+               app:layout_constraintStart_toEndOf="@+id/maçonnerie"
+               app:layout_constraintTop_toBottomOf="@+id/plomberie" />
+
+
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+           android:layout_marginLeft="40dp"
+           android:layout_marginRight="40dp"
+           android:background="#AA150A" />
+
+       <com.google.android.material.textfield.TextInputLayout
+
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="22dp"
+           android:layout_marginRight="35dp"
+           android:textColorHint="#3F3939"
+           android:padding="5dp"
+           app:boxStrokeColor="#AA150A">
+
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/otherSecteur"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Autre Secteur"
+               android:textSize="16sp"
+               android:textColor="#050505"
+               tools:text="Autre secteur? Précisez" />
+       </com.google.android.material.textfield.TextInputLayout>
+
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+           android:layout_marginLeft="40dp"
+           android:layout_marginRight="40dp"
+           android:background="#AA150A" />
+
+       <Button
+           android:id="@+id/next"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="50dp"
+           android:layout_marginRight="50dp"
+           android:padding="16dp"
+           android:text="Suivant"
+           android:textAlignment="center"
+           android:textColor="#0C0100"
+           android:textSize="18sp"
+           android:textStyle="bold"
+           app:backgroundTint="#AA150A" />
+
+   </LinearLayout>
+    </ScrollView>
+</FrameLayout>
