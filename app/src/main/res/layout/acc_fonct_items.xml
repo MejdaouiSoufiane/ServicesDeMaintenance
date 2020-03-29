@@ -64,6 +64,15 @@
             android:text="Time + Ville here !"
             android:textSize="12sp" />
 
+        <ImageView
+            android:id="@+id/newDemande"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:scaleType="centerCrop"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/newDemande"
+            android:layout_marginRight="20dp"
+            />
 
     </RelativeLayout>
 
