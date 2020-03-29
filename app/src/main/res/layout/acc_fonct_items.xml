@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--La liste des items/postes/demandes dans l'acceuil du fonctionnaire-->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        >
+
+        <ImageView
+            android:id="@+id/clientimg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/img"
+            />
+
+        <TextView
+            android:id="@+id/serviceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@+id/clientimg"
+            android:layout_marginStart="10dp"
+            android:text="Service name Here!"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/serviceDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/serviceName"
+            android:layout_toEndOf="@id/clientimg"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:text="Description Here!"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/clientName"
+            android:layout_width="166dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="65dp"
+            android:layout_marginEnd="244dp"
+            android:text="Client Name Here!"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/time_ville"
+            android:layout_width="97dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="65dp"
+            android:layout_marginEnd="10dp"
+            android:text="Time + Ville here !"
+            android:textSize="12sp" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

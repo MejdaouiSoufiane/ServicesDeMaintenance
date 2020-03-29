@@ -21,6 +21,13 @@
         android:src="@drawable/sans_titre"
         android:transitionName="logo_image"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TEST"
+        android:id="@+id/test">
+
+    </Button>
 
     <TextView
         android:id="@+id/textView4"
