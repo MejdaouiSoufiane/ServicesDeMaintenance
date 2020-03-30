@@ -1,21 +1,28 @@
 package com.mejdaoui.servicesdemaintenance;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.View;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mejdaoui.servicesdemaintenance.ViewHolder.DemandeViewHolder;
+import com.mejdaoui.servicesdemaintenance.Fragement.FonctionnaireRecycler;
 
 import java.util.ArrayList;
 
@@ -26,58 +33,59 @@ public class FctHome extends AppCompatActivity {
     private FirebaseRecyclerOptions<Demande> options;
     private FirebaseRecyclerAdapter<Demande, FirebaseViewHolder> adapter;
     private DatabaseReference databaseReference;
+    private DrawerLayout drawer;
 
-    @Override
-    public void onStart(){
-        super.onStart();
-        adapter.startListening();
-    }
-
-
-    @Override
-    public void onStop(){
-        super.onStop();
-        adapter.stopListening();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fct_home);
 
-        recyclerView = findViewById(R.id.home_fct);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        arrayList = new ArrayList<>();
-
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Demandes");
-        databaseReference.keepSynced(true);
-        options = new FirebaseRecyclerOptions.Builder<Demande>().setQuery(databaseReference,Demande.class).build();
-
-        adapter = new FirebaseRecyclerAdapter<Demande, FirebaseViewHolder>(options) {
+        /******* navigation drawer tricks ***/
+        final Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.open_navigation_drawer,R.string.close_navigation_drawer);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseViewHolder holder, int i, @NonNull Demande demande) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                drawer.closeDrawer(Gravity.LEFT);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                int id = item.getItemId();
 
-                holder.clt.setText(demande.getIdClient());
-                holder.srv.setText(demande.getService());
-                holder.timeville.setText(demande.getHeure());
-                holder.desc.setText(demande.getDescription());
+                if(id == R.id.nav_home){
+                    toolbar.setTitle("Main pafe");
+                    FonctionnaireRecycler fragment = new FonctionnaireRecycler();
+                    ft.replace(R.id.fragement_container, fragment);
+                    ft.commit();
+                }else if(id == R.id.nav_message){
+                    toolbar.setTitle("Messages");
+                    Toast.makeText(FctHome.this, "Messages", Toast.LENGTH_SHORT).show();
+                }
+                else if(id == R.id.nav_profile){
+                    toolbar.setTitle("Profile");
+                    Toast.makeText(FctHome.this, "Profles", Toast.LENGTH_SHORT).show();
+                }
 
-               /* holder.itemView.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view){
-                        Toast.makeText(FctHome.this, "Termooooo", Toast.LENGTH_SHORT).show();
-                    }
-                });*/
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
             }
-
-            @NonNull
-            @Override
-            public FirebaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-                return new FirebaseViewHolder(LayoutInflater.from(FctHome.this).inflate(R.layout.acc_fonct_items, viewGroup,false));
-            }
-        };
-
-        recyclerView.setAdapter(adapter);
+        });
+        /******* End navigation drawer tricks***/
     }
+
+
+    @Override
+    public void onBackPressed() {
+        if(drawer.isDrawerOpen(GravityCompat.START))
+            drawer.closeDrawer(GravityCompat.START);
+        else
+            super.onBackPressed();
+    }
+
+
 }

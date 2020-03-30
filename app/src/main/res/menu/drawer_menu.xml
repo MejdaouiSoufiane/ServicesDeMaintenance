@@ -13,7 +13,7 @@
             android:icon="@drawable/ic_message"
             android:title="Message"></item>
         <item
-            android:id="@+id/bav_profile"
+            android:id="@+id/nav_profile"
             android:icon="@drawable/ic_profile"
             android:title="Profile"></item>
     </group>
