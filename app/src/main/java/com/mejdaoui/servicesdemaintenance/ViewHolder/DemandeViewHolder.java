@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mejdaoui.servicesdemaintenance.R;
 
 public class DemandeViewHolder extends RecyclerView.ViewHolder {
+
     public TextView srv;
     public TextView desc;
     public TextView clt;
@@ -23,8 +24,6 @@ public class DemandeViewHolder extends RecyclerView.ViewHolder {
         clt = itemView.findViewById(R.id.clientName);
         timeville = itemView.findViewById(R.id.time_ville);
         imageView = itemView.findViewById(R.id.clientimg);
-
-
     }
 
 

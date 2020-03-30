@@ -70,7 +70,7 @@
             android:layout_height="36dp"
             android:scaleType="centerCrop"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/newDemande"
+            android:background="@drawable/newdemande"
             android:layout_marginRight="20dp"
             />
 
