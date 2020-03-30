@@ -30,7 +30,7 @@ public class AccFonctionnaire extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.acc_fonct_recy);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Demandes");
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
 
         options = new FirebaseRecyclerOptions.Builder<Demande>()
                 .setQuery(databaseReference,Demande.class).build();
