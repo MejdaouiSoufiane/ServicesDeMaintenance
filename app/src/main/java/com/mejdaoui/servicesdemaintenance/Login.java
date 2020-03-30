@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
                     System.out.println(mAuth.getCurrentUser().getProviderData());
                     // database.addValueEventListener(new ValueEventListener() {
 
-                    Intent intent = new Intent(Login.this, ListeCommande.class);
+                    Intent intent = new Intent(Login.this, ListeDemande.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();

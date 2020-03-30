@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
-    app:cardElevation="3dp"
-    app:cardCornerRadius="3dp">
+    app:cardElevation="5dp"
+    app:cardCornerRadius="10dp"
+    app:cardPreventCornerOverlap="true">
     <RelativeLayout
-        android:padding="10dp"
+        android:id="@+id/item_card"
+        android:padding="5dp"
         android:weightSum="10"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

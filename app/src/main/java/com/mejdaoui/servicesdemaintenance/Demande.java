@@ -1,19 +1,28 @@
 package com.mejdaoui.servicesdemaintenance;
 
-import java.util.List;
+import android.net.Uri;
 
 public class Demande {
+    private String idDemande;
     private String idClient ;
     private String titre ;
     private String description ;
     private String service ;
     private String date_dispo ;
-    private int heure ;
+    private String heure ;
     private int lat_loc,long_loc ;
-    private int age_fonc;
+    private String age_fonc;
     private String genre_fon;
+    private Uri uri_picture;
+    private String adr_picture;
+    private String etat;
 
-    public Demande(String idClient, String titre, String description, String service, String date_dispo, int heure, int lat_loc, int long_loc, int age_fonc, String genre_fon) {
+    public Demande() {
+
+    }
+
+    public Demande(String idDemande, String idClient, String titre, String description, String service, String date_dispo, String heure, int lat_loc, int long_loc, String age_fonc, String genre_fon,String etat) {
+        this.idDemande = idDemande;
         this.idClient = idClient;
         this.titre = titre;
         this.description = description;
@@ -24,6 +33,17 @@ public class Demande {
         this.long_loc = long_loc;
         this.age_fonc = age_fonc;
         this.genre_fon = genre_fon;
+      //  this.adr_picture=adr_picture;
+        this.etat = etat;
+    }
+
+
+    public String getIdDemande() {
+        return idDemande;
+    }
+
+    public void setIdDemande(String idDemande) {
+        this.idDemande = idDemande;
     }
 
     public String getIdClient() {
@@ -66,11 +86,11 @@ public class Demande {
         this.date_dispo = date_dispo;
     }
 
-    public int getHeure() {
+    public String getHeure() {
         return heure;
     }
 
-    public void setHeure(int heure) {
+    public void setHeure(String heure) {
         this.heure = heure;
     }
 
@@ -90,11 +110,11 @@ public class Demande {
         this.long_loc = long_loc;
     }
 
-    public int getAge_fonc() {
+    public String getAge_fonc() {
         return age_fonc;
     }
 
-    public void setAge_fonc(int age_fonc) {
+    public void setAge_fonc(String age_fonc) {
         this.age_fonc = age_fonc;
     }
 
@@ -105,4 +125,49 @@ public class Demande {
     public void setGenre_fon(String genre_fon) {
         this.genre_fon = genre_fon;
     }
+
+    public Uri getUri_picture() {
+        return uri_picture;
+    }
+
+    public void setUri_picture(Uri uri_picture) {
+        this.uri_picture = uri_picture;
+    }
+
+    public String getAdr_picture() {
+        return adr_picture;
+    }
+
+    public void setAdr_picture(String adr_picture) {
+        this.adr_picture = adr_picture;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
+    }
+
+    @Override
+    public String toString() {
+        return "Demande{" +
+                "idDemande='" + idDemande + '\'' +
+                ", idClient='" + idClient + '\'' +
+                ", titre='" + titre + '\'' +
+                ", description='" + description + '\'' +
+                ", service='" + service + '\'' +
+                ", date_dispo='" + date_dispo + '\'' +
+                ", heure='" + heure + '\'' +
+                ", lat_loc=" + lat_loc +
+                ", long_loc=" + long_loc +
+                ", age_fonc='" + age_fonc + '\'' +
+                ", genre_fon='" + genre_fon + '\'' +
+                ", uri_picture=" + uri_picture +
+                ", adr_picture='" + adr_picture + '\'' +
+                ", etat='" + etat + '\'' +
+                '}';
+    }
 }
+
