@@ -30,9 +30,8 @@ public class MainFragmentTab extends Fragment {
         tableLayout = view.findViewById(R.id.request_orders_tabs);
 
         adapter = new TabAdapter(getFragmentManager());
-        adapter.addFragment(new FonctionnaireRecycler(), "Tab 1");
-        adapter.addFragment(new FonctionnaireRecycler(), "Tab 2");
-        adapter.addFragment(new FonctionnaireRecycler(), "Tab 3");
+        adapter.addFragment(new FonctionnaireRecycler(), "Offres");
+        adapter.addFragment(new Fonct_fav(), "Pour vous");
 
         viewPager.setAdapter(adapter);
         tableLayout.setupWithViewPager(viewPager);

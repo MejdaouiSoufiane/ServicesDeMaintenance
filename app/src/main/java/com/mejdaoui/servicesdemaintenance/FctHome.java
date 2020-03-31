@@ -23,16 +23,12 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mejdaoui.servicesdemaintenance.Fragement.FonctionnaireRecycler;
+import com.mejdaoui.servicesdemaintenance.Fragement.MainFragmentTab;
 
 import java.util.ArrayList;
 
 public class FctHome extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private ArrayList<Demande> arrayList;
-    private FirebaseRecyclerOptions<Demande> options;
-    private FirebaseRecyclerAdapter<Demande, FirebaseViewHolder> adapter;
-    private DatabaseReference databaseReference;
     private DrawerLayout drawer;
 
 
@@ -43,6 +39,12 @@ public class FctHome extends AppCompatActivity {
 
         /******* navigation drawer tricks ***/
         final Toolbar toolbar = findViewById(R.id.toolbar);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        toolbar.setTitle("TESTT");
+        MainFragmentTab fragment = new MainFragmentTab();
+        ft.replace(R.id.fragement_container, fragment);
+        ft.commit();
+
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.open_navigation_drawer,R.string.close_navigation_drawer);
@@ -53,12 +55,12 @@ public class FctHome extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 drawer.closeDrawer(Gravity.LEFT);
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 int id = item.getItemId();
 
                 if(id == R.id.nav_home){
-                    toolbar.setTitle("Main pafe");
-                    FonctionnaireRecycler fragment = new FonctionnaireRecycler();
+                    toolbar.setTitle("Home");
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    MainFragmentTab fragment = new MainFragmentTab();
                     ft.replace(R.id.fragement_container, fragment);
                     ft.commit();
                 }else if(id == R.id.nav_message){
