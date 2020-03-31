@@ -10,10 +10,11 @@ public class Demande {
     private String service ;
     private String date_dispo ;
     private String heure ;
-    private int lat_loc,long_loc ;
+    private int lat_loc ;
+    private int long_loc ;
     private String age_fonc;
     private String genre_fon;
-    private Uri uri_picture;
+    private String uri_picture;
     private String adr_picture;
     private String etat;
 
@@ -21,8 +22,10 @@ public class Demande {
 
     }
 
+
     public Demande(String idDemande, String idClient, String titre, String description, String service, String date_dispo, String heure, int lat_loc, int long_loc, String age_fonc, String genre_fon,String adr_picture,String etat) {
         this.idDemande = idDemande;
+
         this.idClient = idClient;
         this.titre = titre;
         this.description = description;
@@ -126,11 +129,11 @@ public class Demande {
         this.genre_fon = genre_fon;
     }
 
-    public Uri getUri_picture() {
+    public String getUri_picture() {
         return uri_picture;
     }
 
-    public void setUri_picture(Uri uri_picture) {
+    public void setUri_picture(String uri_picture) {
         this.uri_picture = uri_picture;
     }
 

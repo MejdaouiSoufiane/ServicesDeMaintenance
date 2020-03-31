@@ -72,6 +72,7 @@ public class AddDemande extends AppCompatActivity {
     private TextView date_dispo,heure_dispo;
     ImageView img;
     Bitmap bitmap;
+
     Uri uriimg,url;
     private Uri filePath;
     private String stitre,sdesc,sservice,sdate,sgenre,sadrpict;
@@ -79,6 +80,7 @@ public class AddDemande extends AppCompatActivity {
     private int long_location;
     private String sheure;
     private String sage;
+
 
     String s;
     Demande demande;
@@ -362,10 +364,12 @@ public class AddDemande extends AppCompatActivity {
         stitre = titre.getText().toString();
         sdesc = desc.getText().toString();
         sservice = spinner_service.getSelectedItem().toString();
+
         sdate = date_dispo.getText().toString();
         sheure = heure_dispo.getText().toString();
         sgenre = spinner_genre.getSelectedItem().toString();
         sage = spinner_age.getSelectedItem().toString();
+
 
 
 
