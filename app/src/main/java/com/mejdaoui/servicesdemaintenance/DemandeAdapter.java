@@ -47,7 +47,9 @@ public class DemandeAdapter  extends RecyclerView.Adapter<DemandeAdapter.ViewHol
         name = holder.item_name;
         description = holder.item_description;
         etat = holder.item_etat;
-        Picasso.get().load(demandeItem.getAdr_picture()).into(holder.item_image);
+        String s = demandeItem.getAdr_picture();
+        if(s.equals("")==false)
+        Picasso.get().load(s).resize(50, 50).into(image);
 
         name.setText(demandeItem.getTitre());
         description.setText(demandeItem.getDescription());

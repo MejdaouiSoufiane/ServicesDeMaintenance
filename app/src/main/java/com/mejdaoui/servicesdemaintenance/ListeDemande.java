@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,17 +54,19 @@ public class ListeDemande extends AppCompatActivity {
                 for (DataSnapshot dds: dataSnapshot.getChildren())
                 {
                     Demande d = dds.getValue(Demande.class);
-                    if(d.getIdClient().equals(firebaseUser.getProviderId()))
+                    Toast.makeText(ListeDemande.this,d.getAdr_picture(),Toast.LENGTH_LONG).show();
+                   // if(d.getIdClient().equals(firebaseUser.getProviderId()))
                     demandeList.add(d);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(ListeDemande.this);
+                    RecyclerView.LayoutManager rvLayoutManager = layoutManager;
+
+                    recyclerView.setLayoutManager(rvLayoutManager);
+
+                    adapter = new DemandeAdapter(ListeDemande.this,demandeList,ListeDemande.this);
+                    recyclerView.setAdapter(adapter);
 
                 }
-                LinearLayoutManager layoutManager = new LinearLayoutManager(ListeDemande.this);
-                RecyclerView.LayoutManager rvLayoutManager = layoutManager;
 
-                recyclerView.setLayoutManager(rvLayoutManager);
-
-                adapter = new DemandeAdapter(ListeDemande.this,demandeList,ListeDemande.this);
-                recyclerView.setAdapter(adapter);
 
 
             }

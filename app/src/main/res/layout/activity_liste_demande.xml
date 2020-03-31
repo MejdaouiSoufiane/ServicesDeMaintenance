@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/yellow"
+    android:background="#fafafa"
+
     android:fitsSystemWindows="true"
     tools:context=".ListeDemande"
     tools:layout_editor_absoluteY="25dp">
@@ -37,24 +38,34 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>-->
 
+
     <ImageButton
         android:id="@+id/img_button_add"
         android:layout_width="45dp"
         android:layout_height="47dp"
+        android:layout_marginTop="4dp"
         android:contentDescription="@string/app_name"
         android:fitsSystemWindows="true"
+        android:onClick="btn_add"
         android:scaleType="centerCrop"
-        android:src="@drawable/add_circle_black_192x192"
+        android:src="@drawable/addcircle"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.98"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:onClick="btn_add"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp">
+        android:layout_height="0dp"
+        android:background="#fafafa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_button_add"
+        >
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"

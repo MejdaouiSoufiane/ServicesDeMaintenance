@@ -43,6 +43,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 
@@ -199,7 +200,10 @@ public class DetailDemande extends AppCompatActivity {
                 desc.setText(oldDemande.getDescription());
                 heure_dispo.setText(oldDemande.getHeure());
                 date_dispo.setText(oldDemande.getDate_dispo());
+                String s = oldDemande.getAdr_picture();
+              //  Picasso.get().load(s).resize(50, 50).into(img);
                 //spinner_age.add;
+
 
                 //spinner service
                 String compareValueService = oldDemande.getService();
@@ -372,7 +376,7 @@ public class DetailDemande extends AppCompatActivity {
 
         if (!TextUtils.isEmpty(stitre) && !TextUtils.isEmpty(sdesc) && !TextUtils.isEmpty(sservice)   && !TextUtils.isEmpty(sgenre) &&  !TextUtils.isEmpty(sage) && !TextUtils.isEmpty(sdate) ) {
           //  String iddmd = dbDemande.getKey();
-            newDemande = new Demande(oldDemande.getIdDemande(),oldDemande.getIdClient(), stitre, sdesc, sservice, sdate, sheure, 0, 0, sage, sgenre,"En Attente");
+           // newDemande = new Demande(oldDemande.getIdDemande(),oldDemande.getIdClient(), stitre, sdesc, sservice, sdate, sheure, 0, 0, sage, sgenre,"En Attente");
             dbDemande.setValue(newDemande);
             Toast.makeText(this,"Demande modifiée",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(DetailDemande.this, ListeDemande.class);

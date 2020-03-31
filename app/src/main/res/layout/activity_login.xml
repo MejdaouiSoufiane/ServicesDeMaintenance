@@ -21,6 +21,13 @@
         android:src="@drawable/sans_titre"
         android:transitionName="logo_image"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TEST"
+        android:id="@+id/test">
+
+    </Button>
 
     <TextView
         android:id="@+id/textView4"
@@ -51,12 +58,10 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/username"
-            android:hint="Email"
-           >
+
+            android:hint="Email">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email"
-                android:text="btissam.nachit21@gmail.com"
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -64,14 +69,12 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:hint="Mot de passe"
             app:passwordToggleEnabled="true"
            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
-                android:text="btissam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"/>
@@ -88,7 +91,7 @@
             />
 
         <Button
-            android:id="@+id/connection"
+            android:id="@+id/connect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"

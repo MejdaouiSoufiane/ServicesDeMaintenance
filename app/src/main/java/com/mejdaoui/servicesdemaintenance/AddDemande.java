@@ -54,12 +54,14 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.URI;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.UUID;
 
 public class AddDemande extends AppCompatActivity {
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int CAMERA_REQUEST_CODE = 1;
     private static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private static final int PERMISSION_CODE = 1000 ;
@@ -71,12 +73,14 @@ public class AddDemande extends AppCompatActivity {
     ImageView img;
     Bitmap bitmap;
     Uri uriimg,url;
+    private Uri filePath;
     private String stitre,sdesc,sservice,sdate,sgenre,sadrpict;
     private int lat_location;
     private int long_location;
     private String sheure;
     private String sage;
 
+    String s;
     Demande demande;
 
     private Button take_pic;
@@ -107,63 +111,55 @@ public class AddDemande extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         //spinner service
-        spinner_service = (Spinner) findViewById(R.id.spinner_service);
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,getResources().getStringArray(R.array.secteur));
-        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_service.setAdapter(myAdapter);
-        spinner_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                spinner_service.setSelection(i);
-                String selectedItemText = (String) parent.getItemAtPosition(i);
-                Toast.makeText
-                        (getApplicationContext(), "Selected : " + selectedItemText, Toast.LENGTH_SHORT)
-                        .show();
-               // if(selectedItemText.equals("Normal"))
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        spinner_service();
         //spinner genre
-        spinner_genre = (Spinner) findViewById(R.id.spinner_genre);
-        ArrayAdapter<String> myAdapterG = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,getResources().getStringArray(R.array.genre));
-        myAdapterG.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_genre.setAdapter(myAdapterG);
-        spinner_genre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                spinner_genre.setSelection(i);
-                String selectedItemText = (String) parent.getItemAtPosition(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
+        spinner_genre();
         //spinner_age
-        spinner_age = (Spinner)findViewById(R.id.spinner_age);
-        ArrayAdapter<String> myAdapterA = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,getResources().getStringArray(R.array.age));
-        myAdapterA.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_age.setAdapter(myAdapterA);
-        spinner_age.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                spinner_age.setSelection(i);
-                String selectedItemText = (String) parent.getItemAtPosition(i);
-            }
+        spinner_age();
+        //date
+        date();
+        //heure
+        heure();
+        //take picture
+        take_picture();
+    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
+
+    private void heure() {
+        heure_dispo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int hour = cal.get(Calendar.HOUR_OF_DAY);
+                int minutes = cal.get(Calendar.MINUTE);
+                TimePickerDialog dialog = new TimePickerDialog(
+                        AddDemande.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
+                                heure_dispo.setText(sHour + ":" + sMinute);
+                            }
+                        }, hour, minutes, false);
+
+                //  dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                dialog.show();
             }
         });
-        //date
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                Log.d("ff", "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
+
+                String date = day + "/" +month + "/" +  year;
+                date_dispo.setText(date);
+            }
+        };
+    }
+
+    private void date() {
         date_dispo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -193,60 +189,68 @@ public class AddDemande extends AppCompatActivity {
             }
         };
 
-        //heure
-        heure_dispo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int hour = cal.get(Calendar.HOUR_OF_DAY);
-                int minutes = cal.get(Calendar.MINUTE);
-                TimePickerDialog dialog = new TimePickerDialog(
-                        AddDemande.this,
-                        new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
-                                heure_dispo.setText(sHour + ":" + sMinute);
-                            }
-                        }, hour, minutes, false);
+    }
 
-              //  dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                dialog.show();
+    private void spinner_age() {
+        spinner_age = (Spinner)findViewById(R.id.spinner_age);
+        ArrayAdapter<String> myAdapterA = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,getResources().getStringArray(R.array.age));
+        myAdapterA.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_age.setAdapter(myAdapterA);
+        spinner_age.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+                spinner_age.setSelection(i);
+                String selectedItemText = (String) parent.getItemAtPosition(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
+    }
 
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+    private void spinner_genre() {
+        spinner_genre = (Spinner) findViewById(R.id.spinner_genre);
+        ArrayAdapter<String> myAdapterG = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,getResources().getStringArray(R.array.genre));
+        myAdapterG.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_genre.setAdapter(myAdapterG);
+        spinner_genre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                Log.d("ff", "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
-
-                String date = day + "/" +month + "/" +  year;
-                date_dispo.setText(date);
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+                spinner_genre.setSelection(i);
+                String selectedItemText = (String) parent.getItemAtPosition(i);
             }
-        };
 
-
-        //take picture
-        take_pic = (Button)this.findViewById(R.id.button_img);
-        take_pic.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED||checkSelfPermission(Manifest.permission.CAMERA)==PackageManager.PERMISSION_DENIED){
-                        //permission not enabled
-                        String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                        requestPermissions(permission,PERMISSION_CODE);
-                    }else{
-                        openCamera();
-                    }
-                }else{
-                    openCamera();
-                }
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
-        }
+        });
+    }
 
-        );
+    private void spinner_service() {
+        spinner_service = (Spinner) findViewById(R.id.spinner_service);
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,getResources().getStringArray(R.array.secteur));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_service.setAdapter(myAdapter);
+        spinner_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+                spinner_service.setSelection(i);
+                String selectedItemText = (String) parent.getItemAtPosition(i);
+                Toast.makeText
+                        (getApplicationContext(), "Selected : " + selectedItemText, Toast.LENGTH_SHORT)
+                        .show();
+                // if(selectedItemText.equals("Normal"))
 
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     public void btn_map(View view){
@@ -254,20 +258,33 @@ public class AddDemande extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void take_picture() {
+        take_pic = (Button)this.findViewById(R.id.button_img);
+        take_pic.setOnClickListener(new View.OnClickListener(){
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                            startActivityForResult(cameraIntent,CAMERA_REQUEST_CODE);
+                                        }
+                                    }
 
+        );
+
+    }
 
     private void openCamera() {
-        ContentValues values = new ContentValues();
+
+        /*ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE,"New Picture");
         values.put(MediaStore.Images.Media.DESCRIPTION,"From the Camera");
         uriimg = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,uriimg);
-        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
+        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);*/
 
     }
 
-    @Override
+   /* @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
     {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -294,39 +311,51 @@ public class AddDemande extends AppCompatActivity {
                 Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
             }
         }
-    }
+    }*/
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-                if (resultCode == RESULT_OK ){
-                    img.setImageURI(uriimg);
-                    mStorage = FirebaseStorage.getInstance().getReference().child("Photo_Demandes").child(uriimg.getLastPathSegment());
+                if (resultCode == RESULT_OK && requestCode==CAMERA_REQUEST_CODE && data != null && data.getData() != null){
+                    Bitmap photo = (Bitmap) data.getExtras().get("data") ;
+                    img.setImageBitmap(photo);
+                    filePath = data.getData();
 
-                    mStorage.putFile(uriimg).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(AddDemande.this, "uploading.....;", Toast.LENGTH_SHORT).show();
-                            //Uri url = taskSnapshot.getDownloadUrl();
-                          /* Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
-                            while(!uri.isComplete());
-                            Uri url = uri.getResult();
-                            demande.setAdr_picture(url.toString());
+    }
 
+    }
 
-                            Log.i("FBApp1 URL ", url.toString());*/
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+    public void storage_image(){
+            mStorage = FirebaseStorage.getInstance().getReference().child("Photo_Demandes").child(filePath.getLastPathSegment());
 
-                        }
-                    });
+            mStorage.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(AddDemande.this, "uploading.....;", Toast.LENGTH_SHORT).show();
+                    //Uri url = taskSnapshot.getDownloadUrl();
+                     Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
+                      while(!uri.isComplete());
+                      url = uri.getResult();
+                       dbDemande.child("adr_picture").setValue(url.toString());
+                      //  s=url.toString();
 
+                    Toast.makeText(AddDemande.this, "Uploaded "+url.toString(), Toast.LENGTH_SHORT).show();
 
 
                 }
+
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(AddDemande.this, "Upload failed", Toast.LENGTH_SHORT).show();
+
+
+                }
+            });
+
+
+
     }
 
     public void btn_ajouter(View view){
@@ -337,14 +366,20 @@ public class AddDemande extends AppCompatActivity {
         sheure = heure_dispo.getText().toString();
         sgenre = spinner_genre.getSelectedItem().toString();
         sage = spinner_age.getSelectedItem().toString();
-        sadrpict = mStorage.getPath();
+
 
 
         if (!TextUtils.isEmpty(stitre) && !TextUtils.isEmpty(sdesc) && !TextUtils.isEmpty(sservice)   && !TextUtils.isEmpty(sgenre) &&  !TextUtils.isEmpty(sage) && !TextUtils.isEmpty(sdate) ) {
             String iddmd = dbDemande.push().getKey();
-            demande = new Demande(iddmd,firebaseUser.getProviderId(), stitre, sdesc, sservice, sdate, sheure, 0, 0, sage, sgenre,"En Attente");
+
+           // sadrpict = mStorage.getDownloadUrl().toString();
+            demande = new Demande(iddmd,firebaseUser.getProviderId(), stitre, sdesc, sservice, sdate, sheure, 0, 0, sage, sgenre,"","En Attente");
             dbDemande.child(iddmd).setValue(demande);
+            dbDemande = dbDemande.child(iddmd);
+            storage_image();
+
             Toast.makeText(this,"Demande ajoutée",Toast.LENGTH_LONG).show();
+
         }
         else{
             Toast.makeText(this,"Veuillez remplir les champs",Toast.LENGTH_LONG).show();

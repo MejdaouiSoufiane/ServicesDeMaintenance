@@ -21,7 +21,7 @@ public class Demande {
 
     }
 
-    public Demande(String idDemande, String idClient, String titre, String description, String service, String date_dispo, String heure, int lat_loc, int long_loc, String age_fonc, String genre_fon,String etat) {
+    public Demande(String idDemande, String idClient, String titre, String description, String service, String date_dispo, String heure, int lat_loc, int long_loc, String age_fonc, String genre_fon,String adr_picture,String etat) {
         this.idDemande = idDemande;
         this.idClient = idClient;
         this.titre = titre;
@@ -33,7 +33,7 @@ public class Demande {
         this.long_loc = long_loc;
         this.age_fonc = age_fonc;
         this.genre_fon = genre_fon;
-      //  this.adr_picture=adr_picture;
+        this.adr_picture=adr_picture;
         this.etat = etat;
     }
 

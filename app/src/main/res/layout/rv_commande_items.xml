@@ -7,19 +7,23 @@
     app:cardUseCompatPadding="true"
     app:cardElevation="5dp"
     app:cardCornerRadius="10dp"
-    app:cardPreventCornerOverlap="true">
+    app:cardPreventCornerOverlap="true"
+   >
     <RelativeLayout
         android:id="@+id/item_card"
         android:padding="5dp"
         android:weightSum="10"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/item_image"
             android:layout_width="75dp"
             android:layout_height="75dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/sans_titre"/>
+            android:src="@drawable/sans_titre" />
 
         <TextView
                 android:id="@+id/item_titre"
