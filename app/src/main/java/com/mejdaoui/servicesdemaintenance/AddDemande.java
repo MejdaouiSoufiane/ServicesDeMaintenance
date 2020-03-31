@@ -53,8 +53,8 @@ public class AddDemande extends AppCompatActivity {
     ImageView img;
     Bitmap bitmap;
     Uri uriimg;
-    private String stitre,sdesc,sservice,sdate,sgenre;
-    private int lat_location,long_location,sheure,sage;
+    private String stitre,sdesc,sservice,sdate,sgenre, sheure, sage;
+    private int lat_location,long_location;
 
     FirebaseFirestore database;
 
@@ -139,9 +139,9 @@ public class AddDemande extends AppCompatActivity {
                 sdate = year+"/"+month+"/"+dayOfMonth;
             }
         });
-        sheure = Integer.parseInt(heure.getText().toString());
+        sheure = heure.getText().toString();
         sgenre = spinner_genre.getSelectedItem().toString();
-        sage = Integer.parseInt(age.getText().toString());
+        sage = age.getText().toString();
 
 
         Demande demande = new Demande("0",stitre,sdesc,sservice,sdate,sheure,lat_location,long_location,sage,sgenre);

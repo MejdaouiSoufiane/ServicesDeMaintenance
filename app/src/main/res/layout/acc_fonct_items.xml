@@ -17,7 +17,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="centerCrop"
-            android:background="@drawable/img"
+            android:background="@drawable/man"
             />
 
         <TextView
@@ -28,6 +28,7 @@
             android:layout_toEndOf="@+id/clientimg"
             android:layout_marginStart="10dp"
             android:text="Service name Here!"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -50,7 +51,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="65dp"
-            android:layout_marginEnd="244dp"
+            android:layout_marginEnd="275dp"
             android:text="Client Name Here!"
             android:textSize="12sp" />
 
@@ -60,18 +61,23 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="65dp"
-            android:layout_marginEnd="10dp"
             android:text="Time + Ville here !"
             android:textSize="12sp" />
 
         <ImageView
             android:id="@+id/newDemande"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:scaleType="centerCrop"
             android:layout_alignParentEnd="true"
+<<<<<<< HEAD
             android:background="@drawable/new_demande"
             android:layout_marginRight="20dp"
+=======
+            android:background="@drawable/newdmd"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="0dp"
+>>>>>>> 2138232267633d98e2c7d256628f498b20e835bf
             />
 
     </RelativeLayout>
