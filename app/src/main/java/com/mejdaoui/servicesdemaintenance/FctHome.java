@@ -7,25 +7,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.mejdaoui.servicesdemaintenance.Fragement.FonctionnaireRecycler;
-import com.mejdaoui.servicesdemaintenance.Fragement.MainFragmentTab;
 
-import java.util.ArrayList;
+import com.google.android.material.navigation.NavigationView;
+import com.mejdaoui.servicesdemaintenance.Fragement.MainFragmentTab;
 
 public class FctHome extends AppCompatActivity {
 

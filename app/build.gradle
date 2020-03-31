@@ -43,4 +43,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    //GridLayout
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
 }
