@@ -11,26 +11,29 @@ public class Fonctionnaire {
     private String email ;
     private String pswd ;
     private String adresse ;
-    private String tel ;
+    private String ville;
+    private String téléphone ;
     private List<String> secteur ;
 
     public Fonctionnaire() {
     }
 
-    public Fonctionnaire(String nom, String prenom, String adresse, String tel) {
+    public Fonctionnaire(String nom, String prenom, String adresse, String ville, String tel) {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
-        this.tel = tel;
+        this.téléphone = tel;
+        this.ville = ville;
     }
 
-    public Fonctionnaire(String idFonct, String nom, String prenom, String email, String adresse, String tel, List<String> secteur) {
+    public Fonctionnaire(String idFonct, String nom, String prenom, String email, String adresse,String ville,  String tel, List<String> secteur) {
         this.idFonct = idFonct;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.adresse = adresse;
-        this.tel = tel;
+        this.ville = ville;
+        this.téléphone = tel;
         this.secteur = secteur;
     }
 
@@ -83,11 +86,11 @@ public class Fonctionnaire {
     }
 
     public String getTel() {
-        return tel;
+        return téléphone;
     }
 
     public void setTel(String tel) {
-        this.tel = tel;
+        this.téléphone = tel;
     }
 
     public List<String> getSecteur() {
@@ -97,4 +100,13 @@ public class Fonctionnaire {
     public void setSecteur(List<String> secteur) {
         this.secteur = secteur;
     }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
 }

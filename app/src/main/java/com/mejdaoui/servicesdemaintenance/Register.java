@@ -23,7 +23,7 @@ public class Register extends AppCompatActivity {
 
     static private List<String> secteur = new ArrayList<>();
 
-   static private String tnom, tprenom, tville, ttel, temail, tpassword, type ;
+   static private String tnom, tprenom, tville, ttel, temail, tpassword, type, tadresse ;
 
     DatabaseReference database;
     private FirebaseAuth mAuth;
@@ -31,11 +31,10 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_fonctionnaire_2);
-
-        database = FirebaseDatabase.getInstance().getReference("fonctionnaires");
+        setContentView(R.layout.activity_register_fonctionnaire);
 
         mAuth = FirebaseAuth.getInstance();
+       database = FirebaseDatabase.getInstance().getReference();
 
         UserInfoFragment fragment = new UserInfoFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -50,16 +49,16 @@ public class Register extends AppCompatActivity {
         String id = database.push().getKey();
 
         if(type.equals("fonctionnaire")){
-
-        Fonctionnaire fonctionnaire = new Fonctionnaire(id, tnom, tprenom, temail, tville, ttel, secteur);
-        database.child(id).setValue(fonctionnaire);}
+            database = FirebaseDatabase.getInstance().getReference("fonctionnaires");
+            Fonctionnaire fonctionnaire = new Fonctionnaire(id, tnom, tprenom, temail, tadresse, tville, ttel, secteur);
+            database.child(id).setValue(fonctionnaire);}
 
         else if (type.equals("client")){
-            Client client = new Client(id, tnom, tprenom, temail, tville, ttel);
+            database = FirebaseDatabase.getInstance().getReference("clients");
+
+            Client client = new Client(id, tnom, tprenom, temail, tadresse, tville, ttel);
             database.child(id).setValue(client);
         }
-
-
 
         mAuth.createUserWithEmailAndPassword(temail, tpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -97,6 +96,7 @@ public class Register extends AppCompatActivity {
         tville = intent.getStringExtra("ville");
         ttel = intent.getStringExtra("tel");
         type = intent.getStringExtra("type");
+        tadresse = intent.getStringExtra("adresse");
     }
 
     private void receiveSecteurData() {
@@ -139,8 +139,6 @@ public class Register extends AppCompatActivity {
 
         else if(sender != null && sender.equals("loginFragment")){
 
-
-            Toast.makeText(getApplicationContext(), tnom, Toast.LENGTH_SHORT).show();
             receiveLoginData();
             addUser();
             //Toast.makeText(getApplicationContext(), temail, Toast.LENGTH_SHORT).show();
