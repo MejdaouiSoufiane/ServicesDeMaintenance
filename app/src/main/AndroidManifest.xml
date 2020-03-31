@@ -21,6 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".updateProfileClient"></activity>
 
         <activity android:name=".DemandeDetails"></activity>
         <activity android:name=".FctHome" />

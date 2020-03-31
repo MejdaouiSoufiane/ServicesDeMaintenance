@@ -92,8 +92,7 @@ public class Login extends AppCompatActivity {
                             pd.dismiss();
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-
-                            startActivity(new Intent(Login.this, FctHome.class));
+                             startActivity(new Intent(Login.this, FctHome.class));
 
                             finish();
                         } else {

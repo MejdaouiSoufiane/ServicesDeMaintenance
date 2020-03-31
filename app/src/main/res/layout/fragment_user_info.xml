@@ -80,13 +80,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="35dp"
-                android:hint="Ville"
+                android:hint="Adresse"
                 android:padding="5dp"
                 android:textColorHint="#3F3939"
                 app:boxStrokeColor="#AA150A">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ville"
+                    android:id="@+id/adresse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
@@ -101,6 +101,32 @@
                 android:layout_marginRight="40dp"
                 android:background="#AA150A" />
 
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="35dp"
+                android:hint="Ville"
+                android:padding="5dp"
+                android:textColorHint="#3F3939"
+                app:boxStrokeColor="#AA150A">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ville"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#050505"
+                    tools:text="Ville" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="#AA150A" />
 
             <com.google.android.material.textfield.TextInputLayout
 

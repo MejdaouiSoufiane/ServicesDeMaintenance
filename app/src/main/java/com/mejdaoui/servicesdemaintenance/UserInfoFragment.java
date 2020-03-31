@@ -18,9 +18,9 @@ import android.widget.EditText;
 public class UserInfoFragment extends Fragment {
 
     private Button next;
-    private EditText nom, prenom, ville, tel;
+    private EditText nom, prenom, ville, tel, adresse;
 
-    protected String tnom, tprenom, tville, ttel;
+    protected String tnom, tprenom, tville, ttel, tadresse;
 
     private CheckBox client;
     private CheckBox fonctionnaire;
@@ -41,6 +41,7 @@ public class UserInfoFragment extends Fragment {
         next = (Button) view.findViewById(R.id.next);
         nom = (EditText) view.findViewById(R.id.nom);
         prenom = (EditText) view.findViewById(R.id.prenom);
+        adresse = (EditText) view.findViewById(R.id.adresse);
         ville = (EditText) view.findViewById(R.id.ville);
         tel = (EditText) view.findViewById(R.id.tel);
         client = (CheckBox) view.findViewById(R.id.client);
@@ -75,6 +76,7 @@ public class UserInfoFragment extends Fragment {
         tprenom = prenom.getText().toString();
         tville = ville.getText().toString();
         ttel = tel.getText().toString();
+        tadresse = adresse.getText().toString();
 
         Intent intent = new Intent(getActivity().getBaseContext(), Register.class);
         intent.putExtra("nom",tnom);
@@ -82,6 +84,7 @@ public class UserInfoFragment extends Fragment {
         intent.putExtra("ville",tville);
         intent.putExtra("tel",ttel);
         intent.putExtra("type", ttype);
+        intent.putExtra("adresse", tadresse);
 
         intent.putExtra("fragment", "UserInfo");
 
@@ -93,11 +96,15 @@ public class UserInfoFragment extends Fragment {
             case R.id.client:
                 if (((CheckBox)v).isChecked())
                     ttype = "client";
+                if (fonctionnaire.isChecked())
+                    fonctionnaire.setChecked(false);
                 break;
 
             case R.id.fonctionnaire:
                 if (((CheckBox)v).isChecked())
                     ttype = "fonctionnaire";
+                if(client.isChecked())
+                    client.setChecked(false);
                 break;
         }
     }
