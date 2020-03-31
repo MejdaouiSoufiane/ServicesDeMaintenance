@@ -8,19 +8,21 @@ public class Client {
     private String email ;
     private String pswd ;
     private String adresse ;
-    private String tel ;
+    private String telephone ;
+    private String ville ;
 
     public Client(){
 
     }
 
-    public Client(String idClient, String nom, String prenom, String email, String adresse, String tel) {
+    public Client(String idClient, String nom, String prenom, String email, String adresse, String ville, String tel) {
         this.idClient = idClient;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.adresse = adresse;
-        this.tel = tel;
+        this.telephone = tel;
+        this.ville = ville;
     }
 
     public String getIdClient() {
@@ -71,11 +73,20 @@ public class Client {
         this.adresse = adresse;
     }
 
-    public String getTel() {
-        return tel;
+    public String getTelelephone() {
+        return telephone;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setTelephone(String tel) {
+        this.telephone = tel;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
     }
 }
+
