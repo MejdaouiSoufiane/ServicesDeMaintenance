@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,7 @@ public class ClientProfile extends AppCompatActivity {
     private TextView profileAdresse;
     private TextView profileVille;
     private TextView profileName;
+    private Button up;
 
     DatabaseReference databaseReference;
     FirebaseUser user ;
@@ -49,18 +52,27 @@ public class ClientProfile extends AppCompatActivity {
         profilePhone = this.findViewById(R.id.profilePhone);
         profileAdresse = this.findViewById(R.id.profileAdresse);
         profileVille = this.findViewById(R.id.profileVille);
+        up = this.findViewById(R.id.upd);
+
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ClientProfile.this, updateProfileClient.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
 
-    @Override
-    protected void onStart() {
+//    @Override
+   /* protected void onStart() {
         super.onStart();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("clients");
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -89,9 +101,8 @@ public class ClientProfile extends AppCompatActivity {
 
             }
         });
-    }
-
-    /*
+    }*/
+/*
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
@@ -108,8 +119,7 @@ public class ClientProfile extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.item2:
-                //Intent intent = new Intent(MyList.this, AjouterEtab.class);
-                //startActivity(intent);
+
                 break;
         }
         return super.onOptionsItemSelected(item);

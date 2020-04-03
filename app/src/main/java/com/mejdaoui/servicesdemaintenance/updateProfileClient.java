@@ -46,7 +46,7 @@ public class updateProfileClient extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-
+/*
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,7 +80,7 @@ public class updateProfileClient extends AppCompatActivity {
             public void onClick(View v) {
                 updateUser(v);
             }
-        });
+        });*/
     }
 
     public void updateUser(View v){
