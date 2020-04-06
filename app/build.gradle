@@ -33,7 +33,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
     implementation 'com.google.firebase:firebase-firestore:21.4.1'
-    implementation 'com.google.firebase:firebase-storage:16.0.4'
+
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -42,9 +44,16 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0-alpha05'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
     //GridLayout
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
 }

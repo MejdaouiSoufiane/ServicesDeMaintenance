@@ -1,5 +1,6 @@
 package com.mejdaoui.servicesdemaintenance.Fragement;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mejdaoui.servicesdemaintenance.Client;
 import com.mejdaoui.servicesdemaintenance.Demande;
+import com.mejdaoui.servicesdemaintenance.DemandeDetails;
 import com.mejdaoui.servicesdemaintenance.FirebaseViewHolder;
 import com.mejdaoui.servicesdemaintenance.R;
 
@@ -33,6 +35,7 @@ public class FonctionnaireRecycler extends Fragment {
     private FirebaseRecyclerOptions<Demande> options;
     private FirebaseRecyclerAdapter<Demande, FirebaseViewHolder> adapter;
     private DatabaseReference databaseReference;
+    private CardView cardView;
 
 
     @Override
@@ -107,6 +110,15 @@ public class FonctionnaireRecycler extends Fragment {
                 return new FirebaseViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.acc_fonct_items, viewGroup,false));
             }
         };
+
+        cardView = view.findViewById(R.id.parentLayout);
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(),DemandeDetails.class);
+                startActivity(i);
+            }
+        });
 
         recyclerView.setAdapter(adapter);
         return view;

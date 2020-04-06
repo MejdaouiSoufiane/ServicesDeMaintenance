@@ -74,6 +74,7 @@ public class Login extends AppCompatActivity {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent t = new Intent(Login.this, FctHome.class);
                 startActivity(t);
             }
@@ -91,6 +92,7 @@ public class Login extends AppCompatActivity {
                             pd.dismiss();
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
+
 
                             startActivity(new Intent(Login.this, ClientProfile.class));
                             finish();

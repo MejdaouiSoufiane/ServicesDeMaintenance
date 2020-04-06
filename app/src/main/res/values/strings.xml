@@ -3,7 +3,7 @@
     <string name="app_name">ManTenance</string>
 
     <array name="secteur">
-        <item>Secteur</item>
+        <!--<item>Secteur</item>-->
         <item>Peinture</item>
         <item>Eléctricité</item>
         <item>Maçonnerie</item>
@@ -15,6 +15,13 @@
     <array name="genre">
         <item>Homme</item>
         <item>Femme</item>
+    </array>
+
+
+    <array name="age">
+        <item>de 20 ans à 30 ans</item>
+        <item>de 30 ans à 40 ans</item>
+        <item>de 40 ans à 50 ans</item>
     </array>
 
     <string name="title_activity_maps">Map</string>

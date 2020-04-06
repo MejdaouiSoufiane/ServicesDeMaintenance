@@ -12,7 +12,7 @@ public class Fonctionnaire {
     private String pswd ;
     private String adresse ;
     private String ville;
-    private String téléphone ;
+    private String telephone ;
     private List<String> secteur ;
 
     public Fonctionnaire() {
@@ -22,18 +22,18 @@ public class Fonctionnaire {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
-        this.téléphone = tel;
+        this.telephone = tel;
         this.ville = ville;
     }
 
-    public Fonctionnaire(String idFonct, String nom, String prenom, String email, String adresse,String ville,  String tel, List<String> secteur) {
+    public Fonctionnaire(String idFonct, String nom, String prenom, String email, String adresse, String ville, String telephone, List<String> secteur) {
         this.idFonct = idFonct;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.adresse = adresse;
         this.ville = ville;
-        this.téléphone = tel;
+        this.telephone = telephone;
         this.secteur = secteur;
     }
 
@@ -85,12 +85,12 @@ public class Fonctionnaire {
         this.adresse = adresse;
     }
 
-    public String getTel() {
-        return téléphone;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setTel(String tel) {
-        this.téléphone = tel;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public List<String> getSecteur() {

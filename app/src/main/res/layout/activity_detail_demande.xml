@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +8,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AddDemande"
+        tools:context=".DetailDemande"
         android:orientation="vertical"
         android:background="#fff"
         android:padding="20dp">
@@ -23,7 +22,7 @@
             android:layout_marginTop="40dp"
             android:fontFamily="@font/banger"
             android:gravity="center_horizontal"
-            android:text="Nouvelle Demande"
+            android:text="Détail Demande"
             android:textColor="#000"
             android:textSize="25dp"
             android:transitionName="logo_text" />
@@ -186,7 +185,7 @@
             android:background="#FC000000"
 
             android:text=" Prendre une photo "
-            android:textColor="#000"
+            android:textColor="@color/colorBlack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.54"
             app:layout_constraintStart_toEndOf="@+id/new_image"
@@ -225,7 +224,7 @@
             android:background="#FC000000"
             android:onClick="btn_map"
             android:text="Localisation"
-            android:textColor="#000" />
+            android:textColor="@color/colorBlack" />
 
         <View
             android:id="@+id/view"
@@ -289,7 +288,7 @@
 
 
         <Button
-            android:id="@+id/button_ajouter"
+            android:id="@+id/button_update"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/spinner_genre"
@@ -297,9 +296,9 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp"
             android:background="#FC000000"
-            android:onClick="btn_ajouter"
-            android:text="Ajouter"
-            android:textColor="#000" />
+            android:onClick="btn_modifier"
+            android:text="Modifier"
+            android:textColor="@color/colorBlack" />
 
 
 
