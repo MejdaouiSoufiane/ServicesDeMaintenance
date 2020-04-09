@@ -54,7 +54,7 @@ public class DemandeDetails extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerHorizImages);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Demandes");
         databaseReference.keepSynced(true);
@@ -64,16 +64,9 @@ public class DemandeDetails extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull final DemandeDetailHolder holder, int i, @NonNull Demande demande) {
 
-                String url = demande.getDescription();
+                String url = demande.getAdr_picture();
                 Picasso.get().load(url).into(holder.imageView);
 
-
-               /* holder.itemView.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view){
-                        Toast.makeText(FctHome.this, "Termooooo", Toast.LENGTH_SHORT).show();
-                    }
-                });*/
             }
 
             @NonNull
