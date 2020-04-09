@@ -186,7 +186,7 @@
             android:background="#FC000000"
 
             android:text=" Prendre une photo "
-            android:textColor="@color/colorBlack"
+            android:textColor="#000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.54"
             app:layout_constraintStart_toEndOf="@+id/new_image"
@@ -225,7 +225,7 @@
             android:background="#FC000000"
             android:onClick="btn_map"
             android:text="Localisation"
-            android:textColor="@color/colorBlack" />
+            android:textColor="#000" />
 
         <View
             android:id="@+id/view"
@@ -299,7 +299,7 @@
             android:background="#FC000000"
             android:onClick="btn_ajouter"
             android:text="Ajouter"
-            android:textColor="@color/colorBlack" />
+            android:textColor="#000" />
 
 
 
