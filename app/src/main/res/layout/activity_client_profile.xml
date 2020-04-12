@@ -8,13 +8,15 @@
     android:background="@color/graylight"
     android:orientation="vertical">
 
+
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
+        android:id="@+id/tool"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:elevation="4dp"
+        android:theme="?attr/actionBarTheme"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,7 +29,7 @@
 
 
             <ImageView
-                android:id="@+id/profileImg"
+                android:id="@+id/img"
                 android:layout_width="153dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
@@ -173,13 +175,14 @@
                 android:paddingLeft="20dp"/>
         </LinearLayout>
 
-        <Button
+    <!--    <Button
             android:id="@+id/upd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="update"
             android:background="@color/startBleu"
             android:layout_marginTop="30dp"/>
+     -->
 
     </LinearLayout>
 

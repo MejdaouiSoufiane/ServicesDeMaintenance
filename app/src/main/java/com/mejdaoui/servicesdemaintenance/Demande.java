@@ -1,6 +1,6 @@
 package com.mejdaoui.servicesdemaintenance;
 
-import android.net.Uri;
+import java.util.List;
 
 public class Demande {
     private String idDemande;
@@ -17,15 +17,16 @@ public class Demande {
     private String uri_picture;
     private String adr_picture;
     private String etat;
+    private List<String> idFonctionnaire;
 
     public Demande() {
 
     }
 
 
-    public Demande(String idDemande, String idClient, String titre, String description, String service, String date_dispo, String heure, int lat_loc, int long_loc, String age_fonc, String genre_fon,String adr_picture,String etat) {
+    public Demande(String idDemande, String idClient, String titre, String description, String service, String date_dispo, String heure, int lat_loc, int long_loc, String age_fonc, String genre_fon, String adr_picture, String etat, List<String> idFonctionnaire) {
         this.idDemande = idDemande;
-
+        this.idFonctionnaire = idFonctionnaire;
         this.idClient = idClient;
         this.titre = titre;
         this.description = description;
@@ -171,6 +172,14 @@ public class Demande {
                 ", adr_picture='" + adr_picture + '\'' +
                 ", etat='" + etat + '\'' +
                 '}';
+    }
+
+    public List<String> getIdFonctionnaire() {
+        return idFonctionnaire;
+    }
+
+    public void setIdFonctionnaire(List<String> idFonctionnaire) {
+        this.idFonctionnaire = idFonctionnaire;
     }
 }
 
