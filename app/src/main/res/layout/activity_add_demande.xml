@@ -183,7 +183,7 @@
             android:layout_marginTop="41dp"
             android:layout_toEndOf="@+id/new_image"
             android:layout_toRightOf="@+id/new_image"
-            android:background="#FC000000"
+            android:background="@color/startBleu"
 
             android:text=" Prendre une photo "
             android:textColor="#000"
@@ -222,7 +222,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp"
-            android:background="#FC000000"
+            android:background="@color/startBleu"
             android:onClick="btn_map"
             android:text="Localisation"
             android:textColor="#000" />
@@ -296,7 +296,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp"
-            android:background="#FC000000"
+            android:background="@color/startBleu"
             android:onClick="btn_ajouter"
             android:text="Ajouter"
             android:textColor="#000" />

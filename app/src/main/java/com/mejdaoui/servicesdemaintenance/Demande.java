@@ -1,14 +1,21 @@
 package com.mejdaoui.servicesdemaintenance;
 
 import android.net.Uri;
+import android.os.SystemClock;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class Demande {
     private String idDemande;
     private String idClient ;
+    private List<String> idFonct;
     private String titre ;
     private String description ;
     private String service ;
     private String date_dispo ;
+    private Date date_demande;
     private String heure ;
     private int lat_loc ;
     private int long_loc ;
@@ -25,7 +32,7 @@ public class Demande {
 
     public Demande(String idDemande, String idClient, String titre, String description, String service, String date_dispo, String heure, int lat_loc, int long_loc, String age_fonc, String genre_fon,String adr_picture,String etat) {
         this.idDemande = idDemande;
-
+        this.date_demande = new Date();
         this.idClient = idClient;
         this.titre = titre;
         this.description = description;
@@ -151,6 +158,23 @@ public class Demande {
 
     public void setEtat(String etat) {
         this.etat = etat;
+    }
+
+
+    public List<String> getIdFonct() {
+        return idFonct;
+    }
+
+    public void setIdFonct(List<String> idFonct) {
+        this.idFonct = idFonct;
+    }
+
+    public Date getDate() {
+        return date_demande;
+    }
+
+    public void setDate(Date date_demande) {
+        this.date_demande = date_demande;
     }
 
     @Override

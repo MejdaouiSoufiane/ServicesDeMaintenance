@@ -94,7 +94,7 @@ public class Login extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
 
 
-                            startActivity(new Intent(Login.this, ClientProfile.class));
+                            startActivity(new Intent(Login.this, ListDemande.class));
                             finish();
                         } else {
                             pd.dismiss();

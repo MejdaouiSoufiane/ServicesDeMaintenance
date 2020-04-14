@@ -379,7 +379,7 @@ public class DetailDemande extends AppCompatActivity {
            // newDemande = new Demande(oldDemande.getIdDemande(),oldDemande.getIdClient(), stitre, sdesc, sservice, sdate, sheure, 0, 0, sage, sgenre,"En Attente");
             dbDemande.setValue(newDemande);
             Toast.makeText(this,"Demande modifiée",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(DetailDemande.this, ListeDemande.class);
+            Intent intent = new Intent(DetailDemande.this, ListDemande.class);
             startActivity(intent);
             finish();
         }
