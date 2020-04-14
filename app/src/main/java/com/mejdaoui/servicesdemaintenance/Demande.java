@@ -1,5 +1,11 @@
 package com.mejdaoui.servicesdemaintenance;
 
+
+import android.net.Uri;
+import android.os.SystemClock;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Demande {
@@ -9,6 +15,7 @@ public class Demande {
     private String description ;
     private String service ;
     private String date_dispo ;
+    private Date date_demande;
     private String heure ;
     private int lat_loc ;
     private int long_loc ;
@@ -26,6 +33,7 @@ public class Demande {
 
     public Demande(String idDemande, String idClient, String titre, String description, String service, String date_dispo, String heure, int lat_loc, int long_loc, String age_fonc, String genre_fon, String adr_picture, String etat, List<String> idFonctionnaire) {
         this.idDemande = idDemande;
+        this.date_demande = new Date();
         this.idFonctionnaire = idFonctionnaire;
         this.idClient = idClient;
         this.titre = titre;
@@ -154,6 +162,22 @@ public class Demande {
         this.etat = etat;
     }
 
+
+    public Date getDate_demande() {
+        return date_demande;
+    }
+
+    public void setDate_demande(Date date_demande) {
+        this.date_demande = date_demande;
+    }
+    public List<String> getIdFonctionnaire() {
+        return idFonctionnaire;
+    }
+
+    public void setIdFonctionnaire(List<String> idFonctionnaire) {
+        this.idFonctionnaire = idFonctionnaire;
+    }
+
     @Override
     public String toString() {
         return "Demande{" +
@@ -174,12 +198,6 @@ public class Demande {
                 '}';
     }
 
-    public List<String> getIdFonctionnaire() {
-        return idFonctionnaire;
-    }
 
-    public void setIdFonctionnaire(List<String> idFonctionnaire) {
-        this.idFonctionnaire = idFonctionnaire;
-    }
 }
 

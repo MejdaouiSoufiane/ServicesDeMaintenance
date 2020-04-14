@@ -44,6 +44,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -64,20 +65,15 @@ import java.util.UUID;
 
 public class AddDemande extends AppCompatActivity {
     static final int CAMERA_REQUEST_CODE = 1;
-    private static final int CAMERA_REQUEST = 1888;
-    private static final int MY_CAMERA_PERMISSION_CODE = 100;
-    private static final int PERMISSION_CODE = 1000 ;
-    private static final int IMAGE_CAPTURE_CODE = 1001  ;
 
     private EditText titre,desc;
     private Spinner spinner_service, spinner_genre,spinner_age;
     private TextView date_dispo,heure_dispo;
     ImageView img;
-    Bitmap bitmap;
 
-    Uri uriimg,url;
+    Uri url;
     private Uri filePath;
-    private String stitre,sdesc,sservice,sdate,sgenre,sadrpict;
+    private String stitre,sdesc,sservice,sdate,sgenre,uid_user;
     private int lat_location;
     private int long_location;
     private String sheure;
@@ -94,8 +90,7 @@ public class AddDemande extends AppCompatActivity {
 
     DatabaseReference dbDemande;
     private StorageReference mStorage;
-    FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,9 +106,14 @@ public class AddDemande extends AppCompatActivity {
         date_dispo = (TextView) this.findViewById(R.id.disponibilite);
         img=(ImageView)this.findViewById(R.id.new_image);
 
-        //auth
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
+        //aut
+       user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            for (UserInfo profile : user.getProviderData()) {
+                // UID specific to the provider
+                uid_user = profile.getUid();
+            }
+        }
         //spinner service
         spinner_service();
         //spinner genre
@@ -243,9 +243,7 @@ public class AddDemande extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
                 spinner_service.setSelection(i);
                 String selectedItemText = (String) parent.getItemAtPosition(i);
-                Toast.makeText
-                        (getApplicationContext(), "Selected : " + selectedItemText, Toast.LENGTH_SHORT)
-                        .show();
+
                 // if(selectedItemText.equals("Normal"))
 
             }
@@ -268,7 +266,9 @@ public class AddDemande extends AppCompatActivity {
                                         @Override
                                         public void onClick(View v) {
                                             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
                                             startActivityForResult(cameraIntent,CAMERA_REQUEST_CODE);
+
                                         }
                                     }
 
@@ -276,46 +276,6 @@ public class AddDemande extends AppCompatActivity {
 
     }
 
-    private void openCamera() {
-
-        /*ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE,"New Picture");
-        values.put(MediaStore.Images.Media.DESCRIPTION,"From the Camera");
-        uriimg = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,uriimg);
-        startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);*/
-
-    }
-
-   /* @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-    {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
-            case PERMISSION_CODE : {
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED){
-                    openCamera();
-                }else  {
-                    Toast.makeText(this,"Permission denied ...",Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        }
-        if (requestCode == MY_CAMERA_PERMISSION_CODE)
-        {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            {
-                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-            }
-            else
-            {
-                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
-            }
-        }
-    }*/
 
 
     @Override
@@ -325,6 +285,9 @@ public class AddDemande extends AppCompatActivity {
                     Bitmap photo = (Bitmap) data.getExtras().get("data") ;
                     img.setImageBitmap(photo);
                     filePath = data.getData();
+                    Toast.makeText
+                            (getApplicationContext(), "here on activity" , Toast.LENGTH_SHORT)
+                            .show();
 
     }
 
@@ -343,10 +306,6 @@ public class AddDemande extends AppCompatActivity {
                       url = uri.getResult();
                        dbDemande.child("adr_picture").setValue(url.toString());
                       //  s=url.toString();
-
-                    Toast.makeText(AddDemande.this, "Uploaded "+url.toString(), Toast.LENGTH_SHORT).show();
-
-
                 }
 
             }).addOnFailureListener(new OnFailureListener() {
@@ -385,6 +344,9 @@ public class AddDemande extends AppCompatActivity {
             storage_image();
 
             Toast.makeText(this,"Demande ajoutée",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(AddDemande.this,ListDemande.class);
+            startActivity(intent);
+            finish();
 
         }
         else{

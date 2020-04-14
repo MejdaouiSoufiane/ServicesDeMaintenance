@@ -7,6 +7,10 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--     <uses-permission android:name="android.permission.CAMERA" /> -->
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -23,6 +27,13 @@
         android:theme="@style/AppTheme">
         <activity android:name=".DetailDemandeClt"></activity>
         <activity android:name=".ListFonct" />
+
+        <activity
+            android:name=".ListDemande"
+            android:label="@string/title_activity_list_demande"
+            android:theme="@style/AppTheme.Noactionbar"></activity>
+
+        <activity android:name=".ListFonct"></activity>
         <activity android:name=".updateProfileClient" />
         <activity android:name=".DemandeDetails" />
         <activity android:name=".FctHome" />
@@ -34,20 +45,8 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".AddDemande">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ListeDemande">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".AddDemande" />
         <activity android:name=".ClientProfile" />
         <activity android:name=".Register" />
         <activity android:name=".Login" />
