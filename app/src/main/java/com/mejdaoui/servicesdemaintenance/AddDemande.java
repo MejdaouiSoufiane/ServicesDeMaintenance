@@ -336,7 +336,7 @@ public class AddDemande extends AppCompatActivity {
             String iddmd = dbDemande.push().getKey();
 
            // sadrpict = mStorage.getDownloadUrl().toString();
-            demande = new Demande(iddmd,uid_user, stitre, sdesc, sservice, sdate, sheure, 0, 0, sage, sgenre,"","En Attente");
+            demande = new Demande(iddmd,uid_user, stitre, sdesc, sservice, sdate, sheure, 0, 0, sage, sgenre,"","En Attente",null);
             dbDemande.child(iddmd).setValue(demande);
             dbDemande = dbDemande.child(iddmd);
             storage_image();

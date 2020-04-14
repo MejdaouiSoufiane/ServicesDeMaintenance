@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -58,7 +57,7 @@ public class updateProfileClient extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.update_profile);
 
-        imageView = (ImageView) this.findViewById(R.id.profileImg);
+        imageView = (ImageView) this.findViewById(R.id.img);
         nomProfile = (EditText) this.findViewById(R.id.nomProfile);
         prenomProfile = (EditText) this.findViewById(R.id.prenomProfile);
         mailProfile = (EditText) this.findViewById(R.id.mailProfile);
