@@ -157,7 +157,9 @@ public class ClientProfile extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.item2:
-
+                FirebaseAuth.getInstance().signOut();
+                Intent intent1 = new Intent(ClientProfile.this, Login.class);
+                startActivity(intent1);
                 break;
         }
         return super.onOptionsItemSelected(item);

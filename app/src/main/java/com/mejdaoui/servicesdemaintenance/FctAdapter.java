@@ -42,8 +42,6 @@ public class FctAdapter extends RecyclerView.Adapter<FctAdapter.MyViewHolder> {
 
         if(Fonctionnaires.size() != 0) {
             Fonctionnaire Fct = (Fonctionnaire) Fonctionnaires.get(position);
-
-
             holder.fullName.setText(Fct.getNom()+" "+Fct.getPrenom());
             holder.name.setText(Fct.getNom());
         }

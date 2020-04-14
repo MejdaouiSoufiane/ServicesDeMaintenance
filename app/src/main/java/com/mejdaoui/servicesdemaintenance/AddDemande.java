@@ -57,7 +57,9 @@ import java.io.InputStream;
 import java.net.URI;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
 
 public class AddDemande extends AppCompatActivity {
@@ -375,9 +377,9 @@ public class AddDemande extends AppCompatActivity {
 
         if (!TextUtils.isEmpty(stitre) && !TextUtils.isEmpty(sdesc) && !TextUtils.isEmpty(sservice)   && !TextUtils.isEmpty(sgenre) &&  !TextUtils.isEmpty(sage) && !TextUtils.isEmpty(sdate) ) {
             String iddmd = dbDemande.push().getKey();
-
+            List<String> listFct = new ArrayList<>();
            // sadrpict = mStorage.getDownloadUrl().toString();
-            demande = new Demande(iddmd,firebaseUser.getProviderId(), stitre, sdesc, sservice, sdate, sheure, 0, 0, sage, sgenre,"","En Attente");
+            demande = new Demande(iddmd,firebaseUser.getProviderId(), stitre, sdesc, sservice, sdate, sheure, 0, 0, sage, sgenre,"","En Attente",listFct);
             dbDemande.child(iddmd).setValue(demande);
             dbDemande = dbDemande.child(iddmd);
             storage_image();
