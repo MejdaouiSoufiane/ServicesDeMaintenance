@@ -14,11 +14,12 @@ public class Demande {
     private String titre ;
     private String description ;
     private String service ;
+    private String ville;
     private String date_dispo ;
     private Date date_demande;
     private String heure ;
-    private int lat_loc ;
-    private int long_loc ;
+    private double lat_loc ;
+    private double long_loc ;
     private String age_fonc;
     private String genre_fon;
     private String uri_picture;
@@ -31,7 +32,7 @@ public class Demande {
     }
 
 
-    public Demande(String idDemande, String idClient, String titre, String description, String service, String date_dispo, String heure, int lat_loc, int long_loc, String age_fonc, String genre_fon, String adr_picture, String etat, List<String> idFonctionnaire) {
+    public Demande(String idDemande, String idClient, String titre, String description, String service, String date_dispo, String heure, double lat_loc, double long_loc,String ville, String age_fonc, String genre_fon, String adr_picture, String etat, List<String> idFonctionnaire) {
         this.idDemande = idDemande;
         this.date_demande = new Date();
         this.idFonctionnaire = idFonctionnaire;
@@ -43,6 +44,7 @@ public class Demande {
         this.heure = heure;
         this.lat_loc = lat_loc;
         this.long_loc = long_loc;
+        this.ville = ville;
         this.age_fonc = age_fonc;
         this.genre_fon = genre_fon;
         this.adr_picture=adr_picture;
@@ -106,19 +108,19 @@ public class Demande {
         this.heure = heure;
     }
 
-    public int getLat_loc() {
+    public double getLat_loc() {
         return lat_loc;
     }
 
-    public void setLat_loc(int lat_loc) {
+    public void setLat_loc(double lat_loc) {
         this.lat_loc = lat_loc;
     }
 
-    public int getLong_loc() {
+    public double getLong_loc() {
         return long_loc;
     }
 
-    public void setLong_loc(int long_loc) {
+    public void setLong_loc(double long_loc) {
         this.long_loc = long_loc;
     }
 
@@ -176,6 +178,14 @@ public class Demande {
 
     public void setIdFonctionnaire(List<String> idFonctionnaire) {
         this.idFonctionnaire = idFonctionnaire;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
     }
 
     @Override

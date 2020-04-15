@@ -63,6 +63,7 @@ import java.util.UUID;
 
 public class AddDemande extends AppCompatActivity {
     static final int CAMERA_REQUEST_CODE = 1;
+    static final int MAP_REQUEST_CODE = 2;
 
     private EditText titre,desc;
     private Spinner spinner_service, spinner_genre,spinner_age;
@@ -71,9 +72,9 @@ public class AddDemande extends AppCompatActivity {
 
     Uri url;
     private Uri filePath;
-    private String stitre,sdesc,sservice,sdate,sgenre,uid_user;
-    private int lat_location;
-    private int long_location;
+    private String stitre,sdesc,sservice,sdate,sgenre,uid_user,ville;
+    private double lat_location;
+    private double long_location;
     private String sheure;
     private String sage;
 
@@ -255,8 +256,10 @@ public class AddDemande extends AppCompatActivity {
 
     public void btn_map(View view){
         Intent intent = new Intent(AddDemande.this, MapsActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, MAP_REQUEST_CODE);
     }
+
+
 
     private void take_picture() {
         take_pic = (Button)this.findViewById(R.id.button_img);
@@ -288,6 +291,19 @@ public class AddDemande extends AppCompatActivity {
                             .show();
 
     }
+/// for map data
+        if (requestCode == MAP_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                lat_location = data.getDoubleExtra("lat_location", 0);
+                long_location = data.getDoubleExtra("long_location", 0);
+                ville = data.getStringExtra("ville_location");
+            }
+            if (resultCode == RESULT_CANCELED) {
+                Toast.makeText
+                        (getApplicationContext(), "Vous devez selectionner votre position" , Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
 
     }
 
@@ -332,11 +348,11 @@ public class AddDemande extends AppCompatActivity {
 
 
 
-        if (!TextUtils.isEmpty(stitre) && !TextUtils.isEmpty(sdesc) && !TextUtils.isEmpty(sservice)   && !TextUtils.isEmpty(sgenre) &&  !TextUtils.isEmpty(sage) && !TextUtils.isEmpty(sdate) ) {
+        if (!TextUtils.isEmpty(stitre) && !TextUtils.isEmpty(sdesc) && !TextUtils.isEmpty(sservice)   && !TextUtils.isEmpty(sgenre) &&  !TextUtils.isEmpty(sage) && !TextUtils.isEmpty(sdate) && lat_location != 0 && long_location != 0 ) {
             String iddmd = dbDemande.push().getKey();
 
            // sadrpict = mStorage.getDownloadUrl().toString();
-            demande = new Demande(iddmd,uid_user, stitre, sdesc, sservice, sdate, sheure, 0, 0, sage, sgenre,"","En Attente",null);
+            demande = new Demande(iddmd,uid_user, stitre, sdesc, sservice, sdate, sheure, lat_location, long_location,ville, sage, sgenre,"","En Attente",null);
             dbDemande.child(iddmd).setValue(demande);
             dbDemande = dbDemande.child(iddmd);
             storage_image();
