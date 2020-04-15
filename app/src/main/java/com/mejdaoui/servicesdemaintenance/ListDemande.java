@@ -11,10 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -38,8 +45,8 @@ public class ListDemande extends AppCompatActivity {
     ArrayList<Demande> demandeList;
     DatabaseReference reference;
     DemandeAdapter adapter;
-    FirebaseUser user;
-    String uid_user;
+    FirebaseUser firebaseUser;
+    private Toolbar tool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +64,8 @@ public class ListDemande extends AppCompatActivity {
                 finish();
             }
         });
+
+        tool = (Toolbar) this.findViewById(R.id.tool);
 
         recyclerView = (RecyclerView) findViewById(R.id.rv);
         //imageButton = (ImageButton)findViewById(R.id.img_button_add);
@@ -97,6 +106,10 @@ public class ListDemande extends AppCompatActivity {
             }
         });
         enableSwipeToDeleteAndUndo();
+
+        this.setTitle("Accueil");
+        setSupportActionBar(tool);
+
     }
 
 
@@ -119,7 +132,7 @@ public class ListDemande extends AppCompatActivity {
 
                 if(item.getEtat().equals("En Attente")){
                     alertDialog.setTitle("Alerte")
-                            .setMessage("voulez-vous le supprimer ?")
+                            .setMessage("voulez-vous la supprimer ?")
                             .setIcon(R.drawable.ic_delete)
                             .setPositiveButton("Supprimer", new DialogInterface.OnClickListener() {
                                 @Override
@@ -174,6 +187,29 @@ public class ListDemande extends AppCompatActivity {
 
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
         itemTouchhelper.attachToRecyclerView(recyclerView);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.profile_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+
+            case R.id.item1:
+                Intent intent = new Intent(ListeDemande.this, ClientProfile.class);
+                startActivity(intent);
+                break;
+            case R.id.item2:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent1 = new Intent(ListeDemande.this, Login.class);
+                startActivity(intent1);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

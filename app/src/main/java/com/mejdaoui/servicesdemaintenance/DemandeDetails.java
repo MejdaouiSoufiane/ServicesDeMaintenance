@@ -79,7 +79,8 @@ public class DemandeDetails extends AppCompatActivity {
             @NonNull
             @Override
             public DemandeDetailHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-                return new DemandeDetailHolder(LayoutInflater.from(DemandeDetails.this).inflate(R.layout.dd_images_items, viewGroup,false));
+                return new DemandeDetailHolder(LayoutInflater.from(DemandeDetails.this)
+                        .inflate(R.layout.dd_images_items, viewGroup,false));
             }
         };
 
