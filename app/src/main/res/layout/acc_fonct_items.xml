@@ -70,15 +70,10 @@
             android:layout_height="30dp"
             android:scaleType="centerCrop"
             android:layout_alignParentEnd="true"
-<<<<<<< HEAD
-            android:background="@drawable/new_demande"
-            android:layout_marginRight="20dp"
-=======
+
             android:background="@drawable/newdmd"
             android:layout_marginRight="15dp"
-            android:layout_marginEnd="0dp"
->>>>>>> 2138232267633d98e2c7d256628f498b20e835bf
-            />
+            android:layout_marginEnd="0dp" />
 
     </RelativeLayout>
 

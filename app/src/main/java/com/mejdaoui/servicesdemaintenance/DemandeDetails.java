@@ -11,4 +11,6 @@ public class DemandeDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demande_details);
     }
+
+
 }

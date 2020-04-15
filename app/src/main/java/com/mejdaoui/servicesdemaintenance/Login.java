@@ -24,7 +24,7 @@ public class Login extends AppCompatActivity {
 
     private Button newaccount;
     private Button login;
-    private Button test;
+    //private Button test;
 
     TextInputEditText username;
     TextInputEditText password;
@@ -43,7 +43,7 @@ public class Login extends AppCompatActivity {
         newaccount = findViewById(R.id.newaccount);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        test = findViewById(R.id.test);
+        //test = findViewById(R.id.test);
 
         login.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -71,13 +71,13 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        test.setOnClickListener(new View.OnClickListener() {
+        /*test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent t = new Intent(Login.this, FctHome.class);
                 startActivity(t);
             }
-        });
+        });*/
     }
 
     public void loginUser(String email, String password){
@@ -91,11 +91,10 @@ public class Login extends AppCompatActivity {
                             pd.dismiss();
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-<<<<<<< HEAD
-                            startActivity(new Intent(Login.this, ClientProfile.class));
-=======
+                            System.out.println("==============//////////========== " + user);
+                            //startActivity(new Intent(Login.this, ClientProfile.class));
+
                             startActivity(new Intent(Login.this, FctHome.class));
->>>>>>> 2138232267633d98e2c7d256628f498b20e835bf
                             finish();
                         } else {
                             pd.dismiss();
