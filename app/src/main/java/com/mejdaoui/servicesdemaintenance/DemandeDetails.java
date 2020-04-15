@@ -76,7 +76,7 @@ public class DemandeDetails extends AppCompatActivity {
                 date.setText(b.getString("date"));
 
                 String url = demande.getAdr_picture();
-                Picasso.get().load(url).into(holder.imageView);
+                //Picasso.get().load(url).into(holder.imageView);
                 Toast.makeText(DemandeDetails.this, "Url : "+url, Toast.LENGTH_SHORT).show();
 
             }

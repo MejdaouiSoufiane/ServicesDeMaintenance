@@ -28,7 +28,6 @@ public class Demande {
     private List<String> idFonctionnaire;
 
     public Demande() {
-
     }
 
 

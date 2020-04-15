@@ -29,6 +29,8 @@ import com.mejdaoui.servicesdemaintenance.FctHome;
 import com.mejdaoui.servicesdemaintenance.FirebaseViewHolder;
 import com.mejdaoui.servicesdemaintenance.R;
 
+import java.util.Date;
+
 
 public class FonctionnaireRecycler extends Fragment {
 
@@ -37,6 +39,7 @@ public class FonctionnaireRecycler extends Fragment {
     private FirebaseRecyclerAdapter<Demande, FirebaseViewHolder> adapter;
     private DatabaseReference databaseReference;
     private CardView cardView;
+    public String d;
 
 
     @Override
@@ -80,7 +83,9 @@ public class FonctionnaireRecycler extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Client client = dataSnapshot.getValue(Client.class);
-                        //System.out.println("Client name : "+client.getNom());
+                        if(demande.getDate_demande().compareTo(new Date()) < 0)
+                            System.out.println("New date() : " + new Date());
+                        else System.out.println("Date : "+demande.getDate_demande());
                         holder.clt.setText(client.getNom());
                         holder.cardView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -89,7 +94,7 @@ public class FonctionnaireRecycler extends Fragment {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("nomServ",demande.getService());
                                 bundle.putString("desc",demande.getDescription());
-                                bundle.putString("date",demande.getHeure());
+                                    bundle.putString("date",demande.getDate_demande().toString());
                                 i.putExtras(bundle);
                                 startActivity(i);
                             }

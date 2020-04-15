@@ -56,6 +56,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
+import java.sql.SQLOutput;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -91,7 +92,6 @@ public class AddDemande extends AppCompatActivity {
 
     DatabaseReference dbDemande;
     private StorageReference mStorage;
-    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,13 +108,8 @@ public class AddDemande extends AppCompatActivity {
         img=(ImageView)this.findViewById(R.id.new_image);
 
         //aut
-       user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            for (UserInfo profile : user.getProviderData()) {
-                // UID specific to the provider
-                uid_user = profile.getUid();
-            }
-        }
+        uid_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         //spinner service
         spinner_service();
         //spinner genre
