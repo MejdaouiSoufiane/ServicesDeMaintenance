@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -24,12 +26,18 @@ import com.google.firebase.database.ValueEventListener;
 import com.mejdaoui.servicesdemaintenance.ViewHolder.DemandeDetailHolder;
 import com.squareup.picasso.Picasso;
 
+import java.sql.SQLOutput;
+
 public class DemandeDetails extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private FirebaseRecyclerOptions<Demande> options;
     private FirebaseRecyclerAdapter<Demande, DemandeDetailHolder> adapter;
     private DatabaseReference databaseReference;
+    private TextView nomServ;
+    private TextView desc;
+    private TextView date;
+    private TextView ville;
 
 
     @Override
@@ -52,6 +60,11 @@ public class DemandeDetails extends AppCompatActivity {
 
 
         recyclerView = findViewById(R.id.recyclerHorizImages);
+        nomServ = findViewById(R.id.dd_servName);
+        desc = findViewById(R.id.dd_desc);
+        date = findViewById(R.id.dd_date);
+        ville = findViewById(R.id.dd_vile);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -64,8 +77,14 @@ public class DemandeDetails extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull final DemandeDetailHolder holder, int i, @NonNull Demande demande) {
 
+                Bundle b = getIntent().getExtras();
+                nomServ.setText(b.getString("nomServ"));
+                desc.setText(b.getString("desc"));
+                date.setText(b.getString("date"));
+
                 String url = demande.getAdr_picture();
                 Picasso.get().load(url).into(holder.imageView);
+                Toast.makeText(DemandeDetails.this, "Url : "+url, Toast.LENGTH_SHORT).show();
 
             }
 

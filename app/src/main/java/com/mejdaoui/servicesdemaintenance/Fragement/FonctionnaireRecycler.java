@@ -73,11 +73,9 @@ public class FonctionnaireRecycler extends Fragment {
 
         adapter = new FirebaseRecyclerAdapter<Demande, FirebaseViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final FirebaseViewHolder holder, int i, @NonNull Demande demande) {
-                System.out.println("*** Idclient : "+demande.getIdClient());
+            protected void onBindViewHolder(@NonNull final FirebaseViewHolder holder, int i, @NonNull final Demande demande) {
+
                 DatabaseReference clt = FirebaseDatabase.getInstance().getReference("clients").child(demande.getIdClient());
-                System.out.println("*** DatabaseReference : "+FirebaseDatabase.getInstance().getReference("clients"));
-                System.out.println("*** Child : "+FirebaseDatabase.getInstance().getReference("clients").child(demande.getIdClient()));
                 clt.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -88,6 +86,11 @@ public class FonctionnaireRecycler extends Fragment {
                             @Override
                             public void onClick(View v) {
                                 Intent i = new Intent(getContext(), DemandeDetails.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("nomServ",demande.getService());
+                                bundle.putString("desc",demande.getDescription());
+                                bundle.putString("date",demande.getHeure());
+                                i.putExtras(bundle);
                                 startActivity(i);
                             }
                         });
