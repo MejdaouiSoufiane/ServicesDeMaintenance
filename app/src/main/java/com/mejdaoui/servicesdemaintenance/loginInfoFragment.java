@@ -46,7 +46,8 @@ public class loginInfoFragment extends Fragment {
             public void onClick(View v) {
                 verifyData(v);
             }
-        });
+        }
+        );
 
         return view;
     }

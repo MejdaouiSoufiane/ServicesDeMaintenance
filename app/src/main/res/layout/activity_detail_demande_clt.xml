@@ -43,100 +43,40 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="45dp"
                         android:gravity="center"
-                        android:text="Client"
+                        android:text="Demande"
                         android:textColor="@color/colorTextSecondary"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintTop_toTopOf="parent"/>
 
-                    <TextView
-                        android:id="@+id/textclientname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="MEJDAOUI Soufiane"
-                        android:textColor="@color/colorTextPrimary"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintTop_toBottomOf="@+id/c"/>
-
-                    <ImageView
-                        android:id="@+id/position_icon"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/ic_location"
-                        android:layout_marginTop="15dp"
-                        android:foregroundGravity="center"
-                        app:layout_constraintEnd_toStartOf="@+id/call_icon"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textclientname"/>
-
-                    <ImageView
-                        android:id="@+id/call_icon"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/ic_call"
-                        android:layout_marginTop="15dp"
-                        android:foregroundGravity="center"
-                        app:layout_constraintEnd_toStartOf="@+id/apply_icon"
-                        app:layout_constraintStart_toEndOf="@+id/position_icon"
-                        app:layout_constraintTop_toBottomOf="@+id/textclientname"/>
 
                     <ImageView
                         android:id="@+id/apply_icon"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
+                        android:layout_marginEnd="168dp"
                         android:background="@drawable/ic_touch"
-                        android:layout_marginTop="15dp"
                         android:foregroundGravity="center"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/call_icon"
-                        app:layout_constraintTop_toBottomOf="@+id/textclientname"/>
+                        app:layout_constraintHorizontal_bias="0.982"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/c" />
 
                     <TextView
+                        android:id="@+id/post"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
                         android:gravity="center"
-                        android:text="Position"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorTextSecondary"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@id/position_icon"
-                        app:layout_constraintStart_toStartOf="@id/position_icon"
-                        app:layout_constraintTop_toBottomOf="@id/position_icon"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:gravity="center"
-                        android:text="Appeler"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorTextSecondary"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@id/call_icon"
-                        app:layout_constraintStart_toStartOf="@id/call_icon"
-                        app:layout_constraintTop_toBottomOf="@id/call_icon"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:gravity="center"
-                        android:text="Postuler"
+                        android:text="Voir les postulants"
                         android:textAllCaps="true"
                         android:textColor="@color/colorTextSecondary"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/apply_icon"
+                        app:layout_constraintHorizontal_bias="0.495"
                         app:layout_constraintStart_toStartOf="@id/apply_icon"
-                        app:layout_constraintTop_toBottomOf="@id/apply_icon"
-                        />
+                        app:layout_constraintTop_toBottomOf="@+id/apply_icon"
+                        app:layout_constraintVertical_bias="0.0" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -144,19 +84,19 @@
 
         </FrameLayout>
 
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/clientimage"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                app:layout_constraintBottom_toTopOf="@+id/layoutProfile"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/layoutProfile"
-                android:layout_gravity="center"
-                app:riv_border_width="1dp"
-                app:riv_oval="true"
-                android:background="@drawable/man"
-                />
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/clientimage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintBottom_toTopOf="@+id/layoutProfile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/layoutProfile"
+            android:layout_gravity="center"
+            app:riv_border_width="1dp"
+            app:riv_oval="true"
+            android:background="@drawable/man"
+            />
 
         <TextView
             android:id="@+id/cc"
@@ -184,52 +124,52 @@
             android:paddingLeft="25dp"
             android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:gravity="center"
-                    android:text="Nom du service "
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorTextPrimary"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent"
-                    />
-                <TextView
-                    android:id="@+id/dd_servName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center"
-                    android:text="Peinture "
-                    android:textColor="@color/colorTextSecondary"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent"
-                    />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="Nom du service "
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                />
+            <TextView
+                android:id="@+id/service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="Nom du service ici "
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                />
 
             <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:gravity="center"
-            android:text="Description "
-            android:textAllCaps="true"
-            android:textColor="@color/colorTextPrimary"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
-            />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="Description "
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                />
             <TextView
-                android:id="@+id/dd_desc"
+                android:id="@+id/desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -259,13 +199,13 @@
                 app:layout_constraintTop_toBottomOf="parent"
                 />
             <TextView
-                android:id="@+id/dd_date"
+                android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:text="30/04/2020"
+                android:text="date  ici "
                 android:textColor="@color/colorTextSecondary"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -289,13 +229,13 @@
                 app:layout_constraintTop_toBottomOf="parent"
                 />
             <TextView
-                android:id="@+id/dd_vile"
+                android:id="@+id/vile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:text="Rabat "
+                android:text="Ville  ici "
                 android:textColor="@color/colorTextSecondary"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"

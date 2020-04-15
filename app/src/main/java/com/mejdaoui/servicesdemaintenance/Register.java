@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -46,20 +47,6 @@ public class Register extends AppCompatActivity {
 
     public void addUser() {
 
-        String id = database.push().getKey();
-
-        if(type.equals("fonctionnaire")){
-            database = FirebaseDatabase.getInstance().getReference("fonctionnaires");
-            Fonctionnaire fonctionnaire = new Fonctionnaire(id, tnom, tprenom, temail, tadresse, tville, ttel, secteur);
-            database.child(id).setValue(fonctionnaire);}
-
-        else if (type.equals("client")){
-            database = FirebaseDatabase.getInstance().getReference("clients");
-
-            Client client = new Client(id, tnom, tprenom, temail, tadresse, tville, ttel);
-            database.child(id).setValue(client);
-        }
-
         mAuth.createUserWithEmailAndPassword(temail, tpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -67,6 +54,21 @@ public class Register extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     finish();
                     Toast.makeText(getApplicationContext(), "Compte bien créé", Toast.LENGTH_SHORT).show();
+                    FirebaseUser user = mAuth.getCurrentUser();
+
+                    String id = user.getUid();
+                    if(type.equals("fonctionnaire")){
+                        database = FirebaseDatabase.getInstance().getReference("fonctionnaires");
+                        Fonctionnaire fonctionnaire = new Fonctionnaire(id, tnom, tprenom, temail, tadresse, tville, ttel, secteur);
+                        database.child(id).setValue(fonctionnaire);}
+
+                    else if (type.equals("client")){
+                        database = FirebaseDatabase.getInstance().getReference("clients");
+
+                        Client client = new Client(id, tnom, tprenom, temail, tadresse, tville, ttel);
+                        database.child(id).setValue(client);
+                    }
+
                     startActivity(new Intent(Register.this, Login.class));
                 } else {
 

@@ -19,6 +19,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Login extends AppCompatActivity {
 
@@ -31,6 +33,8 @@ public class Login extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     ProgressDialog pd;
+    DatabaseReference refClt ;
+    DatabaseReference refFct ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,7 @@ public class Login extends AppCompatActivity {
         /*test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent t = new Intent(Login.this, FctHome.class);
                 startActivity(t);
             }
@@ -91,11 +96,21 @@ public class Login extends AppCompatActivity {
                             pd.dismiss();
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            System.out.println("==============//////////========== " + user);
-                            //startActivity(new Intent(Login.this, ClientProfile.class));
 
-                            startActivity(new Intent(Login.this, FctHome.class));
+                            String uid = user.getUid();
+
+                            refClt = FirebaseDatabase.getInstance().getReference("clients").child(uid);
+
+                            if(refClt!= null)
+                                startActivity(new Intent(Login.this, ListDemande.class));
+
+                            refFct = FirebaseDatabase.getInstance().getReference("fonctionnaires").child(uid);
+
+                            if (refFct!=null)
+                                startActivity(new Intent(Login.this, FctHome.class));
+
                             finish();
+
                         } else {
                             pd.dismiss();
 

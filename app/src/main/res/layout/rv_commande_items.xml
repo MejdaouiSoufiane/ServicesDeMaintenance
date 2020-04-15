@@ -5,44 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
-    app:cardElevation="3dp"
-    app:cardCornerRadius="3dp">
+    app:cardElevation="2dp"
+    app:cardCornerRadius="8dp"
+    app:cardPreventCornerOverlap="true"
+   >
     <RelativeLayout
-        android:padding="10dp"
+        android:id="@+id/item_card"
+        android:padding="5dp"
         android:weightSum="10"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/item_image"
             android:layout_width="75dp"
             android:layout_height="75dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/sans_titre"/>
+            android:src="@drawable/sans_titre" />
 
         <TextView
-                android:id="@+id/item_titre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_toRightOf="@+id/item_image"
-                android:layout_toEndOf="@+id/item_image"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:text="Commande"/>
-        <TextView
-                android:id="@+id/item_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_toRightOf="@+id/item_image"
-                android:layout_toEndOf="@+id/item_image"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/item_titre"
-                android:text="Description comamnde "/>
+            android:id="@+id/item_titre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toEndOf="@+id/item_image"
+            android:layout_toRightOf="@+id/item_image"
+            android:text="Commande"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_titre"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="3dp"
+            android:layout_toEndOf="@+id/item_image"
+            android:layout_toRightOf="@+id/item_image"
+            android:text="Description comamnde "
+            android:textSize="14sp" />
 
 
         <TextView
@@ -50,16 +56,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
+            android:layout_below="@+id/item_description"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/item_image"
+            android:layout_toRightOf="@+id/item_image"
             android:background="@drawable/capsule"
             android:gravity="center"
             android:text="Etat"
-            android:textSize="16sp"
-            android:layout_toRightOf="@+id/item_image"
-            android:layout_toEndOf="@+id/item_image"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/item_description"
+            android:textSize="12sp"
             android:textStyle="bold" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

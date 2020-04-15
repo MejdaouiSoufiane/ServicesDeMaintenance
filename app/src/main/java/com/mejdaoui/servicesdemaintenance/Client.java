@@ -6,7 +6,7 @@ public class Client {
     private String nom ;
     private String prenom ;
     private String email ;
-    private String pswd ;
+    private String password ;
     private String adresse ;
     private String telephone ;
     private String ville ;
@@ -57,12 +57,12 @@ public class Client {
         this.email = email;
     }
 
-    public String getPswd() {
-        return pswd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPswd(String pswd) {
-        this.pswd = pswd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getAdresse() {
@@ -73,12 +73,12 @@ public class Client {
         this.adresse = adresse;
     }
 
-    public String getTelelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(String tel) {
-        this.telephone = tel;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getVille() {
