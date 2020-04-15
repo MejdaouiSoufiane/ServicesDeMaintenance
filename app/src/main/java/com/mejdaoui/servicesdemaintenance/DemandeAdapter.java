@@ -58,8 +58,11 @@ public class DemandeAdapter  extends RecyclerView.Adapter<DemandeAdapter.ViewHol
         holder.item_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent detail = new Intent(mactivity,DetailDemande.class);
-                detail.putExtra("id_demande",demandeItem.getIdDemande());
+                //Intent detail = new Intent(mactivity,DetailDemande.class);
+                Intent detail = new Intent(mactivity,DetailDemandeClt.class);
+
+                 detail.putExtra("id_demande",demandeItem.getIdDemande());
+
                 mactivity.startActivity(detail);
             }
         });

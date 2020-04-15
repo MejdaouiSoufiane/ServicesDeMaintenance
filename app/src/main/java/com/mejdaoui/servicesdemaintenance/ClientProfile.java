@@ -3,44 +3,29 @@ package com.mejdaoui.servicesdemaintenance;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.List;
 
 public class ClientProfile extends AppCompatActivity {
 
@@ -48,7 +33,9 @@ public class ClientProfile extends AppCompatActivity {
     private ImageView profileImg ;
     private TextView nbrDmd ;
     private TextView profileMail, profileName, profilePhone, profileAdresse, profileVille;
-    private Button up;
+    //private Button up;
+
+    private Toolbar tool;
 
     int TAKE_IMAGE_CODE = 10001 ;
 
@@ -61,29 +48,25 @@ public class ClientProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_profile);
 
-        profileImg = this.findViewById(R.id.profileImg);
+        profileImg = this.findViewById(R.id.img);
         nbrDmd = this.findViewById(R.id.nbrDmd);
         profileName = this.findViewById(R.id.profileName);
         profileMail = this.findViewById(R.id.profileMail);
         profilePhone = this.findViewById(R.id.profilePhone);
         profileAdresse = this.findViewById(R.id.profileAdresse);
         profileVille = this.findViewById(R.id.profileVille);
-        up = this.findViewById(R.id.upd);
+
+        tool = (Toolbar) this.findViewById(R.id.tool);
+
 
         profileImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HandleImage(v);
+               displayImage(v);
+
             }
         });
 
-        up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ClientProfile.this, updateProfileClient.class);
-                startActivity(intent);
-            }
-        });
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         if(user.getPhotoUrl()!= null){
@@ -91,6 +74,10 @@ public class ClientProfile extends AppCompatActivity {
                     .load(user.getPhotoUrl())
                     .into(profileImg);
         }
+
+        this.setTitle("Profile");
+        setSupportActionBar(tool);
+
     }
 
   @Override
@@ -134,6 +121,50 @@ public class ClientProfile extends AppCompatActivity {
       ref.addListenerForSingleValueEvent(eventListener);
     }
 
+    public void displayImage(View v) {
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.alert_dialog, null);
+        ImageView iv = (ImageView) dialogLayout.findViewById(R.id.imageView);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user.getPhotoUrl()!= null){
+            Glide.with(this)
+                    .load(user.getPhotoUrl())
+                    .into(iv);
+        }
+        builder.setPositiveButton("OK", null);
+        builder.setView(dialogLayout);
+        builder.create().show();
+
+    }
+
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.profile_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+
+            case R.id.item1:
+                Intent intent = new Intent(ClientProfile.this, updateProfileClient.class);
+                startActivity(intent);
+                break;
+            case R.id.item2:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent1 = new Intent(ClientProfile.this, Login.class);
+                startActivity(intent1);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void HandleImage(View view){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(intent.resolveActivity(getPackageManager())!= null){
@@ -147,14 +178,13 @@ public class ClientProfile extends AppCompatActivity {
         if(requestCode == TAKE_IMAGE_CODE){
             switch (resultCode){
                 case RESULT_OK:
-                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                    final Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     profileImg.setImageBitmap(bitmap);
-                    handleUpload(bitmap);
+                    //handleUpload(bitmap);
             }
         }
     }
-
-    private void handleUpload(Bitmap bitmap){
+    /* private void handleUpload(Bitmap bitmap){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 
@@ -179,21 +209,21 @@ public class ClientProfile extends AppCompatActivity {
 
                     }
                 });
-    }
+    }*/
 
-    private void getDownloadUrl(StorageReference reference){
+    /*private void getDownloadUrl(StorageReference reference){
         reference.getDownloadUrl()
                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         Log.d(TAG, "onSuccess: "+ uri);
-                        setUserProfileUrl(uri);
+                       // setUserProfileUrl(uri);
 
                     }
                 });
     }
 
-    private void setUserProfileUrl(Uri uri){
+    /*private void setUserProfileUrl(Uri uri){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
@@ -215,26 +245,5 @@ public class ClientProfile extends AppCompatActivity {
                     }
                 });
                 }
-
-
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.profile_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-
-            case R.id.item1:
-                Intent intent = new Intent(ClientProfile.this, updateProfileClient.class);
-                startActivity(intent);
-                break;
-            case R.id.item2:
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    */
 }

@@ -6,14 +6,19 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<!--
-    <uses-permission android:name="android.permission.CAMERA" />
-    -->
+    <!--     <uses-permission android:name="android.permission.CAMERA" /> -->
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -22,11 +27,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".updateProfileClient"></activity>
+        <activity android:name=".DetailDemandeClt"></activity>
 
-        <activity android:name=".DemandeDetails"></activity>
+
+        <activity
+            android:name=".ListDemande"
+            android:label="@string/title_activity_list_demande"
+            android:theme="@style/AppTheme.Noactionbar"></activity>
+
+        <activity android:name=".ListFonct"></activity>
+        <activity android:name=".updateProfileClient" />
+        <activity android:name=".DemandeDetails" />
         <activity android:name=".FctHome" />
-
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -34,17 +46,12 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
-
-        <activity android:name=".AddDemande">
-
+            android:label="@string/title_activity_maps" >
         </activity>
-        <activity android:name=".ListeDemande">
 
-        </activity>
+        <activity android:name=".AddDemande" />
         <activity android:name=".ClientProfile" />
         <activity android:name=".Register" />
-
         <activity android:name=".Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -54,16 +61,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Profile_fnct" />
-        <!--
-<activity android:name=".RegisterClient" />
-        <activity android:name=".RegisterFonctionnaire" />
-        -->
-
     </application>
-
-
-    <uses-feature
-        android:name="android.hardware.camera.autofocus"
-        android:required="false" />
 
 </manifest>
