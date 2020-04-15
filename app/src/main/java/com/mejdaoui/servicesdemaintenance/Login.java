@@ -101,13 +101,15 @@ public class Login extends AppCompatActivity {
 
                             refClt = FirebaseDatabase.getInstance().getReference("clients").child(uid);
 
-                            if(refClt!= null)
+                            if(refClt!= null){
                                 startActivity(new Intent(Login.this, ListDemande.class));
+                            }
 
                             refFct = FirebaseDatabase.getInstance().getReference("fonctionnaires").child(uid);
 
-                            if (refFct!=null)
+                            if (refFct!=null){
                                 startActivity(new Intent(Login.this, FctHome.class));
+                            }
 
                             finish();
 

@@ -164,7 +164,7 @@ public class AddDemande extends AppCompatActivity {
         };
     }
 
-    private void date() {
+    private void  date() {
         date_dispo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
