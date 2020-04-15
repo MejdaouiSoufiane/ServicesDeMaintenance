@@ -45,7 +45,8 @@ public class ListDemande extends AppCompatActivity {
     ArrayList<Demande> demandeList;
     DatabaseReference reference;
     DemandeAdapter adapter;
-    FirebaseUser firebaseUser;
+    FirebaseUser user;
+    String uid_user;
     private Toolbar tool;
 
     @Override
@@ -200,12 +201,12 @@ public class ListDemande extends AppCompatActivity {
         switch(item.getItemId()) {
 
             case R.id.item1:
-                Intent intent = new Intent(ListeDemande.this, ClientProfile.class);
+                Intent intent = new Intent(ListDemande.this, ClientProfile.class);
                 startActivity(intent);
                 break;
             case R.id.item2:
                 FirebaseAuth.getInstance().signOut();
-                Intent intent1 = new Intent(ListeDemande.this, Login.class);
+                Intent intent1 = new Intent(ListDemande.this, Login.class);
                 startActivity(intent1);
                 break;
         }
