@@ -16,6 +16,7 @@ public class FirebaseViewHolder extends RecyclerView.ViewHolder {
     public TextView clt;
     public TextView timeville;
     public CardView cardView;
+    public ImageView newDemande;
 
     public FirebaseViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -26,6 +27,7 @@ public class FirebaseViewHolder extends RecyclerView.ViewHolder {
         desc = itemView.findViewById(R.id.serviceDesc);
         clt = itemView.findViewById(R.id.clientName);
         timeville = itemView.findViewById(R.id.time_ville);
+        newDemande = itemView.findViewById(R.id.newDemande);
 
     }
 }
