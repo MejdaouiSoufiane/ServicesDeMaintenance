@@ -7,12 +7,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +31,6 @@ public class DemandeDetails extends AppCompatActivity {
     private TextView desc;
     private TextView date;
     private TextView ville;
-    private ImageView imgPostul;
 
 
     @Override
@@ -61,14 +57,6 @@ public class DemandeDetails extends AppCompatActivity {
         desc = findViewById(R.id.dd_desc);
         date = findViewById(R.id.dd_date);
         ville = findViewById(R.id.dd_vile);
-        imgPostul = findViewById(R.id.apply_icon);
-
-        imgPostul.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(DemandeDetails.this, collapsedProfile.class));
-            }
-        });
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -117,7 +117,7 @@ public class Login extends AppCompatActivity {
                                                 startActivity(new Intent(Login.this, ListDemande.class));
                                         }
                                         else if(dataSnapshot.child("fonctionnaires").hasChild(uid)){
-                                            startActivity(new Intent(Login.this, collapsedProfile.class));
+                                            startActivity(new Intent(Login.this, FctHome.class));
                                         }
                                 }
 
