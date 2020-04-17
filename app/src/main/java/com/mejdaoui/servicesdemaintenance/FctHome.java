@@ -34,7 +34,7 @@ public class FctHome extends AppCompatActivity {
         /******* navigation drawer tricks ***/
         final Toolbar toolbar = findViewById(R.id.toolbar);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        toolbar.setTitle("TESTT");
+        toolbar.setTitle("Liste des demandes");
         MainFragmentTab fragment = new MainFragmentTab();
         ft.replace(R.id.fragement_container, fragment);
         ft.commit();
@@ -59,11 +59,15 @@ public class FctHome extends AppCompatActivity {
                     ft.commit();
                 }else if(id == R.id.nav_message){
                     toolbar.setTitle("Messages");
-                    Toast.makeText(FctHome.this, "Messages", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(FctHome.this, "Messages", Toast.LENGTH_SHORT).show();
+                    setTitle("Détails de demande");
+                    startActivity(new Intent(FctHome.this, DemandeDetails.class));
+
                 }
                 else if(id == R.id.nav_profile){
                     toolbar.setTitle("Profile");
-                    Toast.makeText(FctHome.this, "Profles", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(FctHome.this, Profile_fnct.class));
+                    //Toast.makeText(FctHome.this, "Profles", Toast.LENGTH_SHORT).show();
                 }
 
                 DrawerLayout drawer = findViewById(R.id.drawer_layout);

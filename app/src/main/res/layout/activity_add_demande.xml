@@ -287,7 +287,6 @@
             android:hint="Genre"
             />
 
-
         <Button
             android:id="@+id/button_ajouter"
             android:layout_width="60dp"
@@ -300,9 +299,6 @@
             android:onClick="btn_ajouter"
             android:text="Ajouter"
             android:textColor="#000" />
-
-
-
 
     </RelativeLayout>
 </ScrollView>

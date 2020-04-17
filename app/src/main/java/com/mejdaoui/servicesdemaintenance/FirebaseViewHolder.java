@@ -1,12 +1,16 @@
 package com.mejdaoui.servicesdemaintenance;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 public class FirebaseViewHolder extends RecyclerView.ViewHolder {
 
@@ -18,6 +22,7 @@ public class FirebaseViewHolder extends RecyclerView.ViewHolder {
     public CardView cardView;
     public ImageView newDemande;
 
+
     public FirebaseViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -28,6 +33,7 @@ public class FirebaseViewHolder extends RecyclerView.ViewHolder {
         clt = itemView.findViewById(R.id.clientName);
         timeville = itemView.findViewById(R.id.time_ville);
         newDemande = itemView.findViewById(R.id.newDemande);
+
 
     }
 }
