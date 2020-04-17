@@ -35,7 +35,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register_fonctionnaire);
 
         mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance().getReference();
+       database = FirebaseDatabase.getInstance().getReference();
 
         UserInfoFragment fragment = new UserInfoFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();

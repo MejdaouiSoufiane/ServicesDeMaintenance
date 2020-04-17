@@ -7,7 +7,10 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--     <uses-permission android:name="android.permission.CAMERA" /> -->
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -24,13 +27,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".collapsedProfile"></activity>
-        <activity android:name=".DetailDemandeClt" />
+        <activity android:name=".DetailDemandeClt"></activity>
+
+
         <activity
             android:name=".ListDemande"
             android:label="@string/title_activity_list_demande"
-            android:theme="@style/AppTheme.Noactionbar" />
-        <activity android:name=".ListFonct" />
+            android:theme="@style/AppTheme.Noactionbar"></activity>
+
+        <activity android:name=".ListFonct"></activity>
         <activity android:name=".updateProfileClient" />
         <activity android:name=".DemandeDetails" />
         <activity android:name=".FctHome" />
