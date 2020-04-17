@@ -112,13 +112,6 @@ public class FonctionnaireRecycler extends Fragment {
         };
 
         cardView = view.findViewById(R.id.parentLayout);
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(),DemandeDetails.class);
-                startActivity(i);
-            }
-        });
 
         recyclerView.setAdapter(adapter);
         return view;
