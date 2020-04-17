@@ -22,6 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.mejdaoui.servicesdemaintenance.ViewHolder.DemandeDetailHolder;
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
+
 public class DetailDemandeClt extends AppCompatActivity {
 
     private  TextView service, ville, date, desc ;
@@ -70,7 +72,7 @@ public class DetailDemandeClt extends AppCompatActivity {
 
                 service.setText(tservice);
                 desc.setText(tdesc);
-                date.setText(tdate);
+                date.setText(dataSnapshot.child("date_demande").getValue(Date.class).toString());
                 //ville.setText(tville);
             }
 

@@ -1,18 +1,22 @@
 package com.mejdaoui.servicesdemaintenance.Fragement;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.mejdaoui.servicesdemaintenance.Adapter.TabAdapter;
+import com.mejdaoui.servicesdemaintenance.DemandeDetails;
 import com.mejdaoui.servicesdemaintenance.R;
 
 public class MainFragmentTab extends Fragment {
@@ -20,6 +24,7 @@ public class MainFragmentTab extends Fragment {
     private TabAdapter adapter;
     private TabLayout tableLayout;
     private ViewPager viewPager;
+    private CardView cardView;
 
     @Nullable
     @Override
@@ -35,6 +40,20 @@ public class MainFragmentTab extends Fragment {
 
         viewPager.setAdapter(adapter);
         tableLayout.setupWithViewPager(viewPager);
+
+        /*cardView = view.findViewById(R.id.parentLayout);
+        if(cardView!= null) {
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getContext(), DemandeDetails.class);
+                    startActivity(i);
+                }
+            });
+        }
+        else {
+            Toast.makeText(getContext(), "CardView NULL", Toast.LENGTH_SHORT).show();
+        }*/
 
         return view;
     }

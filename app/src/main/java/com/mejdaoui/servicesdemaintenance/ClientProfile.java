@@ -158,6 +158,7 @@ public class ClientProfile extends AppCompatActivity {
                 break;
             case R.id.item2:
                 FirebaseAuth.getInstance().signOut();
+                finish();
                 Intent intent1 = new Intent(ClientProfile.this, Login.class);
                 startActivity(intent1);
                 break;

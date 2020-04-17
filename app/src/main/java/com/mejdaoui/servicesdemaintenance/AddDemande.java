@@ -45,8 +45,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -56,6 +59,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
+import java.sql.SQLOutput;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -89,9 +93,10 @@ public class AddDemande extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
 
-    DatabaseReference dbDemande;
+    DatabaseReference dbDemande,userRef;
     private StorageReference mStorage;
-    FirebaseUser user;
+
+    public long counterdemande;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,13 +113,8 @@ public class AddDemande extends AppCompatActivity {
         img=(ImageView)this.findViewById(R.id.new_image);
 
         //aut
-       user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            for (UserInfo profile : user.getProviderData()) {
-                // UID specific to the provider
-                uid_user = profile.getUid();
-            }
-        }
+        uid_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         //spinner service
         spinner_service();
         //spinner genre
@@ -341,29 +341,58 @@ public class AddDemande extends AppCompatActivity {
         stitre = titre.getText().toString();
         sdesc = desc.getText().toString();
         sservice = spinner_service.getSelectedItem().toString();
-
+        userRef = FirebaseDatabase.getInstance().getReference("clients");
         sdate = date_dispo.getText().toString();
         sheure = heure_dispo.getText().toString();
         sgenre = spinner_genre.getSelectedItem().toString();
         sage = spinner_age.getSelectedItem().toString();
 
+        dbDemande.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists())
+                    counterdemande = dataSnapshot.getChildrenCount();
+                else
+                    counterdemande = 0;
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
 
         if (!TextUtils.isEmpty(stitre) && !TextUtils.isEmpty(sdesc) && !TextUtils.isEmpty(sservice)   && !TextUtils.isEmpty(sgenre) &&  !TextUtils.isEmpty(sage) && !TextUtils.isEmpty(sdate) && lat_location != 0 && long_location != 0 ) {
-            String iddmd = dbDemande.push().getKey();
-            List<String> listFct = new ArrayList<>();
-           // sadrpict = mStorage.getDownloadUrl().toString();
-            demande = new Demande(iddmd,uid_user, stitre, sdesc, sservice, sdate, sheure, lat_location, long_location,ville, sage, sgenre,"","En Attente",listFct);
+            // sadrpict = mStorage.getDownloadUrl().toString();
 
-            dbDemande.child(iddmd).setValue(demande);
-            dbDemande = dbDemande.child(iddmd);
-            storage_image();
+            userRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String iddmd = dbDemande.push().getKey();
+                    List<String> listFct = new ArrayList<>();
+                    //System.out.println("+++++++++++ snapshot "+dataSnapshot.getChildrenCount());
+                    //counterdemande = dataSnapshot.getChildrenCount();
+                    demande = new Demande(iddmd,uid_user, stitre, sdesc, sservice, sdate, sheure, lat_location, long_location,ville, sage, sgenre,"","En Attente",listFct);
 
-            Toast.makeText(this,"Demande ajoutée",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(AddDemande.this,ListDemande.class);
-            startActivity(intent);
-            finish();
+                    demande.setCounter(-counterdemande);
+                    dbDemande.child(iddmd).setValue(demande);
+                    dbDemande = dbDemande.child(iddmd);
+                    //System.out.println("+++++++++++ demande "+demande.getCounter());
+                    storage_image();
+
+                    Toast.makeText(getApplicationContext(),"Demande ajoutée",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AddDemande.this,ListDemande.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
 
         }
         else{

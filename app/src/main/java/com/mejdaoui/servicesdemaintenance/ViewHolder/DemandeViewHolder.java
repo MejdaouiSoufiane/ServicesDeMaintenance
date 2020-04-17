@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mejdaoui.servicesdemaintenance.R;
@@ -16,9 +17,11 @@ public class DemandeViewHolder extends RecyclerView.ViewHolder {
     public TextView clt;
     public TextView timeville;
     public ImageView imageView;
+    public CardView cardView;
 
     public DemandeViewHolder(@NonNull View itemView) {
         super(itemView);
+        cardView = itemView.findViewById(R.id.parentLayout);
         srv = itemView.findViewById(R.id.serviceName);
         desc = itemView.findViewById(R.id.serviceDesc);
         clt = itemView.findViewById(R.id.clientName);

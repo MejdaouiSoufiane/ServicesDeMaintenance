@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -21,6 +23,7 @@ import com.mejdaoui.servicesdemaintenance.Fragement.MainFragmentTab;
 public class FctHome extends AppCompatActivity {
 
     private DrawerLayout drawer;
+    private CardView cardView;
 
 
     @Override
@@ -73,6 +76,7 @@ public class FctHome extends AppCompatActivity {
             }
         });
         /******* End navigation drawer tricks***/
+
     }
 
 
