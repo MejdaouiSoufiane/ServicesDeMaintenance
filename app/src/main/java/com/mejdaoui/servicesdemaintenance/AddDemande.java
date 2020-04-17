@@ -370,14 +370,12 @@ public class AddDemande extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String iddmd = dbDemande.push().getKey();
                     List<String> listFct = new ArrayList<>();
-                    //System.out.println("+++++++++++ snapshot "+dataSnapshot.getChildrenCount());
-                    //counterdemande = dataSnapshot.getChildrenCount();
+                    listFct.add("fonctionnaireID");
                     demande = new Demande(iddmd,uid_user, stitre, sdesc, sservice, sdate, sheure, lat_location, long_location,ville, sage, sgenre,"","En Attente",listFct);
 
                     demande.setCounter(-counterdemande);
                     dbDemande.child(iddmd).setValue(demande);
                     dbDemande = dbDemande.child(iddmd);
-                    //System.out.println("+++++++++++ demande "+demande.getCounter());
                     storage_image();
 
                     Toast.makeText(getApplicationContext(),"Demande ajoutée",Toast.LENGTH_LONG).show();

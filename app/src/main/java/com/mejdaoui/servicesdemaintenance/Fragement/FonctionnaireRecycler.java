@@ -138,14 +138,8 @@ public class FonctionnaireRecycler extends Fragment {
                 holder.timeville.setText(""+day+" "+getMonthForInt(month)+" "+h+":"+m);
 
                 /** comparaison des date pour le trie**/
-                    Calendar ccalendar = Calendar.getInstance();
-                    calendar.setTime(new Date());
-                    int ch = calendar.get(Calendar.HOUR_OF_DAY);
-                    int cm = calendar.get(Calendar.MINUTE);
-                    int cday = calendar.get(Calendar.DAY_OF_MONTH);
-                    int cmonth = calendar.get(Calendar.MONTH);
                     Date date = addHoursToJavaUtilDate(demande.getDate_demande(),2);
-                    if(date.compareTo(new Date()) > 0)
+                    if(date.compareTo(new Date()) < 0)
                         holder.newDemande.setVisibility(View.GONE);
                 /** fin **/
 
