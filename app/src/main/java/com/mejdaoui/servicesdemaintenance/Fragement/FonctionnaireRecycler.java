@@ -1,14 +1,16 @@
 package com.mejdaoui.servicesdemaintenance.Fragement;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -17,16 +19,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.mejdaoui.servicesdemaintenance.Client;
 import com.mejdaoui.servicesdemaintenance.Demande;
 import com.mejdaoui.servicesdemaintenance.DemandeDetails;
+import com.mejdaoui.servicesdemaintenance.FctHome;
 import com.mejdaoui.servicesdemaintenance.FirebaseViewHolder;
 import com.mejdaoui.servicesdemaintenance.R;
+
+import java.text.DateFormatSymbols;
+import java.time.Month;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class FonctionnaireRecycler extends Fragment {
@@ -36,6 +48,7 @@ public class FonctionnaireRecycler extends Fragment {
     private FirebaseRecyclerAdapter<Demande, FirebaseViewHolder> adapter;
     private DatabaseReference databaseReference;
     private CardView cardView;
+    public String d;
 
 
     @Override
@@ -59,7 +72,7 @@ public class FonctionnaireRecycler extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fonct_home_fragment, container, false);
+        final View view = inflater.inflate(R.layout.fonct_home_fragment, container, false);
 
         recyclerView = view.findViewById(R.id.acc_fonct_recy);
         recyclerView.setHasFixedSize(true);
@@ -67,22 +80,43 @@ public class FonctionnaireRecycler extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Demandes");
+        Query sorted = databaseReference.orderByChild("counter");
         databaseReference.keepSynced(true);
-        options = new FirebaseRecyclerOptions.Builder<Demande>().setQuery(databaseReference,Demande.class).build();
+
+        options = new FirebaseRecyclerOptions.Builder<Demande>().setQuery(sorted,Demande.class).build();
 
         adapter = new FirebaseRecyclerAdapter<Demande, FirebaseViewHolder>(options) {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            protected void onBindViewHolder(@NonNull final FirebaseViewHolder holder, int i, @NonNull Demande demande) {
-                System.out.println("*** Idclient : "+demande.getIdClient());
-                DatabaseReference clt = FirebaseDatabase.getInstance().getReference("clients").child(demande.getIdClient());
-                System.out.println("*** DatabaseReference : "+FirebaseDatabase.getInstance().getReference("clients"));
-                System.out.println("*** Child : "+FirebaseDatabase.getInstance().getReference("clients").child(demande.getIdClient()));
-                clt.addValueEventListener(new ValueEventListener() {
+            protected void onBindViewHolder(@NonNull final FirebaseViewHolder holder, int i, @NonNull final Demande demande) {
+
+                String  clt = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference user = FirebaseDatabase.getInstance().getReference("clients").child(clt);
+                DatabaseReference client = FirebaseDatabase.getInstance().getReference("clients").child(demande.getIdClient());
+
+                client.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Client client = dataSnapshot.getValue(Client.class);
-                        System.out.println("Client name : "+client.getNom());
-                        holder.clt.setText(client.getNom());
+                        if(dataSnapshot.exists()){
+
+                            Client client = dataSnapshot.getValue(Client.class);
+                            holder.clt.setText(client.getNom());
+                            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent i = new Intent(getContext(), DemandeDetails.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("nomServ",demande.getService());
+                                    bundle.putString("desc",demande.getDescription());
+                                    bundle.putString("date",holder.timeville.getText().toString());
+                                    i.putExtras(bundle);
+                                    startActivity(i);
+                                }
+                            });
+                        }
+                        else
+                            Toast.makeText(getContext(), "Il n'ya aucune demande.", Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
@@ -91,17 +125,30 @@ public class FonctionnaireRecycler extends Fragment {
                     }
                 });
 
-                //holder.clt.setText(demande.getIdClient());
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(demande.getDate_demande());
+                int h = calendar.get(Calendar.HOUR_OF_DAY);
+                int m = calendar.get(Calendar.MINUTE);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+
                 holder.srv.setText(demande.getService());
                 holder.timeville.setText(demande.getHeure());
                 holder.desc.setText(demande.getDescription());
+                holder.timeville.setText(""+day+" "+getMonthForInt(month)+" "+h+":"+m);
 
-               /* holder.itemView.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view){
-                        Toast.makeText(FctHome.this, "Termooooo", Toast.LENGTH_SHORT).show();
-                    }
-                });*/
+                /** comparaison des date pour le trie**/
+                    Calendar ccalendar = Calendar.getInstance();
+                    calendar.setTime(new Date());
+                    int ch = calendar.get(Calendar.HOUR_OF_DAY);
+                    int cm = calendar.get(Calendar.MINUTE);
+                    int cday = calendar.get(Calendar.DAY_OF_MONTH);
+                    int cmonth = calendar.get(Calendar.MONTH);
+                    Date date = addHoursToJavaUtilDate(demande.getDate_demande(),2);
+                    if(date.compareTo(new Date()) > 0)
+                        holder.newDemande.setVisibility(View.GONE);
+                /** fin **/
+
             }
 
             @NonNull
@@ -111,17 +158,25 @@ public class FonctionnaireRecycler extends Fragment {
             }
         };
 
-        cardView = view.findViewById(R.id.parentLayout);
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(),DemandeDetails.class);
-                startActivity(i);
-            }
-        });
-
         recyclerView.setAdapter(adapter);
         return view;
+    }
+
+    String getMonthForInt(int num) {
+        String month = "wrong";
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        String[] months = dfs.getMonths();
+        if (num >= 0 && num <= 11 ) {
+            month = months[num];
+        }
+        return month;
+    }
+
+    public Date addHoursToJavaUtilDate(Date date, int hours) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.HOUR_OF_DAY, hours);
+        return calendar.getTime();
     }
 
 

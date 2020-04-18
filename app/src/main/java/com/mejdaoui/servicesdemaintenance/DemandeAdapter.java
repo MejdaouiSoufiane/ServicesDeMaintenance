@@ -59,7 +59,7 @@ public class DemandeAdapter  extends RecyclerView.Adapter<DemandeAdapter.ViewHol
             @Override
             public void onClick(View v) {
                 //Intent detail = new Intent(mactivity,DetailDemande.class);
-                Intent detail = new Intent(mactivity,DetailDemandeClt.class);
+                Intent detail = new Intent(mactivity, DetailDemandeClt.class);
 
                  detail.putExtra("id_demande",demandeItem.getIdDemande());
 

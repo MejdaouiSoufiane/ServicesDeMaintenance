@@ -26,9 +26,9 @@ public class Demande {
     private String adr_picture;
     private String etat;
     private List<String> idFonctionnaire;
+    private long counter;
 
     public Demande() {
-
     }
 
 
@@ -186,6 +186,14 @@ public class Demande {
 
     public void setVille(String ville) {
         this.ville = ville;
+    }
+
+    public long getCounter() {
+        return counter;
+    }
+
+    public void setCounter(long counter) {
+        this.counter = counter;
     }
 
     @Override
