@@ -46,8 +46,8 @@ public class ListDemande extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_demande);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        /*Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -199,6 +199,7 @@ public class ListDemande extends AppCompatActivity {
                 break;
             case R.id.item2:
                 FirebaseAuth.getInstance().signOut();
+                finish();
                 Intent intent1 = new Intent(ListDemande.this, Login.class);
                 startActivity(intent1);
                 break;
