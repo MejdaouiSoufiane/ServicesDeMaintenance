@@ -396,7 +396,7 @@ public class AddDemande extends AppCompatActivity {
 
         }
         else{
-            Toast.makeText(this,"Veuillez remplir les champs",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Veuillez remplir tous les champs",Toast.LENGTH_LONG).show();
         }
 
     }
