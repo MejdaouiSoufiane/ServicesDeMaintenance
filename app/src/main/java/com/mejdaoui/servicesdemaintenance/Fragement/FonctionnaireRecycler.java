@@ -137,7 +137,7 @@ public class FonctionnaireRecycler extends Fragment {
                 holder.desc.setText(demande.getDescription());
                 holder.timeville.setText(""+day+" "+getMonthForInt(month)+" "+h+":"+m);
 
-                /** comparaison des date pour le trie**/
+                /** comparaison des date pour le tri**/
                     Calendar ccalendar = Calendar.getInstance();
                     calendar.setTime(new Date());
                     int ch = calendar.get(Calendar.HOUR_OF_DAY);

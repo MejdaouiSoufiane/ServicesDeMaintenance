@@ -193,7 +193,7 @@ public class ListDemande extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.profile_menu, menu);
+        inflater.inflate(R.menu.home_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
