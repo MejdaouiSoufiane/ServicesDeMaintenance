@@ -27,6 +27,7 @@ public class Demande {
     private String etat;
     private List<String> idFonctionnaire;
     private long counter;
+    private String employe;
 
     public Demande() {
     }

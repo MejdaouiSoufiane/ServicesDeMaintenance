@@ -42,11 +42,11 @@
         app:layout_constraintVertical_bias="0.133" />
 
     <Button
-        android:id="@+id/call"
+        android:id="@+id/accept"
         android:layout_width="88dp"
         android:layout_height="36dp"
-        android:background="@color/startBleu"
-        android:text="Appeler"
+        android:background="#64EC69"
+        android:text="Accepter"
         android:textColor="#fff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

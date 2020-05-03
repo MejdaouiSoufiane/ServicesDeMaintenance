@@ -10,6 +10,7 @@ public class Client {
     private String adresse ;
     private String telephone ;
     private String ville ;
+    private String image;
 
     public Client(){
 
@@ -87,6 +88,14 @@ public class Client {
 
     public void setVille(String ville) {
         this.ville = ville;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
 

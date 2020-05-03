@@ -1,4 +1,4 @@
-package com.mejdaoui.servicesdemaintenance;
+package com.mejdaoui.servicesdemaintenance.maps;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -8,27 +8,23 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mejdaoui.servicesdemaintenance.AddDemande;
+import com.mejdaoui.servicesdemaintenance.R;
 
 import java.io.IOException;
 import java.util.List;
@@ -82,7 +78,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         //GPS
         mMap.setOnMyLocationButtonClickListener(onMyLocationButtonClickListener);
         enableMyLocationIfPermitted();
@@ -100,7 +98,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 long_location =latLng.longitude;
                 markerOptions.title(cityName);
                 mMap.clear();
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,25));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
                 mMap.addMarker(markerOptions);
             }
         });
@@ -109,13 +107,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void enableMyLocationIfPermitted() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_FINE_LOCATION},
-                    LOCATION_PERMISSION_REQUEST_CODE);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+            mMap.setMyLocationEnabled(true);
         } else if (mMap != null) {
             mMap.setMyLocationEnabled(true);
         }
