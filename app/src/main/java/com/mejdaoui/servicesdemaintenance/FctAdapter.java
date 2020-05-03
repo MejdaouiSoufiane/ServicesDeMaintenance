@@ -25,6 +25,7 @@ public class FctAdapter extends RecyclerView.ViewHolder {
     public final Button accept;
     public final ImageView img;
     public final TextView fullName;
+    public final TextView profile;
 
     private Fonctionnaire fct;
 
@@ -34,6 +35,7 @@ public class FctAdapter extends RecyclerView.ViewHolder {
         accept = itemView.findViewById(R.id.accept);
         img = itemView.findViewById(R.id.img);
         fullName = itemView.findViewById(R.id.fullName);
+        profile =  itemView.findViewById(R.id.profile);
 
     }
 

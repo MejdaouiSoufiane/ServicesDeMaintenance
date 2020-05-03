@@ -103,11 +103,19 @@ public class ListFonct extends AppCompatActivity {
         adapter = new FirebaseRecyclerAdapter<Fonctionnaire, FctAdapter>(options) {
             @Override
             protected void onBindViewHolder(@NonNull final FctAdapter holder, int position, @NonNull Fonctionnaire fonctionnaire) {
-                String id = fonctionnaire.getIdFonct();
+                final String id = fonctionnaire.getIdFonct();
 
                 if(idList.indexOf(id)!=-1){
                     String name = fonctionnaire.getNom()+" "+fonctionnaire.getPrenom();
                     holder.fullName.setText(name);
+                    holder.profile.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(ListFonct.this, Profile_fnct.class);
+                            intent.putExtra("id",id);
+                            startActivity(intent);
+                        }
+                    });
                     holder.accept.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

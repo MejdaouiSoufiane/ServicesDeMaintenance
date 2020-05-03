@@ -68,9 +68,6 @@ public class ClientProfile extends AppCompatActivity {
             }
         });
 
-
-
-
         this.setTitle("Profile");
         setSupportActionBar(tool);
 
