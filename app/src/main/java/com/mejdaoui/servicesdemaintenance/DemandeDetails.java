@@ -68,7 +68,7 @@ public class DemandeDetails extends AppCompatActivity {
         nomServ = findViewById(R.id.dd_servName);
         desc = findViewById(R.id.dd_desc);
         date = findViewById(R.id.dd_date);
-        ville = findViewById(R.id.dd_vile);
+        ville = findViewById(R.id.dd_ville);
         postuler = findViewById(R.id.apply_icon);
         appeler = findViewById(R.id.call_icon);
         position =findViewById(R.id.position_icon);
@@ -80,6 +80,7 @@ public class DemandeDetails extends AppCompatActivity {
         nomServ.setText(b.getString("nomServ"));
         desc.setText(b.getString("desc"));
         date.setText(b.getString("date"));
+        ville.setText(b.getString("ville"));
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -112,14 +113,20 @@ public class DemandeDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ArrayList<String> list = b.getStringArrayList("idf");
-                System.out.println("+++ List "+list.size());
-                list.add(b.getString("currentFonct"));
+                //System.out.println("+++ List "+list.size());
                 System.out.println("+++ List "+list.size());
                 DatabaseReference d = FirebaseDatabase.getInstance().getReference("Demandes").child(b.getString("dmd_id"));
-                System.out.println("++ Path : "+d);
-                d.child("idFonctionnaire").setValue(list);
-                for(int i=0;i<list.size();i++)
+                //System.out.println("++ Path : "+d);
+                for(int i=0;i<list.size();i++){
                     System.out.println("++++ LISTE : "+list.get(i));
+                    String str = list.get(i);
+                    if(str.equals(b.getString("currentFonct"))){
+                        Toast.makeText(DemandeDetails.this, "Vous avez déja postuler.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                list.add(b.getString("currentFonct"));
+                d.child("idFonctionnaire").setValue(list);
                 Toast.makeText(DemandeDetails.this, "postuler", Toast.LENGTH_SHORT).show();
             }
         });

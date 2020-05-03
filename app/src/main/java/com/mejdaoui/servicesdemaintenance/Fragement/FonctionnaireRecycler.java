@@ -111,6 +111,7 @@ public class FonctionnaireRecycler extends Fragment {
                                     bundle.putString("date",holder.timeville.getText().toString());
                                     bundle.putString("dmd_id",demande.getIdDemande());
                                     bundle.putString("currentFonct",currentFocnt);
+                                    bundle.putString("ville",demande.getVille());
                                     List<String> array = demande.getIdFonctionnaire();
                                     //array.add("ID");
                                     bundle.putStringArrayList("idf",(ArrayList<String>) array);
