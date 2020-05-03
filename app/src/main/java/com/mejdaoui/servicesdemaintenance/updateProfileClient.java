@@ -208,8 +208,9 @@ public class updateProfileClient extends AppCompatActivity {
                                 String picturePath = cursor.getString(columnIndex);
                                 selectedImage = BitmapFactory.decodeFile(picturePath);
                                 imageView.setImageBitmap(selectedImage);
-                                handleUpload(selectedImage);
                                 cursor.close();
+                                handleUpload(selectedImage);
+
                             }
                         }
 
@@ -223,27 +224,6 @@ public class updateProfileClient extends AppCompatActivity {
     }
 
 
-   /* public void HandleImage(View view){
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(intent.resolveActivity(getPackageManager())!= null){
-            startActivityForResult(intent, TAKE_IMAGE_CODE);
-        }
-    }
-/*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == TAKE_IMAGE_CODE){
-            switch (resultCode){
-                case RESULT_OK:
-                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                    profileImg.setImageBitmap(bitmap);
-                    handleUpload(bitmap);
-
-            }
-        }
-    }
-*/
     private void handleUpload(Bitmap bitmap){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -290,6 +270,9 @@ public class updateProfileClient extends AppCompatActivity {
                 .setPhotoUri(uri)
                 .build();
 
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("clients");
+        ref.child(uid).child("image").setValue(uri.toString());
+
         user.updateProfile(request)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -308,3 +291,27 @@ public class updateProfileClient extends AppCompatActivity {
     }
 
 }
+
+
+
+   /* public void HandleImage(View view){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(intent.resolveActivity(getPackageManager())!= null){
+            startActivityForResult(intent, TAKE_IMAGE_CODE);
+        }
+    }
+/*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == TAKE_IMAGE_CODE){
+            switch (resultCode){
+                case RESULT_OK:
+                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                    profileImg.setImageBitmap(bitmap);
+                    handleUpload(bitmap);
+
+            }
+        }
+    }
+*/

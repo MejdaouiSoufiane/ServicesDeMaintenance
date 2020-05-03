@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -79,12 +80,14 @@ public class ClientProfile extends Fragment {
         });
 
 
+
         user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null && user.getPhotoUrl()!= null){
             Glide.with(this)
                     .load(user.getPhotoUrl())
                     .into(profileImg);
         }
+
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +104,9 @@ public class ClientProfile extends Fragment {
 
     }
 
-  @Override
+
+
+    @Override
     public void onStart() {
         super.onStart();
 
@@ -132,7 +137,10 @@ public class ClientProfile extends Fragment {
                   profileVille.setText(ville);
                   profilePhone.setText(tel);
 
+
               }
+
+
 
               @Override
               public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -140,7 +148,15 @@ public class ClientProfile extends Fragment {
               }
           };
 
-          ref.addListenerForSingleValueEvent(eventListener);
+
+      ref.addListenerForSingleValueEvent(eventListener);
+
+      if(user.getPhotoUrl()!= null) {
+          Glide.with(this)
+                  .load(user.getPhotoUrl())
+                  .into(profileImg);
+      }
+
       }
     }
 
@@ -165,14 +181,14 @@ public class ClientProfile extends Fragment {
     }
 
 
-  /* public boolean onCreateOptionsMenu(Menu menu)
+ /* public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.profile_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }*/
 
-    public boolean onOptionsItemSelected(MenuItem item) {
+   /* public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
 
             case R.id.item1:
@@ -189,13 +205,13 @@ public class ClientProfile extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-   /* public void HandleImage(View view){
+   public void HandleImage(View view){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(intent.resolveActivity(getPackageManager())!= null){
             startActivityForResult(intent, TAKE_IMAGE_CODE);
         }
     }
-*/
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -207,7 +223,7 @@ public class ClientProfile extends Fragment {
                     //handleUpload(bitmap);
             }
         }
-    }
+    }*/
     /* private void handleUpload(Bitmap bitmap){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);

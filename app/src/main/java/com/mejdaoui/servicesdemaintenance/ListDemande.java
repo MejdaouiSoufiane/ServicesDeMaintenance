@@ -206,7 +206,7 @@ public class ListDemande extends Fragment {
    /* public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.profile_menu, menu);
+        inflater.inflate(R.menu.home_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

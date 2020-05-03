@@ -1,7 +1,12 @@
 package com.mejdaoui.servicesdemaintenance;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +14,30 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FctAdapter extends RecyclerView.Adapter<FctAdapter.MyViewHolder> {
+public class FctAdapter extends RecyclerView.ViewHolder {
 
+    public final Button accept;
+    public final ImageView img;
+    public final TextView fullName;
+
+    private Fonctionnaire fct;
+
+    public FctAdapter(@NonNull View itemView) {
+        super(itemView);
+
+        accept = itemView.findViewById(R.id.accept);
+        img = itemView.findViewById(R.id.img);
+        fullName = itemView.findViewById(R.id.fullName);
+
+    }
+
+/*
     private Context context ;
     private List<Fonctionnaire> Fonctionnaires = new ArrayList<>();
 
@@ -43,7 +65,7 @@ public class FctAdapter extends RecyclerView.Adapter<FctAdapter.MyViewHolder> {
         if(Fonctionnaires.size() != 0) {
             Fonctionnaire Fct = (Fonctionnaire) Fonctionnaires.get(position);
             holder.fullName.setText(Fct.getNom()+" "+Fct.getPrenom());
-            holder.name.setText(Fct.getNom());
+            //holder.name.setText(Fct.getNom());
         }
         else
             holder.fullName.setText("Aucun candidat");
@@ -51,7 +73,7 @@ public class FctAdapter extends RecyclerView.Adapter<FctAdapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private final Button call;
+        private final Button accept;
         private final TextView name;
         private final ImageView img;
         private final TextView fullName;
@@ -62,21 +84,40 @@ public class FctAdapter extends RecyclerView.Adapter<FctAdapter.MyViewHolder> {
         public MyViewHolder(final View itemView) {
             super(itemView);
 
-            call = itemView.findViewById(R.id.call);
+            accept = itemView.findViewById(R.id.accept);
             name = itemView.findViewById(R.id.name);
             img=  itemView.findViewById(R.id.img);
             fullName = itemView.findViewById(R.id.fullName);
 
+            accept.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setTitle("Confirmer").setMessage("Etes vous sûr de choisir ce fonctionnaire ?")
+                                    .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            Intent intent = ((Activity)context).getIntent() ;
+                                            String idDmd = intent.getStringExtra("idDmd");
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+                                        }
+                                    })
+                                    .setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+
+                                        }
+                                    });
+                            builder.create();
+                        }
+
+            });
+
+            /*itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     new AlertDialog.Builder(itemView.getContext())
                             .setTitle(fct.getNom()+" "+fct.getPrenom())
                             .show();
                 }
-            });
-        }
-
-    }
+            });*/
 }
+
