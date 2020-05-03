@@ -27,7 +27,7 @@
                 android:layout_marginRight="35dp"
                 android:hint="Nom"
                 android:textColorHint="#3F3939"
-                app:boxStrokeColor="#AA150A"
+                app:boxStrokeColor="@color/colorPrimaryDark"
                 android:padding="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -46,7 +46,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:background="#AA150A" />
+                android:background="@color/colorPrimaryDark" />
 
             <com.google.android.material.textfield.TextInputLayout
 
@@ -55,7 +55,7 @@
                 android:layout_marginLeft="22dp"
                 android:layout_marginRight="35dp"
                 android:textColorHint="#3F3939"
-                app:boxStrokeColor="#AA150A"
+                app:boxStrokeColor="@color/colorPrimaryDark"
                 android:padding="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -70,7 +70,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:background="#AA150A" />
+                android:background="@color/colorPrimaryDark" />
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -82,7 +82,7 @@
                 android:hint="Adresse"
                 android:padding="5dp"
                 android:textColorHint="#3F3939"
-                app:boxStrokeColor="#AA150A">
+                app:boxStrokeColor="@color/colorPrimaryDark">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/adresse"
@@ -98,7 +98,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:background="#AA150A" />
+                android:background="@color/colorPrimaryDark" />
 
             <com.google.android.material.textfield.TextInputLayout
 
@@ -109,7 +109,7 @@
                 android:hint="Ville"
                 android:padding="5dp"
                 android:textColorHint="#3F3939"
-                app:boxStrokeColor="#AA150A">
+                app:boxStrokeColor="@color/colorPrimaryDark">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ville"
@@ -125,7 +125,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:background="#AA150A" />
+                android:background="@color/colorPrimaryDark" />
 
             <com.google.android.material.textfield.TextInputLayout
 
@@ -136,7 +136,7 @@
                 android:hint="Téléphone"
                 android:padding="5dp"
                 android:textColorHint="#3F3939"
-                app:boxStrokeColor="#AA150A">
+                app:boxStrokeColor="@color/colorPrimaryDark">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tel"
@@ -152,7 +152,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:background="#AA150A" />
+                android:background="@color/colorPrimaryDark" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/sector"
@@ -186,7 +186,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:background="#AA150A" />
+                android:background="@color/colorPrimaryDark" />
 
 
             <Button
@@ -201,7 +201,7 @@
                 android:textColor="#0C0100"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:backgroundTint="#AA150A" />
+                app:backgroundTint="@color/colorPrimaryDark" />
 
 
 

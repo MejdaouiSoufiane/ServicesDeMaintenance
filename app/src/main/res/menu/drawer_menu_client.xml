@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home"></item>
+
+        <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/ic_message"
+            android:title="Message"></item>
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="Profile"></item>
+    </group>
+
+    <item android:title="Demande">
+        <menu>
+            <item
+                android:id="@+id/nouv_demande"
+                android:icon="@drawable/ic_create_new_folder"
+                android:title="Nouvelle demande"></item>
+            <item
+                android:id="@+id/Liste_demande"
+                android:icon="@drawable/ic_folder"
+                android:title="Toutes les Demandes"></item>
+            <item
+                android:id="@+id/Liste_demande_attente"
+                android:icon="@drawable/ic_folder"
+                android:title="Demandes en attente"></item>
+            <item
+                android:id="@+id/Liste_demande_encours"
+                android:icon="@drawable/ic_folder"
+                android:title="Demandes en cours"></item>
+        </menu>
+    </item>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share"
+                android:title="Share"></item>
+            <item
+                android:id="@+id/bav_send"
+                android:icon="@drawable/ic_send"
+                android:title="Send"></item>
+        </menu>
+    </item>
+
+    <item android:title="Logout">
+        <menu>
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_arrow_back"
+                android:title="Se déconnecter"></item>
+
+        </menu>
+    </item>
+
+</menu>

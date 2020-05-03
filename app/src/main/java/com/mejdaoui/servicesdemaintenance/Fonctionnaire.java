@@ -14,6 +14,7 @@ public class Fonctionnaire {
     private String ville;
     private String telephone ;
     private List<String> secteur ;
+    private String image;
 
     public Fonctionnaire() {
     }

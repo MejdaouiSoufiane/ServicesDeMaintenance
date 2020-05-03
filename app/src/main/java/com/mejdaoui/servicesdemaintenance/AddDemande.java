@@ -4,19 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.nfc.Tag;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -25,47 +19,32 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.mejdaoui.servicesdemaintenance.maps.MapsActivity;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.net.URI;
-import java.sql.SQLOutput;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.UUID;
 
 public class AddDemande extends AppCompatActivity {
     static final int CAMERA_REQUEST_CODE = 1;
@@ -74,7 +53,7 @@ public class AddDemande extends AppCompatActivity {
     private EditText titre,desc;
     private Spinner spinner_service, spinner_genre,spinner_age;
     private TextView date_dispo,heure_dispo;
-    ImageView img;
+   // ImageView img;
 
     Uri url;
     private Uri filePath;
@@ -88,7 +67,7 @@ public class AddDemande extends AppCompatActivity {
     String s;
     Demande demande;
 
-    private Button take_pic;
+    private ImageButton take_pic;
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
@@ -110,7 +89,7 @@ public class AddDemande extends AppCompatActivity {
 
         heure_dispo= (TextView)  this.findViewById(R.id.heure);
         date_dispo = (TextView) this.findViewById(R.id.disponibilite);
-        img=(ImageView)this.findViewById(R.id.new_image);
+       // img=(ImageView)this.findViewById(R.id.new_image);
 
         //aut
         uid_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -264,7 +243,7 @@ public class AddDemande extends AppCompatActivity {
 
 
     private void take_picture() {
-        take_pic = (Button)this.findViewById(R.id.button_img);
+        take_pic = (ImageButton)this.findViewById(R.id.new_image);
         take_pic.setOnClickListener(new View.OnClickListener(){
                                         @Override
                                         public void onClick(View v) {
@@ -286,7 +265,7 @@ public class AddDemande extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
                 if (resultCode == RESULT_OK && requestCode==CAMERA_REQUEST_CODE && data != null && data.getData() != null){
                     Bitmap photo = (Bitmap) data.getExtras().get("data") ;
-                    img.setImageBitmap(photo);
+                    take_pic.setImageBitmap(photo);
                     filePath = data.getData();
                     Toast.makeText
                             (getApplicationContext(), "here on activity" , Toast.LENGTH_SHORT)
@@ -381,8 +360,8 @@ public class AddDemande extends AppCompatActivity {
                     storage_image();
 
                     Toast.makeText(getApplicationContext(),"Demande ajoutée",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(AddDemande.this,ListDemande.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(AddDemande.this,ListDemande.class);
+                    //startActivity(intent);
                     finish();
                 }
 

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,12 +31,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ClientProfile extends AppCompatActivity {
+import static android.app.Activity.RESULT_OK;
+
+public class ClientProfile extends Fragment {
 
     public static final String TAG = "ClientProfile" ;
     private ImageView profileImg ;
     private TextView nbrDmd ;
     private TextView profileMail, profileName, profilePhone, profileAdresse, profileVille;
+    private Button update;
     //private Button up;
 
     private Toolbar tool;
@@ -44,20 +50,25 @@ public class ClientProfile extends AppCompatActivity {
     FirebaseUser user ;
     private String uid ;
 
+    public static ClientProfile newInstance() {
+        return (new ClientProfile());
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_profile);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_client_profile, container, false);
 
-        profileImg = this.findViewById(R.id.img);
-        nbrDmd = this.findViewById(R.id.nbrDmd);
-        profileName = this.findViewById(R.id.profileName);
-        profileMail = this.findViewById(R.id.profileMail);
-        profilePhone = this.findViewById(R.id.profilePhone);
-        profileAdresse = this.findViewById(R.id.profileAdresse);
-        profileVille = this.findViewById(R.id.profileVille);
 
-        tool = (Toolbar) this.findViewById(R.id.tool);
+        profileImg = view.findViewById(R.id.img);
+        nbrDmd = view.findViewById(R.id.nbrDmd);
+        profileName = view.findViewById(R.id.profileName);
+        profileMail = view.findViewById(R.id.profileMail);
+        profilePhone = view.findViewById(R.id.profilePhone);
+        profileAdresse = view.findViewById(R.id.profileAdresse);
+        profileVille = view.findViewById(R.id.profileVille);
+        update = view.findViewById(R.id.upd);
+
+        tool = (Toolbar) view.findViewById(R.id.tool);
 
 
         profileImg.setOnClickListener(new View.OnClickListener() {
@@ -68,49 +79,75 @@ public class ClientProfile extends AppCompatActivity {
             }
         });
 
-        this.setTitle("Profile");
-        setSupportActionBar(tool);
+
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null && user.getPhotoUrl()!= null){
+            Glide.with(this)
+                    .load(user.getPhotoUrl())
+                    .into(profileImg);
+        }
+
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity().getBaseContext(), updateProfileClient.class);
+                startActivityForResult(intent,88);
+
+            }
+        });
+
+      // this.setTitle("Profile");
+      //  setSupportActionBar(tool);
+        return view;
 
     }
 
-  @Override
-    protected void onStart() {
+
+
+    @Override
+    public void onStart() {
         super.onStart();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        uid = user.getUid();
+      if(user !=null) {
+          uid = user.getUid();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+          databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        DatabaseReference ref = databaseReference.child("clients").child(uid);
+          DatabaseReference ref = databaseReference.child("clients").child(uid);
 
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+          ValueEventListener eventListener = new ValueEventListener() {
+              @Override
+              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                String nom = dataSnapshot.child("nom").getValue(String.class);
-                String prenom = dataSnapshot.child("prenom").getValue(String.class);
-                String email = dataSnapshot.child("email").getValue(String.class);
-                String tel = dataSnapshot.child("telephone").getValue(String.class);
-                String ville = dataSnapshot.child("ville").getValue(String.class);
-                String adresse = dataSnapshot.child("adresse").getValue(String.class);
+                  String nom = dataSnapshot.child("nom").getValue(String.class);
+                  String prenom = dataSnapshot.child("prenom").getValue(String.class);
+                  String email = dataSnapshot.child("email").getValue(String.class);
+                  String tel = dataSnapshot.child("telephone").getValue(String.class);
+                  String ville = dataSnapshot.child("ville").getValue(String.class);
+                  String adresse = dataSnapshot.child("adresse").getValue(String.class);
 
-                String fullName = prenom+" "+ nom;
+                  String fullName = prenom + " " + nom;
 
-                profileName.setText(fullName);
-                profileAdresse.setText(adresse);
-                profileMail.setText(email);
-                profileVille.setText(ville);
-                profilePhone.setText(tel);
+                  profileName.setText(fullName);
+                  profileAdresse.setText(adresse);
+                  profileMail.setText(email);
+                  profileVille.setText(ville);
+                  profilePhone.setText(tel);
 
 
-            }
+              }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        };
+
+              @Override
+              public void onCancelled(@NonNull DatabaseError databaseError) {
+
+              }
+          };
+
 
       ref.addListenerForSingleValueEvent(eventListener);
 
@@ -120,12 +157,13 @@ public class ClientProfile extends AppCompatActivity {
                   .into(profileImg);
       }
 
+      }
     }
 
     public void displayImage(View v) {
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity().getBaseContext());
         LayoutInflater inflater = getLayoutInflater();
         View dialogLayout = inflater.inflate(R.layout.alert_dialog, null);
         ImageView iv = (ImageView) dialogLayout.findViewById(R.id.imageView);
@@ -143,31 +181,31 @@ public class ClientProfile extends AppCompatActivity {
     }
 
 
-    public boolean onCreateOptionsMenu(Menu menu)
+ /* public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.profile_menu, menu);
         return super.onCreateOptionsMenu(menu);
-    }
+    }*/
 
-    public boolean onOptionsItemSelected(MenuItem item) {
+   /* public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
 
             case R.id.item1:
-                Intent intent = new Intent(ClientProfile.this, updateProfileClient.class);
+                Intent intent = new Intent(getActivity().getBaseContext(), updateProfileClient.class);
                 startActivity(intent);
                 break;
             case R.id.item2:
                 FirebaseAuth.getInstance().signOut();
-                finish();
-                Intent intent1 = new Intent(ClientProfile.this, Login.class);
+               // finish();
+                Intent intent1 = new Intent(getActivity().getBaseContext(), Login.class);
                 startActivity(intent1);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void HandleImage(View view){
+   public void HandleImage(View view){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(intent.resolveActivity(getPackageManager())!= null){
             startActivityForResult(intent, TAKE_IMAGE_CODE);
@@ -175,7 +213,7 @@ public class ClientProfile extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == TAKE_IMAGE_CODE){
             switch (resultCode){
@@ -185,7 +223,7 @@ public class ClientProfile extends AppCompatActivity {
                     //handleUpload(bitmap);
             }
         }
-    }
+    }*/
     /* private void handleUpload(Bitmap bitmap){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);

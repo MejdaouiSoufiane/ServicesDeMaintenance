@@ -114,7 +114,7 @@ public class Login extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                                         if(dataSnapshot.child("clients").hasChild(uid)){
-                                                startActivity(new Intent(Login.this, ListDemande.class));
+                                                startActivity(new Intent(Login.this, ClientHome.class));
                                         }
                                         else if(dataSnapshot.child("fonctionnaires").hasChild(uid)){
                                             startActivity(new Intent(Login.this, FctHome.class));

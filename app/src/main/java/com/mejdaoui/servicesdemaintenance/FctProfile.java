@@ -55,14 +55,6 @@ public class FctProfile extends AppCompatActivity {
 
         userImg = findViewById(R.id.userImg);
 
-
-        userImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                displayImage(v);
-
-            }
-        });
     }
 
         @Override
@@ -85,9 +77,14 @@ public class FctProfile extends AppCompatActivity {
                     String tel = dataSnapshot.child("telephone").getValue(String.class);
                     String ville = dataSnapshot.child("ville").getValue(String.class);
                     String adresse = dataSnapshot.child("adresse").getValue(String.class);
-                    DataSnapshot secteur = dataSnapshot.child("secteur");
 
-                    String fullName = prenom+" "+ nom;
+                    int nbre = (int)dataSnapshot.child("secteur").getChildrenCount();
+                    List<String> secteur = new ArrayList<>();
+
+                    for(int i=0; i<nbre; i++)
+                        secteur.add(dataSnapshot.child("secteur").child(Integer.toString(i)).getValue(String.class));
+
+                    String fullName = prenom + " " + nom;
 
                     userName.setText(fullName);
                     userVille.setText(ville);
@@ -104,76 +101,5 @@ public class FctProfile extends AppCompatActivity {
             };
 
             ref.addListenerForSingleValueEvent(eventListener);
-
-            if(user.getPhotoUrl()!= null) {
-                Glide.with(this)
-                        .load(user.getPhotoUrl())
-                        .into(profileImg);
-            }
-
         }
-
-        public void displayImage(View v) {
-
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            LayoutInflater inflater = getLayoutInflater();
-            View dialogLayout = inflater.inflate(R.layout.alert_dialog, null);
-            ImageView iv = (ImageView) dialogLayout.findViewById(R.id.imageView);
-
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if(user.getPhotoUrl()!= null){
-                Glide.with(this)
-                        .load(user.getPhotoUrl())
-                        .into(iv);
-            }
-            builder.setPositiveButton("OK", null);
-            builder.setView(dialogLayout);
-            builder.create().show();
-
-        }
-
-
-        public boolean onCreateOptionsMenu(Menu menu)
-        {
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.profile_menu, menu);
-            return super.onCreateOptionsMenu(menu);
-        }
-
-        public boolean onOptionsItemSelected(MenuItem item) {
-            switch(item.getItemId()) {
-
-                case R.id.item1:
-                    Intent intent = new Intent(ClientProfile.this, updateProfileClient.class);
-                    startActivity(intent);
-                    break;
-                case R.id.item2:
-                    FirebaseAuth.getInstance().signOut();
-                    finish();
-                    Intent intent1 = new Intent(ClientProfile.this, Login.class);
-                    startActivity(intent1);
-                    break;
-            }
-            return super.onOptionsItemSelected(item);
-        }
-
-        public void HandleImage(View view){
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if(intent.resolveActivity(getPackageManager())!= null){
-                startActivityForResult(intent, TAKE_IMAGE_CODE);
-            }
-        }
-
-        @Override
-        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-            if(requestCode == TAKE_IMAGE_CODE){
-                switch (resultCode){
-                    case RESULT_OK:
-                        final Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                        profileImg.setImageBitmap(bitmap);
-                        //handleUpload(bitmap);
-                }
-            }
 }
