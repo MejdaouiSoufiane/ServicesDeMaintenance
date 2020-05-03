@@ -3,6 +3,7 @@ package com.mejdaoui.servicesdemaintenance.Fragement;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,15 +30,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.mejdaoui.servicesdemaintenance.Client;
 import com.mejdaoui.servicesdemaintenance.Demande;
 import com.mejdaoui.servicesdemaintenance.DemandeDetails;
-import com.mejdaoui.servicesdemaintenance.FctHome;
 import com.mejdaoui.servicesdemaintenance.FirebaseViewHolder;
 import com.mejdaoui.servicesdemaintenance.R;
 
 import java.text.DateFormatSymbols;
-import java.time.Month;
-import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import javax.xml.transform.Templates;
 
 
 public class FonctionnaireRecycler extends Fragment {
@@ -47,9 +48,7 @@ public class FonctionnaireRecycler extends Fragment {
     private FirebaseRecyclerOptions<Demande> options;
     private FirebaseRecyclerAdapter<Demande, FirebaseViewHolder> adapter;
     private DatabaseReference databaseReference;
-    private CardView cardView;
-    public String d;
-
+    public static int  TEMP;
 
     @Override
     public void onStart(){
@@ -78,6 +77,7 @@ public class FonctionnaireRecycler extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        TEMP = 0;
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Demandes");
         Query sorted = databaseReference.orderByChild("counter");
@@ -90,8 +90,8 @@ public class FonctionnaireRecycler extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull final FirebaseViewHolder holder, int i, @NonNull final Demande demande) {
 
-                String  clt = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DatabaseReference user = FirebaseDatabase.getInstance().getReference("clients").child(clt);
+                final String  currentFocnt = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                //DatabaseReference user = FirebaseDatabase.getInstance().getReference("clients").child(clt);
                 DatabaseReference client = FirebaseDatabase.getInstance().getReference("clients").child(demande.getIdClient());
 
                 client.addValueEventListener(new ValueEventListener() {
@@ -109,14 +109,45 @@ public class FonctionnaireRecycler extends Fragment {
                                     bundle.putString("nomServ",demande.getService());
                                     bundle.putString("desc",demande.getDescription());
                                     bundle.putString("date",holder.timeville.getText().toString());
+                                    bundle.putString("dmd_id",demande.getIdDemande());
+                                    bundle.putString("currentFonct",currentFocnt);
+                                    List<String> array = demande.getIdFonctionnaire();
+                                    //array.add("ID");
+                                    bundle.putStringArrayList("idf",(ArrayList<String>) array);
                                     i.putExtras(bundle);
                                     startActivity(i);
                                 }
                             });
+
+                            databaseReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    System.out.println("++++ TEMP = "+TEMP);
+                                    if(TEMP == 0){
+                                        for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                                            /** comparaison des date pour le trie**/
+                                            Demande d = snapshot.getValue(Demande.class);
+                                            Date date = addHoursToJavaUtilDate(d.getDate_demande(),24);
+                                            if(date.compareTo(new Date()) < 0)
+                                                holder.newDemande.setVisibility(View.GONE);
+                                            System.out.println("+++ Date after 24 heure : " +addHoursToJavaUtilDate(new Date(),24).toString());
+                                            System.out.println("+++ date demande  after 24 heure : " +addHoursToJavaUtilDate(demande.getDate_demande(),24).toString());
+                                            /** fin **/
+
+                                        }TEMP = 1;
+
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
                         }
+
                         else
                             Toast.makeText(getContext(), "Il n'ya aucune demande.", Toast.LENGTH_SHORT).show();
-
                     }
 
                     @Override
@@ -137,12 +168,6 @@ public class FonctionnaireRecycler extends Fragment {
                 holder.desc.setText(demande.getDescription());
                 holder.timeville.setText(""+day+" "+getMonthForInt(month)+" "+h+":"+m);
 
-                /** comparaison des date pour le trie**/
-                    Date date = addHoursToJavaUtilDate(demande.getDate_demande(),2);
-                    if(date.compareTo(new Date()) < 0)
-                        holder.newDemande.setVisibility(View.GONE);
-                /** fin **/
-
             }
 
             @NonNull
@@ -151,15 +176,6 @@ public class FonctionnaireRecycler extends Fragment {
                 return new FirebaseViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.acc_fonct_items, viewGroup,false));
             }
         };
-
-        cardView = view.findViewById(R.id.parentLayout);
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(),DemandeDetails.class);
-                startActivity(i);
-            }
-        });
 
         recyclerView.setAdapter(adapter);
         return view;
