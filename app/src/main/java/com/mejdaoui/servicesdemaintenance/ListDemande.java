@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -97,22 +98,28 @@ public class ListDemande extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 demandeList = new ArrayList<Demande>();
-                for (DataSnapshot dds: dataSnapshot.getChildren())
-                {
-                    Demande d = dds.getValue(Demande.class);
-                    if(d.getIdClient().equals(uid_user)){
+                try {
+                    for (DataSnapshot dds: dataSnapshot.getChildren())
+                    {
+                        Demande d = dds.getValue(Demande.class);
+                        if(d.getIdClient().equals(uid_user)){
                         if(type.equals("all"))demandeList.add(d);
                         else if (type.equals(d.getEtat()))demandeList.add(d);
+                       }
+
+                        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getBaseContext());
+                        RecyclerView.LayoutManager rvLayoutManager = layoutManager;
+
+                        recyclerView.setLayoutManager(rvLayoutManager);
+
+                        adapter = new DemandeAdapter(getActivity().getBaseContext(),demandeList,getActivity());
+                        recyclerView.setAdapter(adapter);
                     }
-
-                    LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getBaseContext());
-                    RecyclerView.LayoutManager rvLayoutManager = layoutManager;
-
-                    recyclerView.setLayoutManager(rvLayoutManager);
-
-                    adapter = new DemandeAdapter(getActivity().getBaseContext(),demandeList,getActivity());
-                    recyclerView.setAdapter(adapter);
+                }catch(DatabaseException e){
+                    //Log the exception and the key
+                    dataSnapshot.getKey();
                 }
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
