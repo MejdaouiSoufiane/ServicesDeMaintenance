@@ -41,31 +41,28 @@
         <activity
             android:name=".maps.MapsFonctActivity"
             android:label="@string/title_activity_maps_fonct">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".DetailDemandeClt" />
         <activity
             android:name=".ListDemande"
             android:label="@string/title_activity_list_demande"
             android:theme="@style/AppTheme.Noactionbar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ListFonct" />
         <activity android:name=".updateProfileClient" />
         <activity android:name=".DemandeDetails" />
         <activity android:name=".FctHome" />
+        <activity android:name=".ClientHome" />
+
         <activity
             android:name=".maps.MapsActivity" android:label="@string/title_activity_maps"></activity>
-        <activity android:name=".AddDemande" />
+        <activity android:name=".AddDemande" >
+
+        </activity>
         <activity android:name=".ClientProfile" />
+
         <activity android:name=".Register" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity">

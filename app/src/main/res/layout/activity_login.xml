@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+<LinearLayout
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,13 +13,13 @@
     android:orientation="vertical"
     android:background="#fff"
     android:padding="20dp">
+
     <ImageView
         android:id="@+id/logoImg"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="140dp"
+        android:layout_height="124dp"
         android:src="@drawable/sans_titre"
-        android:transitionName="logo_image"
-        />
+        android:transitionName="logo_image" />
 
     <TextView
         android:id="@+id/textView4"
@@ -29,8 +28,8 @@
         android:fontFamily="@font/banger"
         android:text="Bonjour et bienvenue !"
         android:textColor="#000"
-        android:textSize="60sp"
-        android:transitionName="logo_text"/>
+        android:textSize="36sp"
+        android:transitionName="logo_text" />
 
     <TextView
         android:id="@+id/textView5"

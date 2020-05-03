@@ -54,6 +54,7 @@ public class DemandeAdapter  extends RecyclerView.Adapter<DemandeAdapter.ViewHol
         name.setText(demandeItem.getTitre());
         description.setText(demandeItem.getDescription());
         etat.setText(demandeItem.getEtat());
+       // if(demandeItem.getEtat().equals("En Cours"))
 
         holder.item_card.setOnClickListener(new View.OnClickListener() {
             @Override

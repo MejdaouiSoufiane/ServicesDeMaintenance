@@ -10,15 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,7 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ListDemande extends AppCompatActivity {
+public class ListDemande extends Fragment {
 
     RecyclerView recyclerView;
     ImageButton imageButton;
@@ -39,37 +43,50 @@ public class ListDemande extends AppCompatActivity {
     DatabaseReference reference;
     DemandeAdapter adapter;
     FirebaseUser user;
-    String uid_user;
+    String uid_user, type;
     private Toolbar tool;
 
+    public static ListDemande newInstance() {
+        return (new ListDemande());
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_demande);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_list_demande, container, false);
+
         /*Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ListDemande.this, AddDemande.class);
+                Intent intent = new Intent(getActivity().getBaseContext(), AddDemande.class);
                 startActivity(intent);
-                finish();
+
             }
         });
 
-        tool = (Toolbar) this.findViewById(R.id.tool);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            type = bundle.getString("TYPE");
+            Toast.makeText(getActivity().getBaseContext().getApplicationContext(), type , Toast.LENGTH_SHORT).show();
 
-        recyclerView = (RecyclerView) findViewById(R.id.rv);
+        }
+
+        tool = (Toolbar) view.findViewById(R.id.tool);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.rv);
         //imageButton = (ImageButton)findViewById(R.id.img_button_add);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            for (UserInfo profile : user.getProviderData()) {
+
+            //for (UserInfo profile : user.getProviderData()) {
                 // UID specific to the provider
-                uid_user = profile.getUid();
-            }
+                uid_user = user.getUid();
+           // Toast.makeText(this,uid_user,Toast.LENGTH_LONG).show();
+           // }
         }
         reference = FirebaseDatabase.getInstance().getReference().child("Demandes");
 
@@ -83,14 +100,17 @@ public class ListDemande extends AppCompatActivity {
                 for (DataSnapshot dds: dataSnapshot.getChildren())
                 {
                     Demande d = dds.getValue(Demande.class);
-                    if(d.getIdClient().equals(uid_user))
-                        demandeList.add(d);
-                    LinearLayoutManager layoutManager = new LinearLayoutManager(ListDemande.this);
+                    if(d.getIdClient().equals(uid_user)){
+                        if(type.equals("all"))demandeList.add(d);
+                        else if (type.equals(d.getEtat()))demandeList.add(d);
+                    }
+
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getBaseContext());
                     RecyclerView.LayoutManager rvLayoutManager = layoutManager;
 
                     recyclerView.setLayoutManager(rvLayoutManager);
 
-                    adapter = new DemandeAdapter(ListDemande.this,demandeList,ListDemande.this);
+                    adapter = new DemandeAdapter(getActivity().getBaseContext(),demandeList,getActivity());
                     recyclerView.setAdapter(adapter);
                 }
             }
@@ -101,20 +121,20 @@ public class ListDemande extends AppCompatActivity {
         });
         enableSwipeToDeleteAndUndo();
 
-        this.setTitle("Accueil");
-        setSupportActionBar(tool);
-
+        //this.setTitle("Accueil");
+       // setSupportActionBar(tool);
+        return view;
     }
 
 
     public void btn_add(View view) {
-        Intent intent = new Intent(ListDemande.this, AddDemande.class);
+        Intent intent = new Intent(getActivity().getBaseContext(), AddDemande.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     private void enableSwipeToDeleteAndUndo() {
-        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(this) {
+        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getActivity().getBaseContext()) {
             @Override
             public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int i) {
 
@@ -122,7 +142,7 @@ public class ListDemande extends AppCompatActivity {
                 final int position = viewHolder.getAdapterPosition();
                 final Demande item = adapter.getData().get(position);
 
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(ListDemande.this);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
 
                 if(item.getEtat().equals("En Attente")){
                     alertDialog.setTitle("Alerte")
@@ -183,7 +203,7 @@ public class ListDemande extends AppCompatActivity {
         itemTouchhelper.attachToRecyclerView(recyclerView);
     }
 
-    public boolean onCreateOptionsMenu(Menu menu)
+   /* public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.profile_menu, menu);
@@ -205,6 +225,6 @@ public class ListDemande extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
 }

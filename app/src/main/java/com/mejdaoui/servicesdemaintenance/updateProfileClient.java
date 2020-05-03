@@ -87,7 +87,7 @@ public class updateProfileClient extends AppCompatActivity {
                 String prenom = dataSnapshot.child("prenom").getValue(String.class);
                 String email = dataSnapshot.child("email").getValue(String.class);
                 String tel = dataSnapshot.child("telephone").getValue(String.class);
-                String ville = dataSnapshot.child("ville").getValue(String.class);
+                String ville = dataSnapshot.child("ville").getValue(String.class) ;
                 String adresse = dataSnapshot.child("adresse").getValue(String.class);
 
                 nomProfile.setText(nom);
@@ -146,8 +146,9 @@ public class updateProfileClient extends AppCompatActivity {
                     }
                 });
 
-        startActivity(new Intent(updateProfileClient.this, ClientProfile.class));
+       //startActivity(new Intent(updateProfileClient.this, ClientProfile.class));
 
+        finish();
     }
 
     private void selectImage(View v) {

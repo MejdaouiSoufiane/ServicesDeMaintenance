@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -52,7 +53,7 @@ public class AddDemande extends AppCompatActivity {
     private EditText titre,desc;
     private Spinner spinner_service, spinner_genre,spinner_age;
     private TextView date_dispo,heure_dispo;
-    ImageView img;
+   // ImageView img;
 
     Uri url;
     private Uri filePath;
@@ -66,7 +67,7 @@ public class AddDemande extends AppCompatActivity {
     String s;
     Demande demande;
 
-    private Button take_pic;
+    private ImageButton take_pic;
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
@@ -88,7 +89,7 @@ public class AddDemande extends AppCompatActivity {
 
         heure_dispo= (TextView)  this.findViewById(R.id.heure);
         date_dispo = (TextView) this.findViewById(R.id.disponibilite);
-        img=(ImageView)this.findViewById(R.id.new_image);
+       // img=(ImageView)this.findViewById(R.id.new_image);
 
         //aut
         uid_user = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -242,7 +243,7 @@ public class AddDemande extends AppCompatActivity {
 
 
     private void take_picture() {
-        take_pic = (Button)this.findViewById(R.id.button_img);
+        take_pic = (ImageButton)this.findViewById(R.id.new_image);
         take_pic.setOnClickListener(new View.OnClickListener(){
                                         @Override
                                         public void onClick(View v) {
@@ -264,7 +265,7 @@ public class AddDemande extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
                 if (resultCode == RESULT_OK && requestCode==CAMERA_REQUEST_CODE && data != null && data.getData() != null){
                     Bitmap photo = (Bitmap) data.getExtras().get("data") ;
-                    img.setImageBitmap(photo);
+                    take_pic.setImageBitmap(photo);
                     filePath = data.getData();
                     Toast.makeText
                             (getApplicationContext(), "here on activity" , Toast.LENGTH_SHORT)
@@ -359,8 +360,8 @@ public class AddDemande extends AppCompatActivity {
                     storage_image();
 
                     Toast.makeText(getApplicationContext(),"Demande ajoutée",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(AddDemande.this,ListDemande.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(AddDemande.this,ListDemande.class);
+                    //startActivity(intent);
                     finish();
                 }
 
