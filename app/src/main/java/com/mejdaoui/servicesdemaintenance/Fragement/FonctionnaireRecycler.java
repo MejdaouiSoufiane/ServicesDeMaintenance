@@ -99,7 +99,7 @@ public class FonctionnaireRecycler extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
 
-                            Client client = dataSnapshot.getValue(Client.class);
+                            final Client client = dataSnapshot.getValue(Client.class);
                             holder.clt.setText(client.getNom());
                             holder.cardView.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -112,6 +112,7 @@ public class FonctionnaireRecycler extends Fragment {
                                     bundle.putString("dmd_id",demande.getIdDemande());
                                     bundle.putString("currentFonct",currentFocnt);
                                     bundle.putString("ville",demande.getVille());
+                                    bundle.putString("cltPhone",client.getTelephone());
                                     List<String> array = demande.getIdFonctionnaire();
                                     //array.add("ID");
                                     bundle.putStringArrayList("idf",(ArrayList<String>) array);

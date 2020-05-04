@@ -3,10 +3,16 @@ package com.mejdaoui.servicesdemaintenance;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +23,9 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.mejdaoui.servicesdemaintenance.ViewHolder.DemandeDetailHolder;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -44,6 +46,8 @@ public class DemandeDetails extends AppCompatActivity {
     public TextView postuler_;
     public TextView appeler_;
     public TextView position_;
+    private static final int REQUEST_CALL = 1;
+    Bundle b;
 
 
     @Override
@@ -63,6 +67,7 @@ public class DemandeDetails extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demande_details);
+        b = getIntent().getExtras();
 
         recyclerView = findViewById(R.id.recyclerHorizImages);
         nomServ = findViewById(R.id.dd_servName);
@@ -76,7 +81,6 @@ public class DemandeDetails extends AppCompatActivity {
         appeler_ = findViewById(R.id.call_icon_);
         position_ = findViewById(R.id.position_icon_);
 
-        final Bundle b = getIntent().getExtras();
         nomServ.setText(b.getString("nomServ"));
         desc.setText(b.getString("desc"));
         date.setText(b.getString("date"));
@@ -130,7 +134,67 @@ public class DemandeDetails extends AppCompatActivity {
                 Toast.makeText(DemandeDetails.this, "postuler", Toast.LENGTH_SHORT).show();
             }
         });
+
+        postuler_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> list = b.getStringArrayList("idf");
+                System.out.println("+++ List "+list.size());
+                DatabaseReference d = FirebaseDatabase.getInstance().getReference("Demandes").child(b.getString("dmd_id"));
+                for(int i=0;i<list.size();i++){
+                    System.out.println("++++ LISTE : "+list.get(i));
+                    String str = list.get(i);
+                    if(str.equals(b.getString("currentFonct"))){
+                        Toast.makeText(DemandeDetails.this, "Vous avez déja postuler.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                list.add(b.getString("currentFonct"));
+                d.child("idFonctionnaire").setValue(list);
+                Toast.makeText(DemandeDetails.this, "Votre demande est envoyée.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        appeler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeCallPhone();
+            }
+        });
+        appeler_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeCallPhone();
+            }
+        });
     }
 
+    private void makeCallPhone() {
+            String phone = b.getString("cltPhone").trim();
+            if(phone.length() > 0){
+                if(ContextCompat.checkSelfPermission(DemandeDetails.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
+                {
+                    ActivityCompat.requestPermissions(
+                            DemandeDetails.this,new String[] {Manifest.permission.CALL_PHONE},REQUEST_CALL);
 
+                }else {
+                    String tel = "tel:" + phone;
+                    startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(tel)));
+                }
+
+            }else {
+                Toast.makeText(this, "Téléphone du client n'existe pas.", Toast.LENGTH_SHORT).show();
+            }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_CALL){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                makeCallPhone();
+            else
+                Toast.makeText(this, "Permission denied!", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
