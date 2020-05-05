@@ -26,6 +26,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mejdaoui.servicesdemaintenance.Model.Demande;
+import com.mejdaoui.servicesdemaintenance.PositionFonct;
 import com.mejdaoui.servicesdemaintenance.R;
 import com.mejdaoui.servicesdemaintenance.ViewHolder.DemandeDetailHolder;
 
