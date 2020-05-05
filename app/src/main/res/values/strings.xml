@@ -31,5 +31,6 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_list_demande">Liste des Demandes</string>
     <string name="title_activity_maps_fonct">Map</string>
+    <string name="title_activity_position_fonct">Map</string>
 
 </resources>

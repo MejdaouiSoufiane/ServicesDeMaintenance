@@ -168,6 +168,18 @@ public class DemandeDetails extends AppCompatActivity {
                 makeCallPhone();
             }
         });
+
+        position.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent location = new Intent(DemandeDetails.this, PositionFonct.class);
+                Bundle bundle = new Bundle();
+                bundle.putDouble("lat",b.getDouble("lat"));
+                bundle.putDouble("lang",b.getDouble("lang"));
+                location.putExtras(bundle);
+                startActivity(location);
+            }
+        });
     }
 
     private void makeCallPhone() {

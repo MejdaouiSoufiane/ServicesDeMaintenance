@@ -113,6 +113,8 @@ public class FonctionnaireRecycler extends Fragment {
                                     bundle.putString("currentFonct",currentFocnt);
                                     bundle.putString("ville",demande.getVille());
                                     bundle.putString("cltPhone",client.getTelephone());
+                                    bundle.putDouble("lat",demande.getLat_loc());
+                                    bundle.putDouble("lang",demande.getLong_loc());
                                     List<String> array = demande.getIdFonctionnaire();
                                     //array.add("ID");
                                     bundle.putStringArrayList("idf",(ArrayList<String>) array);
