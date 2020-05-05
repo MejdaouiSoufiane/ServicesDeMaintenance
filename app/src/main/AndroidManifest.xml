@@ -56,7 +56,7 @@
 
         </activity>
         <activity android:name=".ListFonct" />
-        <activity android:name=".updateProfileClient" />
+        <activity android:name=".Activity.updateProfileClient" />
         <activity android:name=".Activity.DemandeDetails" />
         <activity android:name=".FctHome" />
         <activity android:name=".Activity.ClientHome" />
