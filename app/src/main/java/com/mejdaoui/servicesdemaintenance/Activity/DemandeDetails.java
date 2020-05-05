@@ -1,4 +1,4 @@
-package com.mejdaoui.servicesdemaintenance;
+package com.mejdaoui.servicesdemaintenance.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +25,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mejdaoui.servicesdemaintenance.Model.Demande;
+import com.mejdaoui.servicesdemaintenance.R;
 import com.mejdaoui.servicesdemaintenance.ViewHolder.DemandeDetailHolder;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.mejdaoui.servicesdemaintenance;
+package com.mejdaoui.servicesdemaintenance.Model;
 
 import java.util.List;
 import java.util.Set;

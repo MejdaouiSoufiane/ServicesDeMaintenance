@@ -48,25 +48,25 @@
             android:label="@string/title_activity_maps_fonct">
 
         </activity>
-        <activity android:name=".DetailDemandeClt" />
+        <activity android:name=".Activity.DetailDemandeClt" />
         <activity
-            android:name=".ListDemande"
+            android:name=".Fragement.ListDemande"
             android:label="@string/title_activity_list_demande"
             android:theme="@style/AppTheme.Noactionbar" >
 
         </activity>
         <activity android:name=".ListFonct" />
         <activity android:name=".updateProfileClient" />
-        <activity android:name=".DemandeDetails" />
+        <activity android:name=".Activity.DemandeDetails" />
         <activity android:name=".FctHome" />
-        <activity android:name=".ClientHome" />
+        <activity android:name=".Activity.ClientHome" />
 
         <activity
             android:name=".maps.MapsActivity" android:label="@string/title_activity_maps"></activity>
-        <activity android:name=".AddDemande" >
+        <activity android:name=".Activity.AddDemande" >
 
         </activity>
-        <activity android:name=".ClientProfile" />
+        <activity android:name=".Activity.ClientProfile" />
 
         <activity android:name=".Register" />
         <activity android:name=".Login" />

@@ -1,12 +1,10 @@
 package com.mejdaoui.servicesdemaintenance.Fragement;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +14,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.mejdaoui.servicesdemaintenance.Adapter.TabAdapter;
-import com.mejdaoui.servicesdemaintenance.DemandeDetails;
 import com.mejdaoui.servicesdemaintenance.R;
 
 public class MainFragmentTab extends Fragment {

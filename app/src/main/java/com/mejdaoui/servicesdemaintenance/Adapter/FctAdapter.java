@@ -1,15 +1,6 @@
-package com.mejdaoui.servicesdemaintenance;
+package com.mejdaoui.servicesdemaintenance.Adapter;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,8 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.mejdaoui.servicesdemaintenance.Model.Fonctionnaire;
+import com.mejdaoui.servicesdemaintenance.R;
 
 public class FctAdapter extends RecyclerView.ViewHolder {
 
