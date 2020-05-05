@@ -16,7 +16,7 @@ public class Client {
 
     }
 
-    public Client(String idClient, String nom, String prenom, String email, String adresse, String ville, String tel) {
+    public Client(String idClient, String nom, String prenom, String email, String adresse, String ville, String tel, String image) {
         this.idClient = idClient;
         this.nom = nom;
         this.prenom = prenom;
@@ -24,6 +24,7 @@ public class Client {
         this.adresse = adresse;
         this.telephone = tel;
         this.ville = ville;
+        this.image = image;
     }
 
     public String getIdClient() {

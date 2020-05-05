@@ -24,7 +24,7 @@ public class Register extends AppCompatActivity {
 
     static private List<String> secteur = new ArrayList<>();
 
-   static private String tnom, tprenom, tville, ttel, temail, tpassword, type, tadresse ;
+   static private String tnom, tprenom, tville, ttel, temail, tpassword, type, tadresse, image ;
 
     DatabaseReference database;
     private FirebaseAuth mAuth;
@@ -64,8 +64,8 @@ public class Register extends AppCompatActivity {
 
                     else if (type.equals("client")){
                         database = FirebaseDatabase.getInstance().getReference("clients");
-
-                        Client client = new Client(id, tnom, tprenom, temail, tadresse, tville, ttel);
+                        image = null;
+                        Client client = new Client(id, tnom, tprenom, temail, tadresse, tville, ttel,image);
                         database.child(id).setValue(client);
                     }
 

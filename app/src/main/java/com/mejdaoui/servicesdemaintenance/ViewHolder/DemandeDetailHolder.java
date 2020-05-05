@@ -18,6 +18,7 @@ public class DemandeDetailHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         imageView = itemView.findViewById(R.id.dd_images);
+
     }
 
 
