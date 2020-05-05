@@ -17,12 +17,13 @@ import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mejdaoui.servicesdemaintenance.Adapter.FctAdapter;
+import com.mejdaoui.servicesdemaintenance.Model.Fonctionnaire;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class ListFonct extends AppCompatActivity {
     private RecyclerView rv ;
     private List<Fonctionnaire> fcts = new ArrayList<>();
     private FirebaseRecyclerOptions<Fonctionnaire> options;
-    private FirebaseRecyclerAdapter<Fonctionnaire,FctAdapter> adapter;
+    private FirebaseRecyclerAdapter<Fonctionnaire, FctAdapter> adapter;
 
 
     @Override

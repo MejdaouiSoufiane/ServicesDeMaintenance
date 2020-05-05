@@ -1,4 +1,4 @@
-package com.mejdaoui.servicesdemaintenance;
+package com.mejdaoui.servicesdemaintenance.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mejdaoui.servicesdemaintenance.Model.Demande;
+import com.mejdaoui.servicesdemaintenance.Activity.DetailDemandeClt;
+import com.mejdaoui.servicesdemaintenance.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,7 +27,7 @@ public class DemandeAdapter  extends RecyclerView.Adapter<DemandeAdapter.ViewHol
     private ArrayList<Demande> mList ;
     private Activity mactivity;
 
-    DemandeAdapter(Context context, ArrayList<Demande> list,Activity activity){
+    public DemandeAdapter(Context context, ArrayList<Demande> list,Activity activity){
         mContext = context;
         mList = list;
         mactivity = activity;

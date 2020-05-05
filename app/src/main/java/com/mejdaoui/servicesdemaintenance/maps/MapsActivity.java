@@ -23,7 +23,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.mejdaoui.servicesdemaintenance.AddDemande;
+import com.mejdaoui.servicesdemaintenance.Activity.AddDemande;
 import com.mejdaoui.servicesdemaintenance.R;
 
 import java.io.IOException;
