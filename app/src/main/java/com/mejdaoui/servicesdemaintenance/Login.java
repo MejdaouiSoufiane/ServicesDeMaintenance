@@ -30,6 +30,7 @@ public class Login extends AppCompatActivity {
 
     private Button newaccount;
     private Button login;
+    private Button forgot;
     //private Button test;
 
     TextInputEditText username;
@@ -48,9 +49,16 @@ public class Login extends AppCompatActivity {
         newaccount = findViewById(R.id.newaccount);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
+        forgot = findViewById(R.id.forgot_pswd);
         //test = findViewById(R.id.test);
 
 
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this,ResetPassword.class));
+            }
+        });
 
         pd = new ProgressDialog(this);
         pd.setMessage("Logging In...");

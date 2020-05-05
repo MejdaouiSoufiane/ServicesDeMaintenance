@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -37,6 +39,7 @@ public class DetailDemandeClt extends AppCompatActivity {
     private DatabaseReference databaseReference, dbref;
     private TextView post ;
     private String id;
+    private ImageView postulant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class DetailDemandeClt extends AppCompatActivity {
         setContentView(R.layout.activity_detail_demande_clt);
 
         post = (TextView) this.findViewById(R.id.post);
-
+        postulant = (ImageView) this.findViewById(R.id.apply_icon);
         service = (TextView) this.findViewById(R.id.service);
         desc = (TextView) this.findViewById(R.id.desc);
         ville = (TextView) this.findViewById(R.id.ville);
@@ -54,6 +57,15 @@ public class DetailDemandeClt extends AppCompatActivity {
         id = inte.getStringExtra("id_demande");
 
         post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailDemandeClt.this , ListFonct.class);
+                intent.putExtra("idDmd",id);
+                startActivity(intent);
+            }
+        });
+
+        postulant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DetailDemandeClt.this , ListFonct.class);
@@ -113,4 +125,16 @@ public class DetailDemandeClt extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        adapter.startListening();
+    }
+
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        adapter.stopListening();
+    }
 }

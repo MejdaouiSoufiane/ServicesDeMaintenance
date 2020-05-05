@@ -35,7 +35,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="168dp">
 
                     <TextView
                         android:id="@+id/c"
@@ -43,18 +43,29 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="45dp"
                         android:gravity="center"
-                        android:text="Demande"
+                        android:text="Client"
                         android:textColor="@color/colorTextSecondary"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textclientname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="full name"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@+id/c" />
 
 
                     <ImageView
                         android:id="@+id/apply_icon"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="36dp"
                         android:layout_marginEnd="180dp"
                         android:background="@drawable/ic_touch"
                         android:foregroundGravity="center"
@@ -74,10 +85,10 @@
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@id/apply_icon"
-                        app:layout_constraintHorizontal_bias="0.495"
+                        app:layout_constraintHorizontal_bias="0.42"
                         app:layout_constraintStart_toStartOf="@id/apply_icon"
                         app:layout_constraintTop_toBottomOf="@+id/apply_icon"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.555" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -99,21 +110,21 @@
             android:background="@drawable/man"
             />
 
+
         <TextView
             android:id="@+id/cc"
-            android:background="@drawable/dd_info_backgroud"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="20sp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/dd_info_backgroud"
             android:text="Informations sur la demande"
-            android:textColor="@color/colorPrimary"
             android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layoutProfile"/>
-
+            app:layout_constraintTop_toBottomOf="@id/layoutProfile" />
 
         <LinearLayout
             android:id="@+id/layoutDesc"
@@ -130,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
-                android:text="Nom du service "
+                android:text="Service "
                 android:textAllCaps="true"
                 android:textColor="@color/colorTextPrimary"
                 android:textSize="14sp"
@@ -249,18 +260,18 @@
 
         <TextView
             android:id="@+id/ccc"
-            android:background="@drawable/dd_info_backgroud"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/dd_info_backgroud"
             android:text="Images du travail"
-            android:textColor="@color/colorPrimary"
             android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layoutDesc"/>
+            app:layout_constraintTop_toBottomOf="@id/layoutDesc" />
 
         <HorizontalScrollView
             android:id="@+id/dd_images"

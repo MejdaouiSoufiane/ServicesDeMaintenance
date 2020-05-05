@@ -133,7 +133,7 @@ public class updateProfileClient extends AppCompatActivity {
 
         databaseReference=FirebaseDatabase.getInstance().getReference("clients").child(uid);
 
-        Client client = new Client(uid, nom, prenom, mail, adresse,ville, tel );
+        Client client = new Client(uid, nom, prenom, mail, adresse,ville, tel,null );
 
         databaseReference.setValue(client);
 
@@ -143,13 +143,10 @@ public class updateProfileClient extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Profile modifié", Toast.LENGTH_SHORT).show();
-
                         }
                     }
                 });
-
        //startActivity(new Intent(updateProfileClient.this, ClientProfile.class));
-
         finish();
     }
 
@@ -194,7 +191,6 @@ public class updateProfileClient extends AppCompatActivity {
                         imageView.setImageBitmap(selectedImage);
                         handleUpload(selectedImage);
                     }
-
                     break;
                 case 1:
                     if (resultCode == RESULT_OK && data != null) {
@@ -220,9 +216,6 @@ public class updateProfileClient extends AppCompatActivity {
                     break;
             }
         }
-
-
-
     }
 
 

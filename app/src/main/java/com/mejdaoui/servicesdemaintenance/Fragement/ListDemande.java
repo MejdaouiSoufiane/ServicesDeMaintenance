@@ -106,6 +106,8 @@ public class ListDemande extends Fragment {
                         if(d.getIdClient().equals(uid_user)){
                         if(type.equals("all"))demandeList.add(d);
                         else if (type.equals(d.getEtat()))demandeList.add(d);
+
+                        
                        }
 
                         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getBaseContext());

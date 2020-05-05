@@ -73,6 +73,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/forgot_pswd"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
