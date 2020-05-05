@@ -26,10 +26,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.mejdaoui.servicesdemaintenance.Activity.DemandeDetails;
+import com.mejdaoui.servicesdemaintenance.Helpers.ImageTrans_CircleTransform;
 import com.mejdaoui.servicesdemaintenance.Model.Client;
 import com.mejdaoui.servicesdemaintenance.Model.Demande;
 import com.mejdaoui.servicesdemaintenance.ViewHolder.FirebaseViewHolder;
 import com.mejdaoui.servicesdemaintenance.R;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
@@ -97,6 +99,13 @@ public class FonctionnaireRecycler extends Fragment {
 
                             final Client client = dataSnapshot.getValue(Client.class);
                             holder.clt.setText(client.getNom());
+                            Picasso.get().load(client.getImage())
+                                    .error(R.drawable.ic_launcher_background)
+                                    .placeholder(R.drawable.man)
+                                    .resize(55, 55)
+                                    .transform(new ImageTrans_CircleTransform())
+                                    .into(holder.imageView);
+
                             holder.cardView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -111,6 +120,8 @@ public class FonctionnaireRecycler extends Fragment {
                                     bundle.putString("cltPhone",client.getTelephone());
                                     bundle.putDouble("lat",demande.getLat_loc());
                                     bundle.putDouble("lang",demande.getLong_loc());
+                                    bundle.putString("imageurl",client.getImage());
+                                    bundle.putString("clientname",client.getNom()+" "+client.getPrenom());
                                     List<String> array = demande.getIdFonctionnaire();
                                     //array.add("ID");
                                     bundle.putStringArrayList("idf",(ArrayList<String>) array);
@@ -128,7 +139,7 @@ public class FonctionnaireRecycler extends Fragment {
                                             /** comparaison des date pour le trie**/
                                             Demande d = snapshot.getValue(Demande.class);
                                             Date date = addHoursToJavaUtilDate(d.getDate_demande(),24);
-                                            if(date.compareTo(new Date()) < 0)
+                                            if(date.compareTo(new Date()) > 0)
                                                 holder.newDemande.setVisibility(View.GONE);
                                             System.out.println("+++ Date after 24 heure : " +addHoursToJavaUtilDate(new Date(),24).toString());
                                             System.out.println("+++ date demande  after 24 heure : " +addHoursToJavaUtilDate(demande.getDate_demande(),24).toString());
@@ -167,18 +178,6 @@ public class FonctionnaireRecycler extends Fragment {
                 holder.timeville.setText(demande.getHeure());
                 holder.desc.setText(demande.getDescription());
                 holder.timeville.setText(""+day+" "+getMonthForInt(month)+" "+h+":"+m);
-
-                /** comparaison des date pour le tri**/
-                    Calendar ccalendar = Calendar.getInstance();
-                    calendar.setTime(new Date());
-                    int ch = calendar.get(Calendar.HOUR_OF_DAY);
-                    int cm = calendar.get(Calendar.MINUTE);
-                    int cday = calendar.get(Calendar.DAY_OF_MONTH);
-                    int cmonth = calendar.get(Calendar.MONTH);
-                    Date date = addHoursToJavaUtilDate(demande.getDate_demande(),2);
-                    if(date.compareTo(new Date()) > 0)
-                        holder.newDemande.setVisibility(View.GONE);
-                /** fin **/
 
             }
 

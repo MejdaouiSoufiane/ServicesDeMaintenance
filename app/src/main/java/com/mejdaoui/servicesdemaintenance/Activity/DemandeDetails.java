@@ -25,10 +25,12 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mejdaoui.servicesdemaintenance.Helpers.ImageTrans_CircleTransform;
 import com.mejdaoui.servicesdemaintenance.Model.Demande;
 import com.mejdaoui.servicesdemaintenance.PositionFonct;
 import com.mejdaoui.servicesdemaintenance.R;
 import com.mejdaoui.servicesdemaintenance.ViewHolder.DemandeDetailHolder;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -49,6 +51,8 @@ public class DemandeDetails extends AppCompatActivity {
     public TextView postuler_;
     public TextView appeler_;
     public TextView position_;
+    public ImageView clientimage;
+    public TextView clientname;
     private static final int REQUEST_CALL = 1;
     Bundle b;
 
@@ -83,11 +87,21 @@ public class DemandeDetails extends AppCompatActivity {
         postuler_ = findViewById(R.id.apply_icon_);
         appeler_ = findViewById(R.id.call_icon_);
         position_ = findViewById(R.id.position_icon_);
+        clientimage = findViewById(R.id.clientimage);
+        clientname = findViewById(R.id.textclientname);
 
         nomServ.setText(b.getString("nomServ"));
         desc.setText(b.getString("desc"));
         date.setText(b.getString("date"));
         ville.setText(b.getString("ville"));
+        clientname.setText(b.getString("clientname"));
+
+        Picasso.get().load(b.getString("imageurl"))
+                .error(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.man)
+                .resize(80, 80)
+                .transform(new ImageTrans_CircleTransform())
+                .into(clientimage);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
