@@ -1,4 +1,4 @@
-package com.mejdaoui.servicesdemaintenance;
+package com.mejdaoui.servicesdemaintenance.Model;
 
 import java.util.List;
 import java.util.Set;
@@ -27,7 +27,7 @@ public class Fonctionnaire {
         this.ville = ville;
     }
 
-    public Fonctionnaire(String idFonct, String nom, String prenom, String email, String adresse, String ville, String telephone, List<String> secteur) {
+    public Fonctionnaire(String idFonct, String nom, String prenom, String email, String adresse, String ville, String telephone, List<String> secteur, String img) {
         this.idFonct = idFonct;
         this.nom = nom;
         this.prenom = prenom;
@@ -36,6 +36,7 @@ public class Fonctionnaire {
         this.ville = ville;
         this.telephone = telephone;
         this.secteur = secteur;
+        this.image = img;
     }
 
     public String getIdFonct() {
@@ -110,4 +111,11 @@ public class Fonctionnaire {
         this.ville = ville;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

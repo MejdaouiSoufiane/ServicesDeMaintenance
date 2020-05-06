@@ -1,4 +1,4 @@
-package com.mejdaoui.servicesdemaintenance;
+package com.mejdaoui.servicesdemaintenance.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +21,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mejdaoui.servicesdemaintenance.ListFonct;
+import com.mejdaoui.servicesdemaintenance.Model.Demande;
+import com.mejdaoui.servicesdemaintenance.R;
 import com.mejdaoui.servicesdemaintenance.ViewHolder.DemandeDetailHolder;
 import com.squareup.picasso.Picasso;
 

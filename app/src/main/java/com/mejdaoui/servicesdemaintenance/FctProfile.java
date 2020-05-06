@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,6 @@ public class FctProfile extends AppCompatActivity {
         userImg = findViewById(R.id.userImg);
 
     }
-
         @Override
         protected void onStart() {
             super.onStart();
@@ -77,6 +77,7 @@ public class FctProfile extends AppCompatActivity {
                     String tel = dataSnapshot.child("telephone").getValue(String.class);
                     String ville = dataSnapshot.child("ville").getValue(String.class);
                     String adresse = dataSnapshot.child("adresse").getValue(String.class);
+                    String img = dataSnapshot.child("image").getValue(String.class);
 
                     int nbre = (int)dataSnapshot.child("secteur").getChildrenCount();
                     List<String> secteur = new ArrayList<>();
@@ -92,6 +93,8 @@ public class FctProfile extends AppCompatActivity {
                     userPhone.setText(tel);
                     userAdresse.setText(adresse);
                     userService.setText(secteur.toString());
+
+                    Picasso.get().load(img).resize(50, 50).into(userImg);
                 }
 
                 @Override

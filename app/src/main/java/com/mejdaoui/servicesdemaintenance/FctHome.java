@@ -13,11 +13,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 
 import com.google.android.material.navigation.NavigationView;
+import com.mejdaoui.servicesdemaintenance.Activity.DemandeDetails;
 import com.mejdaoui.servicesdemaintenance.Fragement.MainFragmentTab;
 
 public class FctHome extends AppCompatActivity {

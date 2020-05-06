@@ -16,6 +16,8 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mejdaoui.servicesdemaintenance.Model.Client;
+import com.mejdaoui.servicesdemaintenance.Model.Fonctionnaire;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +61,7 @@ public class Register extends AppCompatActivity {
                     String id = user.getUid();
                     if(type.equals("fonctionnaire")){
                         database = FirebaseDatabase.getInstance().getReference("fonctionnaires");
-                        Fonctionnaire fonctionnaire = new Fonctionnaire(id, tnom, tprenom, temail, tadresse, tville, ttel, secteur);
+                        Fonctionnaire fonctionnaire = new Fonctionnaire(id, tnom, tprenom, temail, tadresse, tville, ttel, secteur,null);
                         database.child(id).setValue(fonctionnaire);}
 
                     else if (type.equals("client")){

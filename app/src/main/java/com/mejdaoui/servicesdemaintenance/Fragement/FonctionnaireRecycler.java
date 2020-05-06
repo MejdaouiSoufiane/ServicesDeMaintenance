@@ -3,7 +3,6 @@ package com.mejdaoui.servicesdemaintenance.Fragement;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,10 +25,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.mejdaoui.servicesdemaintenance.Client;
-import com.mejdaoui.servicesdemaintenance.Demande;
-import com.mejdaoui.servicesdemaintenance.DemandeDetails;
-import com.mejdaoui.servicesdemaintenance.FirebaseViewHolder;
+import com.mejdaoui.servicesdemaintenance.Activity.DemandeDetails;
+import com.mejdaoui.servicesdemaintenance.Model.Client;
+import com.mejdaoui.servicesdemaintenance.Model.Demande;
+import com.mejdaoui.servicesdemaintenance.ViewHolder.FirebaseViewHolder;
 import com.mejdaoui.servicesdemaintenance.R;
 
 import java.text.DateFormatSymbols;
@@ -38,8 +36,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import javax.xml.transform.Templates;
 
 
 public class FonctionnaireRecycler extends Fragment {
@@ -99,7 +95,7 @@ public class FonctionnaireRecycler extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
 
-                            Client client = dataSnapshot.getValue(Client.class);
+                            final Client client = dataSnapshot.getValue(Client.class);
                             holder.clt.setText(client.getNom());
                             holder.cardView.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -111,6 +107,8 @@ public class FonctionnaireRecycler extends Fragment {
                                     bundle.putString("date",holder.timeville.getText().toString());
                                     bundle.putString("dmd_id",demande.getIdDemande());
                                     bundle.putString("currentFonct",currentFocnt);
+                                    bundle.putString("ville",demande.getVille());
+                                    bundle.putString("cltPhone",client.getTelephone());
                                     List<String> array = demande.getIdFonctionnaire();
                                     //array.add("ID");
                                     bundle.putStringArrayList("idf",(ArrayList<String>) array);

@@ -1,4 +1,4 @@
-package com.mejdaoui.servicesdemaintenance;
+package com.mejdaoui.servicesdemaintenance.ViewHolder;
 
 import android.content.Intent;
 import android.view.View;
@@ -9,6 +9,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.mejdaoui.servicesdemaintenance.R;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
