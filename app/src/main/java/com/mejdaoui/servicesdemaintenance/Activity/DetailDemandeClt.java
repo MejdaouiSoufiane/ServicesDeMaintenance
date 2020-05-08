@@ -43,7 +43,7 @@ import java.util.List;
 
 public class DetailDemandeClt extends AppCompatActivity {
 
-    private  TextView service, ville, date, desc ;
+    private  TextView service, ville, date, desc, titre;
 
     private RecyclerView recyclerView;
     private FirebaseRecyclerOptions<Demande> options;
@@ -87,6 +87,7 @@ public class DetailDemandeClt extends AppCompatActivity {
         desc = (TextView) this.findViewById(R.id.desc);
         ville = (TextView) this.findViewById(R.id.ville);
         date = (TextView) this.findViewById(R.id.date);
+        titre = (TextView) this.findViewById(R.id.dmd_titre);
 
         final Intent inte = this.getIntent();
         id = inte.getStringExtra("id_demande");
@@ -118,12 +119,14 @@ public class DetailDemandeClt extends AppCompatActivity {
                 String tservice = dataSnapshot.child("service").getValue(String.class);
                 String tdesc = dataSnapshot.child("description").getValue(String.class);
                 String tdate = dataSnapshot.child("date_dispo").getValue(String.class);
-                //String tville = dataSnapshot.child("ville").getValue(String.class);
+                String tville = dataSnapshot.child("ville").getValue(String.class);
+                String stitre = dataSnapshot.child("titre").getValue(String.class);
 
                 service.setText(tservice);
                 desc.setText(tdesc);
                 date.setText(dataSnapshot.child("date_demande").getValue(Date.class).toString());
-                //ville.setText(tville);
+                ville.setText(tville);
+                titre.setText(stitre);
             }
 
             @Override
