@@ -33,6 +33,12 @@ public class DemandeAdapter  extends RecyclerView.Adapter<DemandeAdapter.ViewHol
         mactivity = activity;
     }
 
+    public DemandeAdapter(Context context, ArrayList<Demande> list){
+        mContext = context;
+        mList = list;
+      //  mactivity = activity;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
