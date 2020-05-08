@@ -153,7 +153,6 @@ public class ClientProfile extends Fragment {
 
     public void displayImage(View v) {
 
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity().getBaseContext());
         LayoutInflater inflater = getLayoutInflater();
         View dialogLayout = inflater.inflate(R.layout.alert_dialog, null);

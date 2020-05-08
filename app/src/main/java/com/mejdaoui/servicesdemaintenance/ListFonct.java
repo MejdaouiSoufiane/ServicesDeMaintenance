@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -131,8 +132,11 @@ public class ListFonct extends AppCompatActivity {
                     });
 
                     String s = fonctionnaire.getImage();
-                    if(s.equals("")==false)
-                        Picasso.get().load(s).resize(50, 50).into(holder.img);
+                    if(!s.equals(""))
+                        Glide.with(getBaseContext())
+                                .load(s)
+                                .into(holder.img);
+                       // Picasso.get().load(s).resize(50, 50).into(holder.img);
 
                     holder.accept.setOnClickListener(new View.OnClickListener() {
                         @Override

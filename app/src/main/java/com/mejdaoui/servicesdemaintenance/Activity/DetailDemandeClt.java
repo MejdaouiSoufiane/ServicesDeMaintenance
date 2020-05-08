@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,10 +46,11 @@ import java.util.List;
 public class DetailDemandeClt extends AppCompatActivity {
 
     private  TextView service, ville, date, desc, titre;
+    private ImageView image ;
 
     private RecyclerView recyclerView;
-    private FirebaseRecyclerOptions<Demande> options;
-    private FirebaseRecyclerAdapter<Demande, DemandeDetailHolder> adapter;
+    private FirebaseRecyclerOptions<String> options;
+    private FirebaseRecyclerAdapter<String, DemandeDetailHolder> adapter;
     private DatabaseReference databaseReference, dbref;
     private TextView post ;
     private String id;
@@ -78,9 +81,11 @@ public class DetailDemandeClt extends AppCompatActivity {
         postulant = (ImageView) this.findViewById(R.id.apply_icon);
         service = (TextView) this.findViewById(R.id.service);
         desc = (TextView) this.findViewById(R.id.desc);
-        ville = (TextView) this.findViewById(R.id.ville);
+        ville = (TextView) this.findViewById(R.id.vile);
         date = (TextView) this.findViewById(R.id.date);
         titre = (TextView) this.findViewById(R.id.dmd_titre);
+        image = this.findViewById(R.id.image_dd);
+
 
         final Intent inte = this.getIntent();
         id = inte.getStringExtra("id_demande");
@@ -114,21 +119,48 @@ public class DetailDemandeClt extends AppCompatActivity {
                 String tdate = dataSnapshot.child("date_dispo").getValue(String.class);
                 String tville = dataSnapshot.child("ville").getValue(String.class);
                 String stitre = dataSnapshot.child("titre").getValue(String.class);
+                final String url = dataSnapshot.child("adr_picture").getValue(String.class);
 
                 service.setText(tservice);
                 desc.setText(tdesc);
                 date.setText(dataSnapshot.child("date_demande").getValue(Date.class).toString());
                 ville.setText(tville);
                 titre.setText(stitre);
-            }
 
+                if (url != null) {
+                    Glide.with(getBaseContext())
+                            .load(url)
+                            .into(image);
+                    //Picasso.get().load(url).resize(50, 50).into(image);
+                }
+
+               /* image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
+                        LayoutInflater inflater = getLayoutInflater();
+                        View dialogLayout = inflater.inflate(R.layout.alert_dialog, null);
+                        ImageView iv = (ImageView) dialogLayout.findViewById(R.id.imageView);
+
+                        if (url != null) {
+                            Glide.with(getBaseContext())
+                                    .load(url)
+                                    .into(iv);
+                            builder.setPositiveButton("OK", null);
+                            builder.setView(dialogLayout);
+                            builder.create().show();
+                        }
+                    }
+                });*/
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Demandes");
+        /*databaseReference = FirebaseDatabase.getInstance().getReference().child("Demandes");
 
         recyclerView = findViewById(R.id.recyclerHorizImages);
         recyclerView.setHasFixedSize(true);
@@ -141,9 +173,20 @@ public class DetailDemandeClt extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull final DemandeDetailHolder holder, int i, @NonNull Demande demande) {
 
-                String url = demande.getDescription();
-                Picasso.get().load(url).into(holder.imageView);
+                String uid = demande.getIdDemande();
 
+                String url = demande.getAdr_picture();
+                Picasso.get().load(url).resize(50, 50).into(holder.imageView);
+                holder.imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        displayImage(v);
+                    }
+                });
+
+               Glide.with(context)
+                        .load(url)
+                        .into(holder.imageView);
             }
 
             @NonNull
@@ -153,7 +196,7 @@ public class DetailDemandeClt extends AppCompatActivity {
                         .inflate(R.layout.dd_images_items, viewGroup,false));
             }
         };
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);*/
 
         commenter();
     }
@@ -230,7 +273,8 @@ public class DetailDemandeClt extends AppCompatActivity {
         });
     }
 
-    @Override
+
+   /* @Override
     public void onStart(){
         super.onStart();
         adapter.startListening();
@@ -241,5 +285,5 @@ public class DetailDemandeClt extends AppCompatActivity {
     public void onStop(){
         super.onStop();
         adapter.stopListening();
-    }
+    }*/
 }
