@@ -131,11 +131,11 @@ public class ListFonct extends AppCompatActivity {
                         }
                     });
 
-                    String s = fonctionnaire.getImage();
-                    if(!s.equals(""))
+                    /*String s = fonctionnaire.getImage();
+                    if(s.equals("")==false)
                         Glide.with(getBaseContext())
                                 .load(s)
-                                .into(holder.img);
+                                .into(holder.img);*/
                        // Picasso.get().load(s).resize(50, 50).into(holder.img);
 
                     holder.accept.setOnClickListener(new View.OnClickListener() {
