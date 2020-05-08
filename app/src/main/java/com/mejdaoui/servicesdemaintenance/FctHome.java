@@ -13,16 +13,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mejdaoui.servicesdemaintenance.Activity.DemandeDetails;
 import com.mejdaoui.servicesdemaintenance.Fragement.MainFragmentTab;
+import com.mejdaoui.servicesdemaintenance.Model.Fonctionnaire;
 
 public class FctHome extends AppCompatActivity {
 
     private DrawerLayout drawer;
-    private CardView cardView;
+    public TextView fonctcname;
+    public TextView fonctemail;
+    public ImageView fonctimage;
+
 
 
     @Override
@@ -30,7 +43,8 @@ public class FctHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fct_home);
 
-        /******* navigation drawer tricks ***/
+
+                /******* navigation drawer tricks ***/
         final Toolbar toolbar = findViewById(R.id.toolbar);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         toolbar.setTitle("Liste des demandes");
@@ -49,6 +63,33 @@ public class FctHome extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 drawer.closeDrawer(Gravity.LEFT);
                 int id = item.getItemId();
+                fonctimage = findViewById(R.id.fonctimage);
+                fonctemail = findViewById(R.id.fonctemail);
+                fonctcname = findViewById(R.id.fonctname);
+                /** Fonctionnaire data **/
+
+                final String  currentFocnt = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference fonct = FirebaseDatabase.getInstance().getReference("fonctionnaires").child(currentFocnt);
+                fonct.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()){
+                            Fonctionnaire f = dataSnapshot.getValue(Fonctionnaire.class);
+                            if(fonctemail != null && fonctcname != null){
+                                fonctcname.setText(f.getNom()+" "+f.getPrenom());
+                                fonctemail.setText(f.getEmail());
+                            }
+
+                        }else
+                            Toast.makeText(FctHome.this, "Data not found.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                /**END fonct data**/
 
                 if(id == R.id.nav_home){
                     toolbar.setTitle("Home");
@@ -75,6 +116,8 @@ public class FctHome extends AppCompatActivity {
             }
         });
         /******* End navigation drawer tricks***/
+
+
 
     }
 

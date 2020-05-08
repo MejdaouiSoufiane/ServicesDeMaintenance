@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.EditText;
 import android.widget.ImageButton;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,6 +71,9 @@ public class DetailDemandeClt extends AppCompatActivity {
    // FirebaseUser user;
     String uid_user, type;
 
+    private ImageView postulant;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +82,7 @@ public class DetailDemandeClt extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         post = (TextView) this.findViewById(R.id.post);
-
+        postulant = (ImageView) this.findViewById(R.id.apply_icon);
         service = (TextView) this.findViewById(R.id.service);
         desc = (TextView) this.findViewById(R.id.desc);
         ville = (TextView) this.findViewById(R.id.ville);
@@ -87,6 +92,15 @@ public class DetailDemandeClt extends AppCompatActivity {
         id = inte.getStringExtra("id_demande");
 
         post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailDemandeClt.this , ListFonct.class);
+                intent.putExtra("idDmd",id);
+                startActivity(intent);
+            }
+        });
+
+        postulant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DetailDemandeClt.this , ListFonct.class);
@@ -220,4 +234,16 @@ public class DetailDemandeClt extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        adapter.startListening();
+    }
+
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        adapter.stopListening();
+    }
 }
