@@ -9,10 +9,6 @@
             android:title="Home"></item>
 
         <item
-            android:id="@+id/nav_message"
-            android:icon="@drawable/ic_message"
-            android:title="Message"></item>
-        <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_profile"
             android:title="Profile"></item>
@@ -24,10 +20,7 @@
                 android:id="@+id/nouv_demande"
                 android:icon="@drawable/ic_create_new_folder"
                 android:title="Nouvelle demande"></item>
-            <item
-                android:id="@+id/Liste_demande"
-                android:icon="@drawable/ic_folder"
-                android:title="Toutes les Demandes"></item>
+
             <item
                 android:id="@+id/Liste_demande_attente"
                 android:icon="@drawable/ic_folder"
@@ -39,18 +32,7 @@
         </menu>
     </item>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_share"
-                android:title="Share"></item>
-            <item
-                android:id="@+id/bav_send"
-                android:icon="@drawable/ic_send"
-                android:title="Send"></item>
-        </menu>
-    </item>
+
 
     <item android:title="Logout">
         <menu>
