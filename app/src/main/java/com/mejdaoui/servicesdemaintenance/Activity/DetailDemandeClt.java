@@ -63,13 +63,6 @@ public class DetailDemandeClt extends AppCompatActivity {
     String postid;
     String publisherid;
 
-   // RecyclerView recyclerView;
-    ImageButton imageButton;
-    ArrayList<Demande> demandeList;
-    DatabaseReference reference;
-    DemandeAdapter adapterd;
-   // FirebaseUser user;
-    String uid_user, type;
 
     private ImageView postulant;
 

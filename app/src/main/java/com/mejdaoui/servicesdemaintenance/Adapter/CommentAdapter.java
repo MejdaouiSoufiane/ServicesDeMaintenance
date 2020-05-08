@@ -85,13 +85,15 @@ public class CommentAdapter  extends RecyclerView.Adapter<CommentAdapter.ViewHol
     private void getUserInfo(/*final ImageView imageView,*/ final TextView username, String publisherid){
         if(FirebaseDatabase.getInstance().getReference().child("clients").child(publisherid)!= null){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("clients").child(publisherid);
+
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Client client = dataSnapshot.getValue(Client.class);
               //  Glide.with(mContext).load(client.getImage()).into(imageView);
+                if (client != null){
                 username.setText(client.getNom()+" "+client.getPrenom());
-                System.out.println(client.getNom());
+                System.out.println(client);}
             }
 
             @Override
@@ -99,15 +101,18 @@ public class CommentAdapter  extends RecyclerView.Adapter<CommentAdapter.ViewHol
 
             }
         });
-        }else if(FirebaseDatabase.getInstance().getReference().child("fonctionnaires").child(publisherid)!= null){
+        }
+        if(FirebaseDatabase.getInstance().getReference().child("fonctionnaires").child(publisherid)!= null){
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("fonctionnaires").child(publisherid);
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Fonctionnaire fonctionnaire = dataSnapshot.getValue(Fonctionnaire.class);
                     //  Glide.with(mContext).load(client.getImage()).into(imageView);
-                    username.setText(fonctionnaire.getNom()+" "+fonctionnaire.getPrenom());
-                    System.out.println(fonctionnaire.getNom());
+                    if (fonctionnaire != null) {
+                        username.setText(fonctionnaire.getNom() + " " + fonctionnaire.getPrenom());
+                        System.out.println(fonctionnaire.getNom());
+                    }
                 }
 
                 @Override

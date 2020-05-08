@@ -17,15 +17,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.mejdaoui.servicesdemaintenance.Adapter.CommentAdapter;
 import com.mejdaoui.servicesdemaintenance.Helpers.ImageTrans_CircleTransform;
+import com.mejdaoui.servicesdemaintenance.Model.Comment;
 import com.mejdaoui.servicesdemaintenance.Model.Demande;
 import com.mejdaoui.servicesdemaintenance.PositionFonct;
 import com.mejdaoui.servicesdemaintenance.R;
@@ -33,6 +41,8 @@ import com.mejdaoui.servicesdemaintenance.ViewHolder.DemandeDetailHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class DemandeDetails extends AppCompatActivity {
@@ -55,6 +65,19 @@ public class DemandeDetails extends AppCompatActivity {
     public TextView clientname;
     private static final int REQUEST_CALL = 1;
     Bundle b;
+
+
+    //for commments
+    private String id;
+    private FirebaseUser user;
+    private RecyclerView cRecyclerView;
+    private CommentAdapter commentAdapter;
+    private List<Comment> commentList;
+    EditText addComment;
+    ImageView image_profile;
+    TextView envoyer;
+    String postid;
+    String publisherid;
 
 
     @Override
@@ -195,6 +218,83 @@ public class DemandeDetails extends AppCompatActivity {
                 bundle.putDouble("lang",b.getDouble("lang"));
                 location.putExtras(bundle);
                 startActivity(location);
+            }
+        });
+
+        commenter();
+    }
+
+    private void commenter() {
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        id = b.getString("idDemande");
+
+        cRecyclerView = findViewById(R.id.recyclerHorizComments);
+        cRecyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        cRecyclerView.setLayoutManager(linearLayoutManager);
+        commentList = new ArrayList<>();
+
+        commentAdapter = new CommentAdapter(this,commentList);
+        cRecyclerView.setAdapter(commentAdapter);
+
+        addComment = findViewById(R.id.add_comment);
+        image_profile = findViewById(R.id.image_profile);
+        envoyer = findViewById(R.id.envoyer);
+
+
+
+        postid = id;
+        if (user != null) {
+            publisherid = user.getUid();
+        }
+
+        envoyer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (addComment.getText().toString().equals("")){
+                    Toast.makeText(DemandeDetails.this,"\n" +
+                            "vous ne pouvez pas envoyer un commentaire vide",Toast.LENGTH_SHORT).show();
+                }else {
+                    addComment();
+                }
+            }
+        });
+
+        readComments();
+        Toast.makeText(DemandeDetails.this,"here",Toast.LENGTH_SHORT).show();
+
+    }
+    private void addComment(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Comments").child(id);
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("comment",addComment.getText().toString());
+        hashMap.put("publisher",publisherid);
+
+        reference.push().setValue(hashMap);
+        addComment.setText("");
+    }
+
+    private void readComments(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Comments").child(id);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                commentList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Comment comment = snapshot.getValue(Comment.class);
+                    commentList.add(comment);
+
+                }
+
+                commentAdapter.notifyDataSetChanged();
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }
