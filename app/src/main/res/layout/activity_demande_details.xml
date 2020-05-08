@@ -327,7 +327,7 @@
         <HorizontalScrollView
             android:id="@+id/dd_images"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:overScrollMode="never"
             android:scrollbars="none"
             app:layout_constraintTop_toBottomOf="@id/ccc"
@@ -335,7 +335,7 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
 
@@ -349,6 +349,76 @@
             </LinearLayout>
 
         </HorizontalScrollView>
+        <TextView
+            android:id="@+id/comment"
+            android:background="@drawable/dd_info_backgroud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="20dp"
+            android:text="Commentaires"
+            android:textColor="@color/colorPrimary"
+            android:textAllCaps="true"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dd_images"/>
+
+
+        <HorizontalScrollView
+            android:id="@+id/dd_comment"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/comment"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recyclerHorizComments"
+                    app:layout_constraintTop_toBottomOf="@id/comment"
+                    android:orientation="horizontal"/>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom"
+            android:background="#fff"
+            android:padding="4dp"
+            android:layout_alignParentBottom="true"
+            app:layout_constraintTop_toBottomOf="@id/dd_comment">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Votre commentaire..."
+                android:id="@+id/add_comment"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@android:color/transparent"
+                android:layout_toLeftOf="@+id/envoyer"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/envoyer"
+                android:text="ENVOYER"
+                android:layout_marginEnd="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorPrimary"/>
+
+        </RelativeLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
