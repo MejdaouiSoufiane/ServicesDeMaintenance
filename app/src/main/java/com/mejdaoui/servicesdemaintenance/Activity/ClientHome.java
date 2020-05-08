@@ -131,7 +131,6 @@ public class ClientHome extends AppCompatActivity implements NavigationView.OnNa
         switch (id){
             case R.id.nav_home:
                 this.showFragment(FRAGMENT_DEMANDE);
-                navigationView.setCheckedItem(R.id.Liste_demande);
                 break;
             case R.id.nouv_demande:
                 this.showFragment(FRAGMENT_NEW_DEMANDE);
