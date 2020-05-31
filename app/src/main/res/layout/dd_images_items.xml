@@ -6,19 +6,26 @@
     android:layout_margin="2dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="100dp"
+        android:layout_width="404dp"
         android:layout_height="130dp"
         app:riv_corner_radius="6dp"
         android:elevation="1dp">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/dd_images"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="130dp"
-            android:background="@drawable/image"
+            android:background="@drawable/chambre"
+            />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/dd_image"
+            android:layout_width="200dp"
+            android:layout_height="130dp"
+            android:layout_marginLeft="202dp"
+            android:background="@drawable/chambre2"
             />
 
     </androidx.cardview.widget.CardView>
-
 
 </RelativeLayout>
