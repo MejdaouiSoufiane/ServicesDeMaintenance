@@ -165,13 +165,13 @@ public class DemandeDetails extends AppCompatActivity {
                     System.out.println("++++ LISTE : "+list.get(i));
                     String str = list.get(i);
                     if(str.equals(b.getString("currentFonct"))){
-                        Toast.makeText(DemandeDetails.this, "Vous avez déja postuler.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DemandeDetails.this, "Vous avez déja postulé pour ce travail!.", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
                 list.add(b.getString("currentFonct"));
                 d.child("idFonctionnaire").setValue(list);
-                Toast.makeText(DemandeDetails.this, "postuler", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DemandeDetails.this, "Votre damande est bien postulé!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -185,7 +185,7 @@ public class DemandeDetails extends AppCompatActivity {
                     System.out.println("++++ LISTE : "+list.get(i));
                     String str = list.get(i);
                     if(str.equals(b.getString("currentFonct"))){
-                        Toast.makeText(DemandeDetails.this, "Vous avez déja postuler.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DemandeDetails.this, "Vous avez déja postulé.", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
@@ -262,7 +262,7 @@ public class DemandeDetails extends AppCompatActivity {
         });
 
         readComments();
-        Toast.makeText(DemandeDetails.this,"here",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(DemandeDetails.this,"here",Toast.LENGTH_SHORT).show();
 
     }
     private void addComment(){
