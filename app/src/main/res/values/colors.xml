@@ -21,6 +21,8 @@
     <color name="startBleu">#09c6df</color>
     <color name="endBleu">#0bcce6</color>
 
+    <color name="enAttente">#E6750B</color>
+
 
     <color name="colorTextPrimary">#212121</color>
     <color name="colorTextSecondary">#757575</color>
