@@ -138,6 +138,8 @@ public class ListFonct extends AppCompatActivity {
                                 .into(holder.img);*/
                        // Picasso.get().load(s).resize(50, 50).into(holder.img);
 
+
+
                     holder.accept.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
