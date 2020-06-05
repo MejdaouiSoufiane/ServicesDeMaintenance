@@ -17,7 +17,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="fffffffff fffff"
             android:textStyle="bold"
             android:textColor="@color/colorTextPrimary"
             android:textSize="14sp"
@@ -27,7 +26,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/comment"
-            android:text="ddddddddd"
             android:maxLines="5"/>
     </LinearLayout>
 

@@ -109,6 +109,11 @@ public class FctHome extends AppCompatActivity {
                     startActivity(new Intent(FctHome.this, Profile_fnct.class));
                     //Toast.makeText(FctHome.this, "Profles", Toast.LENGTH_SHORT).show();
                 }
+                else if(id == R.id.logout){
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(FctHome.this, Login.class));
+                    //Toast.makeText(FctHome.this, "Profles", Toast.LENGTH_SHORT).show();
+                }
 
                 DrawerLayout drawer = findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);

@@ -236,7 +236,7 @@ public class DetailDemandeClt extends AppCompatActivity {
         });
 
         readComments();
-        Toast.makeText(DetailDemandeClt.this,"here",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(DetailDemandeClt.this,"here",Toast.LENGTH_SHORT).show();
 
     }
     private void addComment(){
