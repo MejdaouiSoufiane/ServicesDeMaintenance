@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="70dp">
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="91dp"
-        android:layout_height="71dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:src="@drawable/man"
+        android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,7 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Full name"
+        android:textStyle="bold"
         android:textSize="18sp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.065"
@@ -33,23 +36,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Voir le profil"
-        android:textSize="18sp"
+        android:textStyle="italic"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toEndOf="@+id/img"
-        app:layout_constraintTop_toBottomOf="@+id/fullName"
         app:layout_constraintVertical_bias="0.133" />
 
     <Button
         android:id="@+id/accept"
         android:layout_width="88dp"
         android:layout_height="36dp"
-        android:background="#64EC69"
+        android:background="#1AC220"
         android:text="Accepter"
         android:textColor="#fff"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.866"
         app:layout_constraintStart_toEndOf="@+id/profile"

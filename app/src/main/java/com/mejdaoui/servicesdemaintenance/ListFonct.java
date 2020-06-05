@@ -156,12 +156,13 @@ public class ListFonct extends AppCompatActivity {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                     String etat = dataSnapshot.child("etat").getValue(String.class);
-                                                    if(etat.equals("en cours")){
+                                                    if(etat.equals("En Cours")){
                                                         Toast.makeText(ListFonct.this, "Vous avez déjà choisi un fonctionnaie pour ce travail. Vous ne pouvez pas choisir un autre.", Toast.LENGTH_SHORT).show();
                                                     }
                                                     else{
-                                                        dbref.child("etat").setValue("en cours");
+                                                        dbref.child("etat").setValue("En Cours");
                                                         dbref.child("employe").setValue(id);
+                                                        Toast.makeText(ListFonct.this, "Le fonctionnaire choisi sera notifié.", Toast.LENGTH_SHORT).show();
 
                                                         startActivity(new Intent(ListFonct.this, ClientHome.class));
                                                     }

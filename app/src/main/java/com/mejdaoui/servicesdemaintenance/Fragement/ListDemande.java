@@ -72,7 +72,7 @@ public class ListDemande extends Fragment {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             type = bundle.getString("TYPE");
-            Toast.makeText(getActivity().getBaseContext().getApplicationContext(), type , Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity().getBaseContext().getApplicationContext(), type , Toast.LENGTH_SHORT).show();
 
         }
 
