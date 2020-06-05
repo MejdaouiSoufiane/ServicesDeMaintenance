@@ -35,7 +35,10 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="168dp">
+                    android:layout_height="168dp"
+
+
+                    >
 
                     <TextView
                         android:id="@+id/c"
@@ -67,12 +70,11 @@
                         android:layout_height="30dp"
                         android:layout_marginTop="36dp"
                         android:layout_marginEnd="180dp"
+                        android:layout_marginLeft="175dp"
                         android:background="@drawable/ic_touch"
-                        android:foregroundGravity="center"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/c" />
+                        app:layout_constraintTop_toBottomOf="@+id/c"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"/>
 
                     <TextView
                         android:id="@+id/post"
@@ -83,12 +85,10 @@
                         android:textAllCaps="true"
                         android:textColor="@color/colorTextSecondary"
                         android:textSize="14sp"
+                        android:layout_marginBottom="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@id/apply_icon"
-                        app:layout_constraintHorizontal_bias="0.42"
-                        app:layout_constraintStart_toStartOf="@id/apply_icon"
-                        app:layout_constraintTop_toBottomOf="@+id/apply_icon"
-                        app:layout_constraintVertical_bias="0.555" />
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
